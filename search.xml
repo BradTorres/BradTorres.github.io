@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/03/28/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="This-is-Brad-Torres’s-personal-blog"><a href="#This-is-Brad-Torres’s-personal-blog" class="headerlink" title="This is Brad Torres’s personal blog"></a>This is Brad Torres’s personal blog</h2><h2 id="这是徐文栋的个人博客"><a href="#这是徐文栋的个人博客" class="headerlink" title="这是徐文栋的个人博客"></a>这是徐文栋的个人博客</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>且将新火试新茶,诗酒趁年华</title>
+    <url>/2023/03/29/%E4%B8%94%E5%B0%86%E6%96%B0%E7%81%AB%E8%AF%95%E6%96%B0%E8%8C%B6-%E8%AF%97%E9%85%92%E8%B6%81%E5%B9%B4%E5%8D%8E/</url>
+    <content><![CDATA[<h1 id="且将新火试新茶-诗酒趁年华"><a href="#且将新火试新茶-诗酒趁年华" class="headerlink" title="且将新火试新茶,诗酒趁年华"></a>且将新火试新茶,诗酒趁年华</h1><h2 id="第一篇文章哦"><a href="#第一篇文章哦" class="headerlink" title="第一篇文章哦"></a>第一篇文章哦</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+      <categories>
+        <category>间隙随笔</category>
+      </categories>
+      <tags>
+        <tag>分享</tag>
+        <tag>生活碎碎念</tag>
+      </tags>
+  </entry>
+</search>

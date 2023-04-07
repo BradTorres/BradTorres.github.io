@@ -3,7 +3,7 @@
   <entry>
     <title>文章发布规划1</title>
     <url>/2023/03/29/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%A7%84%E5%88%921/</url>
-    <content><![CDATA[<h1 id="文章发布规划1"><a href="#文章发布规划1" class="headerlink" title="文章发布规划1"></a>文章发布规划1</h1><h2 id="第一篇文章哦"><a href="#第一篇文章哦" class="headerlink" title="第一篇文章哦"></a>第一篇文章哦</h2><p>目前的计划是开一个大数据技术原理与应用专栏，数据结构与算法专栏和我的日记间隙随笔专栏。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="文章发布规划1"><a href="#文章发布规划1" class="headerlink" title="文章发布规划1"></a>文章发布规划1</h1><h2 id="第一篇文章哦"><a href="#第一篇文章哦" class="headerlink" title="第一篇文章哦"></a>第一篇文章哦</h2><p>目前的计划是开一个大数据技术原理与应用专栏，数据结构与算法专栏和我的日记间隙随笔专栏。</p>
 <p>大数据技术原理与应用记录学习过程的收获，就相当于以前的纸质笔记本。不过既然是计算机专业的学生，当然要写博客来当作自己的笔记本啦。</p>
 <p>数据结构与算法其实之前学过，但当时自己听听就完了，没有做类似的博客来记录。现在补上，正好考研也要学习数据结构，一举两得。正所谓，温故而知新,可以为师矣。</p>
 <p>日记间隙随笔专栏，记录我的思考和平时的灵感想法，会有很多暴言，不要当真就好。</p>
@@ -18,7 +18,7 @@
   <entry>
     <title>大数据技术原理与应用实验4NoSQL和关系数据库的操作比较</title>
     <url>/2023/04/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C4NoSQL%E5%92%8C%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h1 id="实验4-NoSQL和关系数据库的操作比较"><a href="#实验4-NoSQL和关系数据库的操作比较" class="headerlink" title="实验4 NoSQL和关系数据库的操作比较"></a>实验4 NoSQL和关系数据库的操作比较</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.  实验目的"></a>1.  实验目的</h1><p>（1）理解四种数据库(MySQL、 HBase、 Redis 和 MongoDB)的概念以及不同点；<br> （2）熟练使用四种数据库操作常用的 Shell 命令；<br> （3）熟悉四种数据库操作常用的 Java API。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实验4-NoSQL和关系数据库的操作比较"><a href="#实验4-NoSQL和关系数据库的操作比较" class="headerlink" title="实验4 NoSQL和关系数据库的操作比较"></a>实验4 NoSQL和关系数据库的操作比较</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.  实验目的"></a>1.  实验目的</h1><p>（1）理解四种数据库(MySQL、 HBase、 Redis 和 MongoDB)的概念以及不同点；<br> （2）熟练使用四种数据库操作常用的 Shell 命令；<br> （3）熟悉四种数据库操作常用的 Java API。</p>
 <h1 id="2-实验平台"><a href="#2-实验平台" class="headerlink" title="2.实验平台"></a>2.实验平台</h1><p>（1） 操作系统： Linux（Ubuntu-22.04.2）；<br> （2） Hadoop 版本： 3.1.3；<br> （3） MySQL 版本： 8.0.32；<br> （4） HBase 版本： 2.2.2；<br> （5） Redis 版本： 7.0.10；<br> （6） MongoDB 版本： 6.0.5；<br> （7） JDK 版本： 1.8；<br> （8） Java IDE： Eclipse；</p>
 <h1 id="3-实验步骤与结果"><a href="#3-实验步骤与结果" class="headerlink" title="3.实验步骤与结果"></a>3.实验步骤与结果</h1><p>（一） <strong>MySQL</strong> 数据库操作</p>
 <p>学生表如 14-7 所示。</p>
@@ -210,7 +210,7 @@
   <entry>
     <title>大数据技术原理与应用实验3熟悉常用的HBase操作</title>
     <url>/2023/04/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C3%E7%86%9F%E6%82%89%E5%B8%B8%E7%94%A8%E7%9A%84HBase%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h1 id="实验3-熟悉常用的HBase操作"><a href="#实验3-熟悉常用的HBase操作" class="headerlink" title="实验3 熟悉常用的HBase操作"></a>实验3 熟悉常用的HBase操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.  实验目的"></a>1.  实验目的</h1><p>（1） 理解 HBase 在 Hadoop 体系结构中的角色；<br> （2） 熟练使用 HBase 操作常用的 Shell 命令；<br> （3） 熟悉 HBase 操作常用的 Java API。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实验3-熟悉常用的HBase操作"><a href="#实验3-熟悉常用的HBase操作" class="headerlink" title="实验3 熟悉常用的HBase操作"></a>实验3 熟悉常用的HBase操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.  实验目的"></a>1.  实验目的</h1><p>（1） 理解 HBase 在 Hadoop 体系结构中的角色；<br> （2） 熟练使用 HBase 操作常用的 Shell 命令；<br> （3） 熟悉 HBase 操作常用的 Java API。</p>
 <h1 id="2-实验平台"><a href="#2-实验平台" class="headerlink" title="2.实验平台"></a>2.实验平台</h1><p>（1） 操作系统： Linux（Ubuntu-22.04.2-desktop-amd64）；</p>
 <p>（2） Hadoop 版本： 3.1.3；</p>
 <p>（3） HBase版本：</p>
@@ -420,7 +420,7 @@
   <entry>
     <title>大数据技术原理与应用实验2熟悉常用的HDFS操作</title>
     <url>/2023/04/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C2%E7%86%9F%E6%82%89%E5%B8%B8%E7%94%A8%E7%9A%84HDFS%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h1 id="实验2-熟悉常用的-HDFS-操作"><a href="#实验2-熟悉常用的-HDFS-操作" class="headerlink" title="实验2 熟悉常用的 HDFS 操作"></a>实验2 熟悉常用的 HDFS 操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.实验目的"></a>1.实验目的</h1><p>（1） 理解 HDFS 在 Hadoop 体系结构中的角色；</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实验2-熟悉常用的-HDFS-操作"><a href="#实验2-熟悉常用的-HDFS-操作" class="headerlink" title="实验2 熟悉常用的 HDFS 操作"></a>实验2 熟悉常用的 HDFS 操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.实验目的"></a>1.实验目的</h1><p>（1） 理解 HDFS 在 Hadoop 体系结构中的角色；</p>
 <p>（2） 熟练使用 HDFS 操作常用的 Shell 命令；</p>
 <p>（3） 熟悉 HDFS 操作常用的 Java API。 </p>
 <h1 id="2-实验平台"><a href="#2-实验平台" class="headerlink" title="2.实验平台"></a>2.实验平台</h1><p>（1） 操作系统： Linux（Ubuntu-22.04.2-desktop-amd64）；</p>
@@ -563,7 +563,7 @@
   <entry>
     <title>大数据技术原理与应用实验1熟悉常用的Linux操作和Hadoop操作</title>
     <url>/2023/04/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C1%E7%86%9F%E6%82%89%E5%B8%B8%E7%94%A8%E7%9A%84Linux%E6%93%8D%E4%BD%9C%E5%92%8CHadoop%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<h1 id="实验1-熟悉常用的Linux操作和Hadoop操作"><a href="#实验1-熟悉常用的Linux操作和Hadoop操作" class="headerlink" title="实验1 熟悉常用的Linux操作和Hadoop操作"></a>实验1 熟悉常用的Linux操作和Hadoop操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.实验目的"></a>1.实验目的</h1><p>Hadoop运行在Linux系统上，因此，需要学习实践一些常用的Linux命令。本实验旨在熟悉常用的Linux操作和Hadoop操作，为顺利开展后续其他实验奠定基础。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实验1-熟悉常用的Linux操作和Hadoop操作"><a href="#实验1-熟悉常用的Linux操作和Hadoop操作" class="headerlink" title="实验1 熟悉常用的Linux操作和Hadoop操作"></a>实验1 熟悉常用的Linux操作和Hadoop操作</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.实验目的"></a>1.实验目的</h1><p>Hadoop运行在Linux系统上，因此，需要学习实践一些常用的Linux命令。本实验旨在熟悉常用的Linux操作和Hadoop操作，为顺利开展后续其他实验奠定基础。</p>
 <h1 id="2-实验平台"><a href="#2-实验平台" class="headerlink" title="2.实验平台"></a>2.实验平台</h1><p>（1）操作系统： Ubuntu-22.04.2-desktop-amd64</p>
 <p>（2）Hadoop版本：3.1.3</p>
 <h1 id="3-实验步骤与结果"><a href="#3-实验步骤与结果" class="headerlink" title="3.实验步骤与结果"></a>3.实验步骤与结果</h1><p>*<em>1.<strong><strong>熟悉常用的</strong></strong>Linux</em>*<strong>操作</strong></p>
@@ -687,7 +687,7 @@
   <entry>
     <title>说再见</title>
     <url>/2023/04/04/%E8%AF%B4%E5%86%8D%E8%A7%81/</url>
-    <content><![CDATA[<h1 id="说再见"><a href="#说再见" class="headerlink" title="说再见"></a>说再见</h1><p>（美化回忆没有意义，只会自欺欺人）</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="说再见"><a href="#说再见" class="headerlink" title="说再见"></a>说再见</h1><p>（美化回忆没有意义，只会自欺欺人）</p>
 <p>长话短说，我再也不踢足球了。包括一切对足球有关的东西，都不接触了。</p>
 <p>理由也很简单，很真实。</p>
 <p><u>足球在功利性上没用。</u></p>
@@ -786,7 +786,7 @@
   <entry>
     <title>早睡早起落实</title>
     <url>/2023/04/01/%E6%97%A9%E7%9D%A1%E6%97%A9%E8%B5%B7%E8%90%BD%E5%AE%9E/</url>
-    <content><![CDATA[<h1 id="简易温和实操版本："><a href="#简易温和实操版本：" class="headerlink" title="简易温和实操版本："></a>简易温和实操版本：</h1><h2 id="思想指导："><a href="#思想指导：" class="headerlink" title="思想指导："></a>思想指导：</h2><p>早起相当于把晚上那些劣质废铁时间，转化成早上的黄金时间，变相增加了一天的有效工作时间。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="简易温和实操版本："><a href="#简易温和实操版本：" class="headerlink" title="简易温和实操版本："></a>简易温和实操版本：</h1><h2 id="思想指导："><a href="#思想指导：" class="headerlink" title="思想指导："></a>思想指导：</h2><p>早起相当于把晚上那些劣质废铁时间，转化成早上的黄金时间，变相增加了一天的有效工作时间。</p>
 <p>按部就班、具体地落实这些有关于早起的仪式&#x2F;习惯之后，就可以不痛苦地早起了。我不提倡以鸡血、动力、信念等来苦苦强撑着早起，这种状态是不可持续的，鸡血很容易耗尽，人也就随之废了。</p>
 <h2 id="仪式行动："><a href="#仪式行动：" class="headerlink" title="仪式行动："></a>仪式行动：</h2><ol>
 <li>睡前不做刺激性活动，比如玩游戏，看时间过长的电影。</li>
@@ -807,7 +807,7 @@
   <entry>
     <title>Hello World</title>
     <url>/2023/03/28/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="This-is-Brad-Torres’s-personal-blog"><a href="#This-is-Brad-Torres’s-personal-blog" class="headerlink" title="This is Brad Torres’s personal blog"></a>This is Brad Torres’s personal blog</h2><h2 id="这是徐文栋的个人博客"><a href="#这是徐文栋的个人博客" class="headerlink" title="这是徐文栋的个人博客"></a>这是徐文栋的个人博客</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h3><!--以下全是一个笨蛋的胡说八道，记录了他的想法，仅代表个人，说的不一定对，完全可能是错误愚蠢的-->
 
 <p>我是一所很普通的名气不大的985的计算机科学与技术专业的大三下在读学生。</p>

@@ -16,6 +16,11 @@
       </tags>
   </entry>
   <entry>
+    <title>测试</title>
+    <url>/2023/04/07/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
     <title>大数据技术原理与应用实验4NoSQL和关系数据库的操作比较</title>
     <url>/2023/04/05/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C4NoSQL%E5%92%8C%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C%E6%AF%94%E8%BE%83/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="实验4-NoSQL和关系数据库的操作比较"><a href="#实验4-NoSQL和关系数据库的操作比较" class="headerlink" title="实验4 NoSQL和关系数据库的操作比较"></a>实验4 NoSQL和关系数据库的操作比较</h1><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.  实验目的"></a>1.  实验目的</h1><p>（1）理解四种数据库(MySQL、 HBase、 Redis 和 MongoDB)的概念以及不同点；<br> （2）熟练使用四种数据库操作常用的 Shell 命令；<br> （3）熟悉四种数据库操作常用的 Java API。</p>

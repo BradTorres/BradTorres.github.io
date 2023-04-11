@@ -16,6 +16,73 @@
       </tags>
   </entry>
   <entry>
+    <title>Next主题(Hexo)字体相关配置</title>
+    <url>/2023/04/11/Next%E4%B8%BB%E9%A2%98-Hexo-%E5%AD%97%E4%BD%93%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Next主题-Hexo-字体相关配置"><a href="#Next主题-Hexo-字体相关配置" class="headerlink" title="Next主题(Hexo)字体相关配置"></a>Next主题(Hexo)字体相关配置</h1><p>最近想修改了一下 NexT 主题的字体配置，网上大多都是2020年的相关文章，我几乎baidu以及google了全部的相关文章，都或多或少的出现了问题。前前后后捣鼓了大概10小时，终于成功修改。这不发一篇博客记录我的痛苦经历都对不住我。呜呜呜😭😭😭。每次弄博客美化博客都花好长时间，感觉有点累了💔。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Google Fonts 分别在 2018年的11 月 18 日和 12 月 07 日提供了思源黑体和思源宋体的简繁支持，而且高达 6 种字重支持，其中思源宋体更是高达 7 种字重。这可了不得啊！更重要的是：它支持了目前电子显示屏上稀缺的宋体，这将会是一个伟大的进步！要知道，对于中文书籍，宋体一直是正文印刷的标准字体，而不是目前电子显示屏上普遍的黑体，因为<em>宋体的衬线更适合长时间阅读</em>。</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>都说衬线字体（宋体）较无衬线字体（黑体）更适合阅读！<br>＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br>在西方国家罗马字母阵营中，字体分为两大种类：Sans Serif和 Serif，打字机体虽然也属于 Sans Serif，但由于是等宽字体，所以另外独立出 Monospace 这一种类，例如在Web中，表示代码时常常要使用等宽字体。</p>
+<p>Serif的意思是，在字的笔画开始及結束的地方有额外的装饰，而且笔画的粗细会因直橫的不同而有不同。相反的，Sans Serif则沒有这些额外的装饰，笔画粗细大致差不多。</p>
+<p>可以看出，我们平时所用的Georgia、Times New Roman等就属于Serif字体，而Arial、Tahoma、Verdana等则属于Sans Serif字体。对中文而言，同样存在这两大种类，很明显，宋体、细明体（繁体中常用）等就属于Serif，而黑体、幼圆等则属于Sans Serif。</p>
+<p>Serif 和 Sans Serif 的一般比较<br>1、Serif的字体容易辨认，因此易读性较高。反之Sans Serif 则较醒目，但在行文阅读的情況下，Sans Serif 容易造成字母辨认的困扰，常会有来回重读及上下行错乱的情形。<br>2、Serif 强调了字母笔画的开始及结束，因此较易前后连续性的辨识。<br>3、Serif 强调一个word，而非单一的字母，反之Sans Serif则强调个别字母。<br>4、在小字体的场合，通常Sans Serif比Serif更清晰。<br>适用用途：<br>通常文章的內文、正文使用的是易读性较佳的 Serif 字体，这可增加易读性，而且长时间阅读下因为会以word为单位来阅读，较不容易疲倦。而标题、表格內用字则采用较醒目的Sans Serif字体，它需要显著、醒目，但不必长时间盯著这些字来阅读。</p>
+<p>像宣传品、海报类，为求醒目，它的短篇的段落也会采用Sans Serif字体。但在书籍、报刊杂志，正文有相当篇幅的情形下，则应采用Serif字体来减轻读者阅读上的负担。</p>
+<p>中文的情况<br>在中文的情形也是有相当于 serif 的字体，例如宋体就是 serif 的，他通常是和 Times Roman 字体来搭配的。而黑体、幼圆等就相当于是 sans serif 的字体。<br>在中文直排的情況，比较不容易区分 serif&#x2F;sans serif 之间的差异性，但是在目前中文橫排普遍的情形下，以上所谈到的易读性、醒目性也是适用于中文的。</p>
+<p>经常看到中文出版的书籍、杂志，内容中间使用了不易阅读，但却很醒目的黑体或者幼圆等字体，这对读者来说，在长期阅读之下很容易就引起眼睛不舒服，似乎是应该尽量避免才是。在Web设计及浏览器设置中也应遵循此原则为是。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>这边的配置是这样的，可以改成自己喜欢的</p>
+<ul>
+<li><p>中文字体: Noto Serif SC</p>
+</li>
+<li><p>英文字体: EB Garamond</p>
+</li>
+<li><p>站点标题字体: Cinzel Decorative</p>
+</li>
+<li><p>代码字体: JetBrains Mono</p>
+<h4 id="1）Next主题配置文件-config-yml"><a href="#1）Next主题配置文件-config-yml" class="headerlink" title="1）Next主题配置文件_config.yml"></a>1）Next主题配置文件<code>_config.yml</code></h4><p>Next主题的配置文件<code>_config.yml</code>里有一段关于字体配置的选项</p>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"># 文件位置：~/blog/themes/next/_config<span class="selector-class">.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">font</span>:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line">  # Uri of fonts host. E.g. //fonts.googleapis.com (Default)</span><br><span class="line">  # 亲测这个可用，如果不可用，自己搜索 [Google 字体 国内镜像]，找个能用的就行</span><br><span class="line">  host: https://fonts.loli.net</span><br><span class="line"></span><br><span class="line">  # Global font settings used on &lt;body&gt; element.</span><br><span class="line">  global:</span><br><span class="line">    # external: true will load this font family from host.</span><br><span class="line">    external: true</span><br><span class="line">    family: EB Garamond</span><br><span class="line"></span><br><span class="line">  # Font settings for Headlines (h1, h2, h3, h4, h5, h6)</span><br><span class="line">  # Fallback to `global` font settings.</span><br><span class="line">  headings:</span><br><span class="line">    external: true</span><br><span class="line">    family: Cinzel Decorative</span><br><span class="line"></span><br><span class="line">  # Font settings for posts</span><br><span class="line">  # Fallback to `global` font settings.</span><br><span class="line">  posts:</span><br><span class="line">    external: true</span><br><span class="line">    family: </span><br><span class="line"></span><br><span class="line">  # Font settings for Logo</span><br><span class="line">  # Fallback to `global` font settings.</span><br><span class="line">  # The `size` option use `px` as unit</span><br><span class="line">  logo:</span><br><span class="line">    external: true</span><br><span class="line">    family:</span><br><span class="line">    size: </span><br><span class="line"></span><br><span class="line">  # Font settings for &lt;code&gt; and code blocks.</span><br><span class="line">  codes:</span><br><span class="line">    external: true</span><br><span class="line">    family: JetBrains Mono</span><br><span class="line">    size:</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="字体获取"><a href="#字体获取" class="headerlink" title="字体获取"></a>字体获取</h5><p>字体可以在<a href="https://fonts.google.com/">Google Fonts</a> 挑选，填入<code>_config.yml</code>里面相应类型的<code>family</code>字段即可。</p>
+<p>看别的文章讲<code>fonts.googleapis.com</code>的稳定性问题，这些文章一般会建议使用<code>fonts.loli.net</code>，这次看到这篇帖子<a href="https://sb.sb/blog/css-cdn/">前端 CDNJS 库及 Google Fonts、Ajax 和 Gravatar 国内加速服务</a>，才知道原来是后者反代了前者。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font</span>:</span><br><span class="line">  enable: true</span><br><span class="line">  # Uri of fonts host, e.g. https://fonts.googleapis.com (Default).</span><br><span class="line">  host: https://fonts.loli.net</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2）字体变量的定义-base-styl"><a href="#2）字体变量的定义-base-styl" class="headerlink" title="2）字体变量的定义_base.styl"></a>2）字体变量的定义<code>_base.styl</code></h4><p>在<code>source/css/_variables/base.styl</code>里有关于字体变量的定义，主要关注一下字体：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// <span class="attribute">Font</span> families.</span><br><span class="line"><span class="comment">/* 文件位置：~/blog/themes/next/source/css/_variables/base.styl */</span></span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-chinese      = &quot;Noto Serif SC&quot;</span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-base         = $<span class="attribute">font-family</span>-chinese, sans-serif</span><br><span class="line">$<span class="attribute">font-family</span>-base         = get_font_family(&#x27;global&#x27;), $<span class="attribute">font-family</span>-chinese, sans-serif if get_font_family(&#x27;global&#x27;)</span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-logo         = $<span class="attribute">font-family</span>-base</span><br><span class="line">$<span class="attribute">font-family</span>-logo         = get_font_family(&#x27;logo&#x27;), $<span class="attribute">font-family</span>-base if get_font_family(&#x27;logo&#x27;)</span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-headings     = $<span class="attribute">font-family</span>-base</span><br><span class="line">$<span class="attribute">font-family</span>-headings     = get_font_family(&#x27;headings&#x27;), $<span class="attribute">font-family</span>-base if get_font_family(&#x27;headings&#x27;)</span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-posts        = $<span class="attribute">font-family</span>-base</span><br><span class="line">$<span class="attribute">font-family</span>-posts        = get_font_family(&#x27;posts&#x27;), $<span class="attribute">font-family</span>-base if get_font_family(&#x27;posts&#x27;)</span><br><span class="line"></span><br><span class="line">$<span class="attribute">font-family</span>-monospace    = $<span class="attribute">font-family</span>-chinese, monospace</span><br><span class="line">$<span class="attribute">font-family</span>-monospace    = Menlo, Monaco, Consolas, get_font_family(&#x27;codes&#x27;), $<span class="attribute">font-family</span>-chinese, monospace if get_font_family(&#x27;codes&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3）external-fonts-swig"><a href="#3）external-fonts-swig" class="headerlink" title="3）external-fonts.swig"></a>3）<code>external-fonts.swig</code></h4><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">文件位置：~/blog/themes/next/layout/_partials/head/head.swig</span><br></pre></td></tr></table></figure>
+
+<p>将这个文件的全部内容直接替换为 Google Fonts 网站生成的 <code>&lt;link&gt;</code> 代码，然后可以将 <code>googleapis.com</code> 修改为 <code>loli.net</code>。</p>
+<p>在<code>~/blog/themes/next/layout/_partials/head/head.swig</code>里Ctrl+F搜索<code>&#123;&#123; next_font() &#125;&#125;</code>，然后就能看到这一段</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;&#123; next_font() &#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;%- set font_awesome_uri = theme<span class="selector-class">.vendors</span><span class="selector-class">.fontawesome</span> or next_vendors(&#x27;<span class="attribute">font</span>-awesome/css/<span class="attribute">all</span><span class="selector-class">.min</span><span class="selector-class">.css</span>&#x27;) %&#125;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;&#123; font_awesome_uri &#125;&#125;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>紧接着加上</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;link href=&quot;https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&amp;display=swap<span class="string">&quot; rel=&quot;</span>stylesheet<span class="string">&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4）custom-styl"><a href="#4）custom-styl" class="headerlink" title="4）custom.styl"></a>4）<code>custom.styl</code></h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 文件位置：~/blog/themes/next/source/css/_custom/custom.styl */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.post-body</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a href="https://zhuanlan.zhihu.com/p/49470735">衬线体的进化：从纸面到屏幕 | 方正字库</a></p>
+<h2 id="googleapis-镜像"><a href="#googleapis-镜像" class="headerlink" title="googleapis 镜像"></a>googleapis 镜像</h2><p>虽然许多文章里都提到说 <code>fonts.googleapis.com</code> 不太稳定，但我访问还挺顺利的……</p>
+<p><code>fonts.googleapis.com</code> 的国内 CDN 比较少，只找到这么一篇帖子。</p>
+<p><a href="https://sb.sb/blog/css-cdn/">前端 CDNJS 库及 Google Fonts、Ajax 和 Gravatar 国内加速服务</a></p>
+<p>用上面帖子里提供的 CDN，Next 的配置就可以这样：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">font</span>:</span><br><span class="line">  enable: true</span><br><span class="line">  host: //fonts.loli.net</span><br></pre></td></tr></table></figure>
+
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p><a href="https://theme-next.org/docs/theme-settings/#Fonts-Customization">https://theme-next.org/docs/theme-settings/#Fonts-Customization</a></p>
+<h2 id="如果修改不生效"><a href="#如果修改不生效" class="headerlink" title="如果修改不生效"></a>如果修改不生效</h2><ol>
+<li>浏览器清理下缓存。</li>
+<li>是部署后没效果还是本地就没效果？<code>hexo s</code> 或 <code>hexo d</code> 前使用 <code>hexo clean</code> 清理下。</li>
+<li>部署后没效果的话，稍微等一下远程的缓存刷新。</li>
+<li>本地没生效的话，CSS 文件夹有没有使用 CDN？</li>
+<li>再不行，进主题的 CSS 文件，或后文里提到的 <code>styles.styl</code> 为 <code>.post-body</code> 单独添加字体相关的 CSS。</li>
+<li>尝试升级 hexo-theme……</li>
+<li>如果仍不能正常显示，或者确定不是自己的问题，可以去 <a href="https://github.com/theme-next/hexo-theme-next">theme-next&#x2F;hexo-theme-next</a> 提 issue 。</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
     <title>考研笔记之速过408基础C语言</title>
     <url>/2023/04/11/%E8%80%83%E7%A0%94%E7%AC%94%E8%AE%B0%E4%B9%8B%E9%80%9F%E8%BF%87408%E5%9F%BA%E7%A1%80C%E8%AF%AD%E8%A8%80/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="考研笔记之速过408基础C语言"><a href="#考研笔记之速过408基础C语言" class="headerlink" title="考研笔记之速过408基础C语言"></a>考研笔记之速过408基础C语言</h1><p>前言</p>

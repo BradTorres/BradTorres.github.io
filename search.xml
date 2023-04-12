@@ -18,7 +18,7 @@
   <entry>
     <title>Hexo个人博客添加APlayer音乐播放器功能</title>
     <url>/2023/04/12/Hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0APlayer%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8%E5%8A%9F%E8%83%BD/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image002.jpg" alt="图形用户界面, 网站  描述已自动生成"></strong></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image002.jpg"></strong></p>
 <p><strong>还来不及，仔仔细细写下你的关于，描述我如何爱你，你却微笑的离我而去。</strong></p>
 <p>​                                                                                                                             **———-**<strong>《我不配》</strong></p>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>因为我并不了解前端HTML5或者是JavaScript等等，Hexo个人博客添加APlayer音乐播放器这个功能我前前后后Google了很多博客，完成了大部分博客介绍的内容。完整的GitHub上面开源的部分的演示内容是能够&#x3D;&#x3D;显示封面，显示歌手名，显示歌词，曲目列表，进度于音量调节，启、停播放控制。&#x3D;&#x3D;我一会就成功添加了除显示歌词以外的其余全部功能，后续大概花了6个小时在研究如何&#x3D;&#x3D;显示歌词&#x3D;&#x3D;上面，最后还是没有成功。</p>
@@ -323,7 +323,7 @@
   <entry>
     <title>Next主题(Hexo)字体相关配置</title>
     <url>/2023/04/11/Next%E4%B8%BB%E9%A2%98-Hexo-%E5%AD%97%E4%BD%93%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/blogcover/%E4%BA%94%E6%9C%88%E5%A4%A9%EF%BC%86%E5%AD%99%E7%87%95%E5%A7%BF%20-%20%E6%B8%A9%E6%9F%94.jpg" alt="五月天＆孙燕姿 - 温柔"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/blogcover/%E4%BA%94%E6%9C%88%E5%A4%A9%EF%BC%86%E5%AD%99%E7%87%95%E5%A7%BF%20-%20%E6%B8%A9%E6%9F%94.jpg"></p>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>最近想修改了一下 NexT 主题的字体配置，网上大多都是2020年的相关文章，我几乎baidu以及google了全部的相关文章，都或多或少的出现了问题。前前后后捣鼓了大概10小时，终于成功修改。这不发一篇博客记录我的痛苦经历都对不住我。呜呜呜😭😭😭。每次弄博客美化博客都花好长时间，感觉有点累了💔。</p>
 <span id="more"></span>
 
@@ -469,9 +469,10 @@
 <p>五是对自己又要重拾八股文的看法，没什么看法。只要看清楚自己的目标就好了。自己的目标从来只是八股文高作为一个工具，考试结束就什么都没了。所以自己不要投入太多无意义的东西情感价值和成本在非目标上，所谓的自豪感，自负感，高人一等感都是骗自己的。摆正视角就能发现以前太多重复的无意义的刷了。但在哪个环境下面，又不可能让我们做别的事情，充其量也就是找事情让我们做，至于效果，就是找事情让我们做的效果。就像给驴找一辆没有粮食的石磨拉，就是让驴白天不睡觉而找的事情，至于事情有没有意义，没有人会问这个问题。自己也在那种畸形的压抑的异性的愚蠢的气氛里面受到感染，或是受到了别人源于他自己压力和私心从而对我的蛊惑。人家就是逢场作戏，缓解自己的当头之急，你这个笨蛋看不清潜规则，自己还误以为真，把整个人搭进去。为了做怪异游戏里面的先驱者而自我催眠，到头来偏离了目标，一场狂欢醒来，原来自己活着的一口气全靠自己的催眠，别人上面都没给你。啊Q都没自己会骗自己。</p>
 ]]></content>
       <categories>
-        <category>Diary</category>
+        <category>日记间隙随笔</category>
       </categories>
       <tags>
+        <tag>生活碎碎念</tag>
         <tag>Diary</tag>
       </tags>
   </entry>
@@ -1290,8 +1291,8 @@
         <category>日记间隙随笔</category>
       </categories>
       <tags>
-        <tag>daily life</tag>
         <tag>生活碎碎念</tag>
+        <tag>计划</tag>
       </tags>
   </entry>
   <entry>

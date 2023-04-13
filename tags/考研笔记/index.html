@@ -75,40 +75,7 @@
   border-radius: 4px;
   padding: 0 10px 0 14px;
 }
-</style><script>
-  window.addEventListener('DOMContentLoaded', () => {
-    'use strict';
-    
-      if (NexT.utils.hasMobileUA()) return;
-    
-    let time, hidden, visible, title = document.title;
-    let favicon = document.querySelector('link[rel="icon"]');
-    
-      hidden = '';
-      visible = '';
-    
-    let random = t => t[Math.floor(Math.random() * t.length)];
-    const change = () => {
-      if (document.hidden) {
-        favicon.setAttribute('href', '/images/favicon-32x32-next.png');
-        
-          document.title = hidden;
-        
-        clearTimeout(time);
-      } else {
-        favicon.setAttribute('href', '/images/favicon-32x32-next.png');
-        
-          document.title = visible;
-        
-        time = setTimeout(() => {
-          document.title = title;
-        }, 2019);
-      }
-    }
-    document.addEventListener('visibilitychange', change, false);
-  });
-</script>
-
+</style>
   <title>标签: 考研笔记 | Serendipity</title>
   
 
@@ -405,13 +372,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">121k</span>
+    <span title="站点总字数">101k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:50</span>
+    <span title="站点阅读时长">1:31</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -603,6 +570,20 @@ window.addEventListener('pjax:success', () => {
 <script type="text/javascript" src="/dist/APlayer.min.js"></script>
 <script type="text/javascript" src="/dist/music.js"></script>
 
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
 
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>

@@ -1,0 +1,3012 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.实验介绍1.1.实验概述本实验基于华为云服务。通过模拟开发流程，包括数据导入库，组件应用开发，构建搜索服务，最终完成实时检索功能。 1.2.实验目的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据技术原理与应用华为云实验实时检索">
+<meta property="og:url" content="https://bradtorres.github.io/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="1.实验介绍1.1.实验概述本实验基于华为云服务。通过模拟开发流程，包括数据导入库，组件应用开发，构建搜索服务，最终完成实时检索功能。 1.2.实验目的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image002.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image004.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image006.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image008.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image010.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image012.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image014.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image016.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image018.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image020.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image022.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image024.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image026.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image028.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image030.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image032.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image034.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image036.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image038.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image040.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image042.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image044.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image046.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image048.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image050.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image052.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image054.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image056.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image058.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image060.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image061.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image063.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image065.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image067.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image069.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image071.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image073.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image075.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image077.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image079.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image081.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image083.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image084.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image086.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image088.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image090.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image092.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image094.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image096.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image098.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image100.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image102.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image104.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image105.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image107.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image109.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image111.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image113.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image115.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image117.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image119.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image121.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image123.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image125.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image127.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image129.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image131.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image132.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image134.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image136.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image138.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image140.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image142.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image144.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image146.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image148.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image150.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image152.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image154.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image156.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image158.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image160.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image162.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image164.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image166.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image168.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image170.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image172.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image174.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image176.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image178.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image180.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image182.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image184.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image186.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image188.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image190.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image192.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image194.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image196.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image198.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image200.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image202.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image204.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image206.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image208.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image210.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image211.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image213.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image215.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image217.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image219.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image221.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image223.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image225.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image226.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image228.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image230.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image232.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image234.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image236.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image238.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image240.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image242.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image244.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image245.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image247.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image249.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image250.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image251.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image253.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image255.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image256.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image257.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image259.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image261.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image262.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image263.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image265.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image266.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image268.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image269.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image270.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image272.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image273.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image274.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image275.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image276.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image277.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image278.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image279.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image281.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image283.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image285.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image287.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image289.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image291.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image293.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image295.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image297.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image299.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image301.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image303.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image305.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image307.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image309.jpg">
+<meta property="article:published_time" content="2023-04-25T07:31:35.000Z">
+<meta property="article:modified_time" content="2023-04-25T07:42:27.104Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image002.jpg">
+
+<link rel="canonical" href="https://bradtorres.github.io/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>大数据技术原理与应用华为云实验实时检索 | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="link fa-fw"></i>友链</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          大数据技术原理与应用华为云实验实时检索
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-25 15:31:35 / 修改时间：15:42:27" itemprop="dateCreated datePublished" datetime="2023-04-25T15:31:35+08:00">2023-04-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">大数据技术原理与应用</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/" class="post-meta-item leancloud_visitors" data-flag-title="大数据技术原理与应用华为云实验实时检索" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>44k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>40 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-实验介绍"><a href="#1-实验介绍" class="headerlink" title="1.实验介绍"></a>1.实验介绍</h1><h2 id="1-1-实验概述"><a href="#1-1-实验概述" class="headerlink" title="1.1.实验概述"></a>1.1.实验概述</h2><p>本实验基于华为云服务。通过模拟开发流程，包括数据导入库，组件应用开发，构建搜索服务，最终完成实时检索功能。</p>
+<h2 id="1-2-实验目的"><a href="#1-2-实验目的" class="headerlink" title="1.2.实验目的"></a>1.2.实验目的</h2><p>l 掌握大数据相关服务的购买及基础配置</p>
+<p>l 掌握HBase应用开发的基本语法</p>
+<p>l 掌握ElasticSearch应用开发的基本语法</p>
+<p>l 掌握实时检索的功能实现</p>
+<h2 id="1-3-实验规划"><a href="#1-3-实验规划" class="headerlink" title="1.3.实验规划"></a>1.3.实验规划</h2><p>在同一VPC内的ECS通过内网访问MRS HBase和CSS各自的网络地址，并通过各自网络地址完成数据导入和数据查询。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image002.jpg" alt="img"></p>
+<h2 id="1-4-实验思路"><a href="#1-4-实验思路" class="headerlink" title="1.4.实验思路"></a>1.4.实验思路</h2><p>（1）通过配置和申请华为云服务VPC，ECS，MRS和CSS作为基础配置。</p>
+<p>（2）ECS在同一VPC内通过安全组规则访问MRS和CSS服务。</p>
+<p>（3）在ECS上搭建基本应用开发环境。</p>
+<p>（4）在ECS上建工程项目，开发基于MRS和CSS的应用程序。</p>
+<p>（5）服务使用完毕，进行释放资源。</p>
+<h2 id="1-5-实验流程"><a href="#1-5-实验流程" class="headerlink" title="1.5.实验流程"></a>1.5.实验流程</h2><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image004.png" alt="img"></p>
+<h1 id="2-实验平台与服务"><a href="#2-实验平台与服务" class="headerlink" title="2.实验平台与服务"></a>2.实验平台与服务</h1><p>l <strong>ECS (Elastic Cloud Server)</strong></p>
+<p>弹性云服务器是由CPU、内存、操作系统、云硬盘组成的基础的计算组件。弹性云服务器创建成功后，就可以像使用自己的本地PC或物理服务器一样，在云上使用弹性云服务器。</p>
+<p>l <strong>MRS (MapReduce Service)</strong></p>
+<p>MapReduce服务是一个在华为云上部署和管理Hadoop系统的服务，一键即可部署Hadoop集群。</p>
+<p>l <strong>VPC(Virtual Private Cloud)</strong></p>
+<p>虚拟私有云是为云服务器、云容器、云数据库等云上资源构建隔离、私密的虚拟网络环境。VPC丰富的功能可以灵活管理云上网络，包括创建子网、设置安全组和网络ACL、管理路由表、申请弹性公网IP和带宽等。此外，还可以通过云专线、VPN等服务将VPC与传统的数据中心互联互通，灵活整合资源，构建混合云网络。</p>
+<p>VPC使用网络虚拟化技术，通过链路冗余，分布式网关集群，多AZ部署等多种技术，保障网络的安全、稳定、高可用。</p>
+<p>l <strong>CSS (Cloud Search Service)</strong></p>
+<p>云搜索服务提供托管的分布式搜索引擎服务，完全兼容开源Elasticsearch搜索引擎，支持结构化、非结构化文本的多条件检索、统计、报表。云搜索服务的使用流程和数据库类似。</p>
+<h1 id="3-实验步骤与结果"><a href="#3-实验步骤与结果" class="headerlink" title="3.实验步骤与结果"></a>3.实验步骤与结果</h1><h2 id="3-1-大数据相关服务的购买与基本配置"><a href="#3-1-大数据相关服务的购买与基本配置" class="headerlink" title="3.1. 大数据相关服务的购买与基本配置"></a>3.1. 大数据相关服务的购买与基本配置</h2><h3 id="3-1-1-开通VPC服务"><a href="#3-1-1-开通VPC服务" class="headerlink" title="3.1.1. 开通VPC服务"></a>3.1.1. 开通VPC服务</h3><p>步骤如下：</p>
+<p>创建私有云</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image006.jpg" alt="img"></p>
+<p>配置私有云后购买</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image008.jpg" alt="img"></p>
+<p>创建成功</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image010.jpg" alt="img"></p>
+<p>购买和配置弹性公网IP</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image012.jpg" alt="img"></p>
+<p>购买配置如下：</p>
+<p>计费模式 - 按需计费</p>
+<p>区域 - 华北-北京四</p>
+<p>带宽类型 - 独享</p>
+<p>购买量 - 2</p>
+<p>其余配置默认，详细配置如下：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image014.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image016.jpg" alt="img"></p>
+<p>配置好后点击立即购买</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image018.jpg" alt="img"></p>
+<p>确认配置后提交</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image020.jpg" alt="img"></p>
+<p>可以看到配置成功</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image022.jpg" alt="img"></p>
+<h3 id="3-1-2-开通MRS服务"><a href="#3-1-2-开通MRS服务" class="headerlink" title="3.1.2. 开通MRS服务"></a>3.1.2. 开通MRS服务</h3><p>购买MapReduce服务 - MRS搜索MapReduce服务搜索MapReduce服务或MRS<img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image024.jpg" alt="img"></p>
+<p>购买MapReduce服务</p>
+<p>进入MapReduce服务控制台后，选择右边的购买集群</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image026.jpg" alt="img"></p>
+<p>MapReduce服务配置</p>
+<p>进入购买页面后，选择自定义购买</p>
+<p>按照如下信息配置集群基本信息：</p>
+<p>区域—选择“华北-北京四”。</p>
+<p>集群名称—自定义名称，本人是“mrs-HSU”。</p>
+<p>集群版本—MRS 1.9.2</p>
+<p>集群类型—选择分析集群。</p>
+<p>组件选择—勾选所有组件。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image028.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image030.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image032.jpg" alt="img">点击下一步</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image034.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image036.jpg" alt="img">告警—选择关闭，其他都是默认配置。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image038.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image040.jpg" alt="img">点击立即购买，返回控制台集群列表页面，显示集群正在启动(需要10分钟左右)。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image042.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image044.jpg" alt="img">集群启动成功后，点击集群名称进入集群信息页面</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image046.jpg" alt="img"></p>
+<p>绑定弹性公网IP</p>
+<p>在集群信息页面点击节点管理，选择Core节点，点击进入</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image048.jpg" alt="img"></p>
+<p>进入弹性云服务器页面后，选择弹性公网IP，点击绑定弹性公网IP</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image050.jpg" alt="img"></p>
+<p>选择一个弹性公网IP绑定，点击确定（请记住这两个IP用于后续登录）。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image052.jpg" alt="img"></p>
+<p>修改安全组</p>
+<p>配置好IP后需要修改网络安全组，否则无法登陆到Master服务器。点击“安全组”，选择“更改安全组”。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image054.jpg" alt="img"></p>
+<p>选择入方向规则，点击“添加规则”，选择“全部放通”，点击确定。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image056.jpg" alt="img"></p>
+<p>确定集群节点hostname和ip</p>
+<p>在集群节点管理页面查看集群节点hostname和ip</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image058.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image060.jpg" alt="img"></p>
+<p>记住此hostname和ip，并将ip地址前移，下划线”_”改为短线”-”，后面ECS修改hosts文件会用到。如下</p>
+<p>192.168.0.71        node-master2xhIH</p>
+<p>192.168.0.193    node-master1iqma</p>
+<p>192.168.0.124    node-ana-coreTcIw</p>
+<p>192.168.0.173    node-ana-coreDqFa</p>
+<p>192.168.0.30     node-ana-coreyBOq</p>
+<p>注意：也可以通过远程登录MRS集群任意节点通过命令查看&#x2F;etc&#x2F;hosts文件拿到hostname和ip。登录MRS集群节点后，执行命令如下：</p>
+<p>cat &#x2F;etc&#x2F;hosts</p>
+<h3 id="3-1-3-开通云搜索CSS服务"><a href="#3-1-3-开通云搜索CSS服务" class="headerlink" title="3.1.3. 开通云搜索CSS服务"></a>3.1.3. 开通云搜索CSS服务</h3><p>搜索云搜索服务</p>
+<p>在页面搜索云搜索服务或CSS，回车进入</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image061.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image063.jpg" alt="img"></p>
+<p>购买云搜索服务</p>
+<p>进入云搜索服务控制台后，选择创建集群。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image065.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image067.jpg" alt="img"></p>
+<p>云搜索服务配置</p>
+<p>进入购买页面后，配置集群参数</p>
+<p><strong>计费模式</strong> - 按需计费</p>
+<p><strong>区域</strong> - 华北-北京四</p>
+<p><strong>集群版本</strong> – 7.6.2</p>
+<p><strong>集群名称</strong> – Es-search。</p>
+<p><strong>节点数量</strong> – 1</p>
+<p><strong>CPU****架构</strong> – x86计算</p>
+<p><strong>节点规格</strong> - 内存优化型 - 2u16g（若无此配置可选择更高配置）</p>
+<p>节点存储 – 高I&#x2F;O</p>
+<p>节点存储容量 – 40GB</p>
+<p><strong>按需套餐包</strong> – 默认不勾选</p>
+<p><strong>虚拟私有云</strong> - 选择之前设置的虚拟私有云</p>
+<p><strong>子网</strong> - 选择一个子网</p>
+<p><strong>安全组</strong> - Sys-default（与需要购买的ECS，MRS保持一致）</p>
+<p>安全模式 - 关闭</p>
+<p>其余配置默认</p>
+<p>详细配置见下图：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image069.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image071.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image073.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image075.jpg" alt="img"></p>
+<p>配置完成之后，右边选择立即申请，进入页面确认配置提交申请。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image077.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image079.jpg" alt="img"></p>
+<p>进入集群管理页面，等待集群启动</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image081.jpg" alt="img"></p>
+<p>集群启动成功后，查看集群名和内网访问地址，后续conf.properties配置文件会用到：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image083.jpg" alt="img"></p>
+<h3 id="3-1-4-购买弹性云服务器ECS"><a href="#3-1-4-购买弹性云服务器ECS" class="headerlink" title="3.1.4. 购买弹性云服务器ECS"></a>3.1.4. 购买弹性云服务器ECS</h3><p>搜索弹性云服务器</p>
+<p>在页面搜索弹性云服务器或ECS回车进入</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image084.png" alt="img"></p>
+<p>购买弹性云服务器</p>
+<p>进入控制台后,选择购买弹性云服务器</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image086.jpg" alt="img"></p>
+<p>弹性云服务器配置</p>
+<p>计费模式 - 按需计费，</p>
+<p>区域 - 华北-北京四</p>
+<p>可用区 – 随机分配</p>
+<p>规格 - 四核8G</p>
+<p>镜像 - 公共镜像Windows Server 2016 标准版 64位简体中文(40GB)</p>
+<p>主机安全 – 不勾选主机安全</p>
+<p>系统盘 – 普通IO，40GB</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image088.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image090.jpg" alt="img"></p>
+<p>点击下一步：网络配置</p>
+<p>虚拟私有云 - 选择之前设置的虚拟私有云</p>
+<p>网卡 – 默认选择一个子网，自动分配IP地址</p>
+<p>安全组 - Sys-default（注意：此安全组和之后购买的MRS，CSS保持一致）</p>
+<p>弹性公网IP - 现在购买</p>
+<p>规格 - 全动态BGP，带宽大小 – 5</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image092.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image094.png" alt="img"></p>
+<p>点击下一步：高级配置</p>
+<p>云服务器名称 – 自定义名称，本例以ecs-search为例</p>
+<p>登录方式 - 密码</p>
+<p>密码 - 自行设置（用于登录，请妥善保管！！！)</p>
+<p>云备份 、云服务器 、高级选项 – 默认配置</p>
+<p>购买量 - 1</p>
+<p>配置完成之后，右边选择下一步，进入页面确认配置后立即提交。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image096.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image098.png" alt="img"></p>
+<p>确认配置后，点击立即购买。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image100.png" alt="img"></p>
+<p>完成后，控制台显示正在启动（启动后可看到弹性公网IP）。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image102.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image104.jpg" alt="img"></p>
+<h3 id="3-1-5-访问Windows云服务器"><a href="#3-1-5-访问Windows云服务器" class="headerlink" title="3.1.5. 访问Windows云服务器"></a>3.1.5. 访问Windows云服务器</h3><p>连接弹性云服务器</p>
+<p>在个人电脑打开运行 （快捷键Win + R）输入mstsc，打开远程桌面连接</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image105.png" alt="img"></p>
+<p>输入任务四中购买的弹性云服务器<a target="_blank" rel="noopener" href="https://console.huaweicloud.com/ecm/?agencyId=2f08ee8c7f9949b58a660d0b9dd1b372&locale=zh-cn&region=cn-north-1#/ecs/manager/vmList/vmDetail/basicinfo?instanceId=ad9e7ced-4711-446d-9de0-922efa4d3614">ecs-search</a>的弹性公网IP，在弹性云服务器页面可看到该IP地址</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image107.png" alt="img"></p>
+<p>输入用户名Administrator和密码（ECS服务器设置的密码）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image109.png" alt="img"></p>
+<p>安装chrome浏览器</p>
+<p>在ECS远程桌面打开IE浏览器，输入谷歌官网<a target="_blank" rel="noopener" href="https://www.google.cn/chrome/%E4%B8%8B%E8%BD%BDchrome%E6%B5%8F%E8%A7%88%E5%99%A8">https://www.google.cn/chrome/下载chrome浏览器</a></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image111.jpg" alt="img"></p>
+<p>选择下载</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image113.jpg" alt="img"></p>
+<p>下载完后直接运行文件，自动安装。完成</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image115.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image117.png" alt="img"></p>
+<p>安装Maven</p>
+<p>下载Maven</p>
+<p>连接ECS到远程桌面后，在远程桌面打开谷歌浏览器输入下面网址下载Maven安装包</p>
+<p>下载链接：<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip">http://archive.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip</a></p>
+<p>（注：若版本失效进入<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/maven/maven-3/%E5%AF%BB%E6%89%BE%E5%90%88%E9%80%82%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%89">http://archive.apache.org/dist/maven/maven-3/寻找合适的版本）</a></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image119.jpg" alt="img"></p>
+<p>下载好进入文件所在路径，解压安装到默认地址：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image121.png" alt="img"></p>
+<p>配置maven的setting文件</p>
+<p>进入华为开源镜像网站<a target="_blank" rel="noopener" href="https://mirrors.huaweicloud.com/">https://mirrors.huaweicloud.com/</a> ，下载setting文件</p>
+<p>搜索华为huaweiCloud SDK，点击空白处下载。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image123.jpg" alt="img"></p>
+<p>登录后下载setting文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image125.jpg" alt="img"></p>
+<p>将下载好的setting文件放入maven的conf 路径下，直接覆盖原有的setting文件即可</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image127.png" alt="img"></p>
+<p>安装JDK</p>
+<p>在ECS远程桌面进入Oracle官网<a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>下载JDK8 版本8u261，需要接受协议，单击下载后登录Orcale账户才能正常下载。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image129.png" alt="img"></p>
+<p>下载好后运行安装JDK</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image131.png" alt="img"></p>
+<p>安装路径默认</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image132.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image134.png" alt="img"></p>
+<p>安装JRE java运行环境</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image136.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image138.png" alt="img"></p>
+<p>安装路径默认，完成后点击关闭。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image140.jpg" alt="img"></p>
+<p>JDK安装完成。</p>
+<p>配置JDK环境变量</p>
+<p>在ECS远程桌面打开系统设置，在文件资源管理器右键此电脑，选择属性</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image142.jpg" alt="img"></p>
+<p>选择高级系统设置，选择环境变量</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image144.jpg" alt="img"></p>
+<p>编辑系统变量Path</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image146.jpg" alt="img"></p>
+<p>新建三个系统变量</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image148.jpg" alt="img"></p>
+<p>通过浏览更改路径</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image150.jpg" alt="img"></p>
+<p>选择刚才安装的Maven路径下的bin文件夹路径</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image152.jpg" alt="img"></p>
+<p>确定后，同理，修改变量2的路径，选择浏览</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image154.png" alt="img"></p>
+<p>选择安装的JDK路径下的bin路径</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image156.jpg" alt="img"></p>
+<p>确定后，继续选择变量3，选择浏览</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image158.jpg" alt="img"></p>
+<p>选择JRE的安装路径下的bin路径</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image160.png" alt="img"></p>
+<p>确定后，将新增的环境变量移动至最上方。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image162.jpg" alt="img"></p>
+<p>点击确认，保存更改。</p>
+<p>验证是否正确配置</p>
+<p>在远程桌面打开运行(快捷键Win + R) 输入cmd</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image164.jpg" alt="img"></p>
+<p>输入</p>
+<p>mvn -version </p>
+<p>若配置正确会有Maven版本信息输出</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image166.jpg" alt="img"></p>
+<p>输入：</p>
+<p>java -version</p>
+<p>若配置正确会有java版本信息输出</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image168.jpg" alt="img"></p>
+<p>输入：</p>
+<p>javac -version</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image170.jpg" alt="img"></p>
+<p>若配置正确会有java 编译器版本信息输出</p>
+<p>安装Eclipse</p>
+<p>下载Eclipse</p>
+<p>在ECS远程桌面进入Eclipse官网<a target="_blank" rel="noopener" href="https://www.eclipse.org/downloads/packages/release/oxygen/3a">https://www.eclipse.org/downloads/packages/release/oxygen/3a</a> 下载oxygen版本</p>
+<p>选择64位</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image172.jpg" alt="img"></p>
+<p>点击下载</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image174.jpg" alt="img"></p>
+<p>安装Eclipse</p>
+<p>下载完成之后，解压安装包，解压路径随意，打开解压好的eclipse文件夹，选中 eclipse.exe文件，在桌面创建快捷方式，Eclipse的安装就完成了。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image176.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image178.jpg" alt="img"></p>
+<p>选择工作空间即代码存储位置。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image180.jpg" alt="img"></p>
+<p>配置Maven</p>
+<p>在Eclipse页面选择Window -&gt; Preferences -&gt; Maven -&gt; Installations - &gt; add</p>
+<p>添加之前安装的Maven</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image182.png" alt="img"></p>
+<p>添加自己的Maven安装路径，点击Finish。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image184.jpg" alt="img"></p>
+<p>选择应用自行安装的Maven</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image186.jpg" alt="img"></p>
+<p>在Preferences 下的Maven下选择User Setting</p>
+<p>选择自行下载的setting文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image188.png" alt="img"></p>
+<p>完成后点击应用并关闭</p>
+<p>修改hosts文件</p>
+<p>在ECS远程桌面进入目录C:\Windows\System32\drivers\etc，修改hosts文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image190.jpg" alt="img"></p>
+<p>右键打开方式，选择记事本，在末尾编辑添加集群节点hostname和ip（任务二中MRS的主机名和IP地址），结果如下。（替换为自己集群节点的hostname和ip）：</p>
+<p>192.168.0.124  node-ana-coreTcIw</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image192.jpg" alt="img"></p>
+<p>保存，环境配置到此结束。</p>
+<h2 id="3-2-大数据实时数据分析开发实战"><a href="#3-2-大数据实时数据分析开发实战" class="headerlink" title="3.2. 大数据实时数据分析开发实战"></a>3.2. 大数据实时数据分析开发实战</h2><h3 id="3-2-1-步骤1-新建项目"><a href="#3-2-1-步骤1-新建项目" class="headerlink" title="3.2.1. 步骤1 新建项目"></a>3.2.1. 步骤1 新建项目</h3><p>在ECS远程桌面进打开Eclipse，新建项目。</p>
+<p>点击File -&gt; New -&gt; Maven Project（如果没有Maven Project,则选择project，然后在Maven中找到Maven Project）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image194.png" alt="img"></p>
+<p>点击next，勾选Create a simple project </p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image196.jpg" alt="img"></p>
+<p>点击Next，输入GroupId和ArtifactId，版本默认</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image198.png" alt="img"></p>
+<p>点击Finish，等待项目初始化完成。</p>
+<h3 id="3-2-2-步骤2-修改依赖文件"><a href="#3-2-2-步骤2-修改依赖文件" class="headerlink" title="3.2.2. 步骤2 修改依赖文件"></a>3.2.2. 步骤2 修改依赖文件</h3><p>项目初始化完成后，修改pom文件，该文件用来管理项目依赖包。</p>
+<p>pom文件初始如下：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image200.jpg" alt="img"></p>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<p> <modelVersion>4.0.0</modelVersion></p>
+<p> <groupId>com.huawei.bigdata</groupId></p>
+<p> <artifactId>realtimesearch</artifactId></p>
+<p> <version>0.0.1-SNAPSHOT</version></p>
+</project>
+
+<p>在</version> 和 </project>之间添加如下配置（可从提供的POM文件粘贴所需内容）</p>
+<!-- Spring boot 父引用 -->
+
+  <parent>
+
+<p>​    <groupId>org.springframework.boot</groupId></p>
+<p>​    <artifactId>spring-boot-starter-parent</artifactId></p>
+<p>​    <version>1.4.0.RELEASE</version></p>
+  </parent>
+
+ 
+
+  <properties>
+
+<p>​    &lt;hbase.version&gt;2.1.1.0101-mrs-2.0&lt;&#x2F;hbase.version&gt;</p>
+<p>​    &lt;zookeeper.version&gt;3.5.1-mrs-2.0&lt;&#x2F;zookeeper.version&gt;</p>
+<p>​    &lt;hadoop.version&gt;3.1.1-mrs-2.0&lt;&#x2F;hadoop.version&gt;</p>
+<p>​    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</p>
+<p>​    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</p>
+<p>​    &lt;maven.compiler.source&gt;1.8&lt;&#x2F;maven.compiler.source&gt;</p>
+<p>​    &lt;maven.compiler.target&gt;1.8&lt;&#x2F;maven.compiler.target&gt;</p>
+  </properties>
+
+ 
+
+  <!--仓库源-->
+
+  <repositories>
+
+<p>​    <repository></p>
+<p>​      <id>alimaven</id></p>
+<p>​      <name>aliyun maven</name></p>
+<p>​      <url><a target="_blank" rel="noopener" href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a></url></p>
+<p>​      <releases></p>
+<p>​        <enabled>true</enabled></p>
+<p>​      </releases></p>
+<p>​      <snapshots></p>
+<p>​        <enabled>false</enabled></p>
+<p>​      </snapshots></p>
+<p>​    </repository></p>
+  </repositories>
+
+ 
+
+  <dependencies>
+
+<p>​    <!-- Spring boot 核心web --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.springframework.boot</groupId></p>
+<p>​      <artifactId>spring-boot-starter-web</artifactId></p>
+<p>​    </dependency></p>
+<p>​    <!-- 解决thymeleaf模板引擎对h5页面检查太严格问题 --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>net.sourceforge.nekohtml</groupId></p>
+<p>​      <artifactId>nekohtml</artifactId></p>
+<p>​      <version>1.9.22</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.springframework.boot</groupId></p>
+<p>​      <artifactId>spring-boot-starter-thymeleaf</artifactId></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hbase</groupId></p>
+<p>​      <artifactId>hbase-common</artifactId></p>
+<p>​      <version>${hbase.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hbase</groupId></p>
+<p>​      <artifactId>hbase-protocol</artifactId></p>
+<p>​      <version>${hbase.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hbase</groupId></p>
+<p>​      <artifactId>hbase-client</artifactId></p>
+<p>​      <version>${hbase.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hadoop</groupId></p>
+<p>​      <artifactId>hadoop-common</artifactId></p>
+<p>​      <version>${hadoop.version}</version></p>
+<p>​    </dependency></p>
+<p>​     <dependency></p>
+<p>​      <groupId>org.apache.hadoop</groupId></p>
+<p>​      <artifactId>hadoop-auth</artifactId></p>
+<p>​      <version>${hadoop.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hadoop</groupId></p>
+<p>​      <artifactId>hadoop-client</artifactId></p>
+<p>​      <version>${hadoop.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.hadoop</groupId></p>
+<p>​      <artifactId>hadoop-hdfs</artifactId></p>
+<p>​      <version>${hadoop.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <!-- ElasticSearch --></p>
+<p>​    <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.elasticsearch</groupId></p>
+<p>​      <artifactId>elasticsearch</artifactId></p>
+<p>​      <version>6.2.3</version></p>
+<p>​    </dependency></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.elasticsearch.client</groupId></p>
+<p>​      <artifactId>transport</artifactId></p>
+<p>​      <version>6.2.3</version></p>
+<p>​    </dependency></p>
+<p>​    <!-- 解锁ES运行时没有对应方法的的错误 --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.locationtech.spatial4j</groupId></p>
+<p>​      <artifactId>spatial4j</artifactId></p>
+<p>​      <version>0.6</version></p>
+<p>​    </dependency></p>
+<p>​    <!-- zookeeper --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>org.apache.zookeeper</groupId></p>
+<p>​      <artifactId>zookeeper</artifactId></p>
+<p>​      <version>${zookeeper.version}</version></p>
+<p>​    </dependency></p>
+<p>​    <!-- 解决ES和HBase中 io.netty包冲突 --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>io.netty</groupId></p>
+<p>​      <artifactId>netty-all</artifactId></p>
+<p>​      <version>4.1.16.Final</version></p>
+<p>​    </dependency></p>
+<p>​    <!-- json --></p>
+<p>​    <dependency></p>
+<p>​      <groupId>com.alibaba</groupId></p>
+<p>​      <artifactId>fastjson</artifactId></p>
+<p>​      <version>1.2.13</version></p>
+<p>​    </dependency></p>
+  </dependencies>
+
+ 
+
+  <dependencyManagement>
+
+<p>​    <dependencies></p>
+<p>​      <dependency></p>
+<p>​        <groupId>jdk.tools</groupId></p>
+<p>​        <artifactId>jdk.tools</artifactId></p>
+<p>​         <version>1.8</version></p>
+<p>​      </dependency></p>
+<p>​    </dependencies></p>
+  </dependencyManagement>
+
+ 
+
+  <build>
+
+<p>​    <plugins></p>
+<p>​      <plugin></p>
+<p>​        <groupId>org.apache.maven.plugins</groupId></p>
+<p>​        <artifactId>maven-compiler-plugin</artifactId></p>
+<p>​        <version>3.1</version></p>
+<p>​        <configuration></p>
+<p>​          <source>1.7</source></p>
+<p>​          <target>1.7</target></p>
+<p>​        </configuration></p>
+<p>​      </plugin></p>
+<p>​    </plugins></p>
+<p>​    <resources></p>
+<p>​      <resource></p>
+<p>​        <directory>src&#x2F;main&#x2F;resources</directory></p>
+<p>​      </resource></p>
+<p>​    </resources></p>
+  </build>
+
+<p>更改完成之后使pom文件(ctrl+s保存)生效，此时确保连通网络,等待项目下载相关资源。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image202.jpg" alt="img"></p>
+<p>下载完成后，右键项目名选择Run As，选择Maven install</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image204.png" alt="img"></p>
+<p>右键项目名选择Maven，选择Update Project</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image206.png" alt="img"></p>
+<p>修改项目的Java Build Path</p>
+<p>项目右键，选择Build Path &gt; Configure Build Path &gt; Java Build Path &gt;Libraries ,选中JRE System Library[J2SE-1.5]，点击右侧的Remove,</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image208.png" alt="img"></p>
+<p>再点击Add Library… &gt; JRE System Library &gt; Next (默认选中安装的JDK1.8) &gt; Finish</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image210.png" alt="img"></p>
+<p>设置完成后确保项目不再报错即可。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image211.png" alt="img"></p>
+<h3 id="3-2-3．步骤3-编辑配置文件"><a href="#3-2-3．步骤3-编辑配置文件" class="headerlink" title="3.2.3．步骤3 编辑配置文件"></a>3.2.3．步骤3 编辑配置文件</h3><p>新建conf.properties文件</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Other -&gt; General -&gt; File -&gt; 新建conf.properties配置文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image213.jpg" alt="img"></p>
+<p>文件建好之后，在该文件键入如下内容：</p>
+<p>#原始数据路径</p>
+<p>inputPath &#x3D;data&#x2F;</p>
+<p>#HBase的配置</p>
+<p>#通过MRS Manager服务管理列表获取的ZK连接地址</p>
+<p>ZKServer&#x3D;192.168.0.77:2181</p>
+<p>#HBase表名</p>
+<p>tableName&#x3D;PublicSecurity</p>
+<p>#HBase列族</p>
+<p>columnFamily1&#x3D;Basic</p>
+<p>columnFamily2&#x3D;OtherInfo</p>
+<p>#ElasticSearch的配置</p>
+<p>#通过CSS服务列表获取的ES集群名称，内外IP，默认端口</p>
+<p>clusterName&#x3D;Es-search</p>
+<p>hostName&#x3D;192.168.0.3</p>
+<p>tcpPort&#x3D;9300</p>
+<p>indexName&#x3D;publicsecurity</p>
+<p>typeName&#x3D;info</p>
+<p>注意:更改ZKServer的地址为购买的MRS Manager服务页面的ZKServer服务地址，ElasticSearch的clusterName和hostName也改为购买的对应CSS服务的集群名和IP地址。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image215.jpg" alt="img"></p>
+<p>新建application.properties文件</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Other -&gt; General -&gt; File -&gt;新建application.properties配置文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image217.jpg" alt="img"></p>
+<p>文件建好之后，在该文件键入如下内容：</p>
+<p>#config</p>
+<p>server.port&#x3D;8084</p>
+<p>server.contextPath&#x3D;&#x2F;hw_bigdata</p>
+<p>#web页面热布署</p>
+<p>spring.thymeleaf.cache&#x3D;false</p>
+<p>#解决html5检查太严格问题</p>
+<p>spring.thymeleaf.mode &#x3D; LEGACYHTML5</p>
+<p>新建log4j.properties文件</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Other -&gt; General -&gt; File -&gt; 新建log4j.properties配置文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image219.jpg" alt="img"></p>
+<p>文件建好之后，在该文件键入如下内容:</p>
+<p>log4j.rootLogger&#x3D;INFO,console</p>
+<p>log4j.appender.console&#x3D;org.apache.log4j.ConsoleAppender</p>
+<p>log4j.appender.console.target&#x3D;System.out</p>
+<p>log4j.appender.console.layout&#x3D;org.apache.log4j.PatternLayout</p>
+<p>log4j.appender.console.layout.ConversionPattern&#x3D;%-4r [%t] %-5p %c %x - %m%n</p>
+<p>新建log4j2.properties文件</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Other -&gt; General -&gt; File -&gt; 新建log4j2.properties配置文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image221.jpg" alt="img"></p>
+<p>文件建好之后，在该文件键入如下内容：</p>
+<p>name &#x3D; PropertiesConfig</p>
+<p>property.filename &#x3D; target&#x2F;logs</p>
+<p>#appenders &#x3D; console, file</p>
+<p>#配置值是appender的类型，并不是具体appender实例的name</p>
+<p>appenders &#x3D; rolling</p>
+<p>appender.rolling.type &#x3D; RollingFile</p>
+<p>appender.rolling.name &#x3D; RollingLogFile</p>
+<p>appender.rolling.fileName&#x3D;${filename}&#x2F;automationlogs.log</p>
+<p>appender.rolling.filePattern &#x3D; ${filename}&#x2F;automationlogs-%d{MM-dd-yy-HH-mm-ss}-%i.log</p>
+<p>appender.rolling.layout.type &#x3D; PatternLayout</p>
+<p>appender.rolling.layout.pattern&#x3D;[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</p>
+<p>appender.rolling.policies.type &#x3D; Policies</p>
+<p>appender.rolling.policies.size.type &#x3D; SizeBasedTriggeringPolicy</p>
+<p>appender.rolling.policies.size.size&#x3D;100MB</p>
+<p>appender.rolling.strategy.type &#x3D; DefaultRolloverStrategy</p>
+<p>appender.rolling.strategy.max &#x3D; 5</p>
+<p>rootLogger.level &#x3D; INFO,console</p>
+<p>rootLogger.appenderRef.rolling.ref &#x3D; rolling</p>
+<p>rootLogger.appenderRef.rolling.ref &#x3D; RollingLogFile</p>
+<h3 id="3-2-4．步骤4-导入数据"><a href="#3-2-4．步骤4-导入数据" class="headerlink" title="3.2.4．步骤4 导入数据"></a>3.2.4．步骤4 导入数据</h3><p>新建文件夹</p>
+<p>在项目下新建数据存放文件夹</p>
+<p>右键项目名 -&gt; New -&gt; Folder -&gt; 新建data文件夹（可根据路径在conf.properties文件修改）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image223.png" alt="img"></p>
+<p>导入数据</p>
+<p>将测试数据文件复制到该文件夹。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image225.jpg" alt="img"></p>
+<h3 id="3-2-5．步骤5-编写常量工具类"><a href="#3-2-5．步骤5-编写常量工具类" class="headerlink" title="3.2.5．步骤5 编写常量工具类"></a>3.2.5．步骤5 编写常量工具类</h3><p>新建包</p>
+<p>右键src&#x2F;main&#x2F;java -&gt; New -&gt; Package -&gt; 新建com.huawei.bigdata.utils包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image226.png" alt="img"></p>
+<p>新建类</p>
+<p>右键com.huawei.bigdata.utils -&gt; New -&gt; Class -&gt; 新建ConstantUtil类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image228.png" alt="img"></p>
+<p>编辑类</p>
+<p>编辑该类的内容：</p>
+<p>package com.huawei.bigdata.utils;</p>
+<p>import org.apache.log4j.PropertyConfigurator;</p>
+<p>import org.slf4j.Logger;</p>
+<p>import org.slf4j.LoggerFactory;</p>
+<p>import java.io.FileInputStream;</p>
+<p>import java.io.IOException;</p>
+<p>import java.util.Properties;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>public class ConstantUtil {</p>
+<p>  public static final Properties PROPS &#x3D; new Properties();</p>
+<p>  public static final Logger LOG &#x3D; LoggerFactory.getLogger(ConstantUtil.class);</p>
+<p>  public static final String INPUT_PATH;</p>
+<p>  public static final String ZK_SERVER;</p>
+<p>  public static final String TABLE_NAME;</p>
+<p>  public static final String COLUMN_FAMILY_1;</p>
+<p>  public static final String COLUMN_FAMILY_2;</p>
+<p>  public static final String INDEX_NAME;</p>
+<p>  public static final String TYPE_NAME;</p>
+<p>  &#x2F;&#x2F;ES集群名,默认值elasticsearch</p>
+<p>  public static final String CLUSTER_NAME;</p>
+<p>  &#x2F;&#x2F;ES集群中某个节点</p>
+<p>  public static final String HOSTNAME;</p>
+<p>  &#x2F;&#x2F;ES连接端口号</p>
+<p>  public static final int TCP_PORT;</p>
+<p>  static {</p>
+<p>​    try {</p>
+<p>​      &#x2F;&#x2F;加载日志配置</p>
+<p>​      PropertyConfigurator.configure(ConstantUtil.class.getClassLoader().getResource(“log4j.properties”).getPath());</p>
+<p>​      &#x2F;&#x2F;加载连接配置</p>
+<p>​      PROPS.load(new FileInputStream(ConstantUtil.class.getClassLoader().getResource(“conf.properties”).getPath()));</p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>​    INPUT_PATH &#x3D; PROPS.getProperty(“inputPath”);</p>
+<p>​    ZK_SERVER &#x3D; PROPS.getProperty(“ZKServer”);</p>
+<p>​    TABLE_NAME &#x3D; PROPS.getProperty(“tableName”);</p>
+<p>​    INDEX_NAME &#x3D; PROPS.getProperty(“indexName”).toLowerCase();</p>
+<p>​    TYPE_NAME &#x3D; PROPS.getProperty(“typeName”);</p>
+<p>​    COLUMN_FAMILY_1 &#x3D; PROPS.getProperty(“columnFamily1”);</p>
+<p>​    COLUMN_FAMILY_2 &#x3D; PROPS.getProperty(“columnFamily2”);</p>
+<p>​    CLUSTER_NAME &#x3D; PROPS.getProperty(“clusterName”);</p>
+<p>​    HOSTNAME &#x3D; PROPS.getProperty(“hostName”);</p>
+<p>​    TCP_PORT &#x3D; Integer.valueOf(PROPS.getProperty(“tcpPort”));</p>
+<p>  }</p>
+<p>}</p>
+<h3 id="3-2-6．步骤6-编写Hbase工具类"><a href="#3-2-6．步骤6-编写Hbase工具类" class="headerlink" title="3.2.6．步骤6 编写Hbase工具类"></a>3.2.6．步骤6 编写Hbase工具类</h3><p>新建类</p>
+<p>右键com.huawei.bigdata.utils -&gt; New -&gt; Class -&gt; 新建HBaseUtil类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image230.png" alt="img"></p>
+<p>编辑类</p>
+<p>编辑该类的内容</p>
+<p>package com.huawei.bigdata.utils;</p>
+<p>import org.apache.hadoop.conf.Configuration;</p>
+<p>import org.apache.hadoop.hbase.*;</p>
+<p>import org.apache.hadoop.hbase.client.*;</p>
+<p>import org.apache.hadoop.hbase.util.Bytes;</p>
+<p>import org.slf4j.Logger;</p>
+<p>import java.io.IOException;</p>
+<p>import java.util.ArrayList;</p>
+<p>import java.util.HashMap;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>public class HBaseUtil {</p>
+<p>  &#x2F;**</p>
+<p>   * HBase连接的基本配置</p>
+<p>   *&#x2F;</p>
+<p>  public static Admin admin &#x3D; null;</p>
+<p>  public static Configuration conf &#x3D; null;</p>
+<p>  public static Connection conn &#x3D; null;</p>
+<p>  private HashMap&lt;String, Table&gt; tables &#x3D; null;</p>
+<p>  private static final Logger LOG &#x3D; ConstantUtil.LOG;</p>
+<p>  &#x2F;**</p>
+<p>   * 构造函数加载配置</p>
+<p>   *&#x2F;</p>
+<p>  public HBaseUtil() {</p>
+<p>​    this(ConstantUtil.ZK_SERVER);</p>
+<p>  }</p>
+<p>  public HBaseUtil(String zkServer) {</p>
+<p>​    init(zkServer);</p>
+<p>  }</p>
+<p>  private void ifNotConnTableJustConn(String tableName) {</p>
+<p>​    if (!tables.containsKey(tableName)) {</p>
+<p>​      this.addTable(tableName);</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  public Table getTable(String tableName) {</p>
+<p>​    ifNotConnTableJustConn(tableName);</p>
+<p>​    return tables.get(tableName);</p>
+<p>  }</p>
+<p>  public void addTable(String tableName) {</p>
+<p>​    try {</p>
+<p>​      tables.put(tableName, conn.getTable(TableName.valueOf(tableName)));</p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 通过 LIst<put> 直接插入一批数据</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param putList</p>
+<p>   * @return</p>
+<p>   *&#x2F;</p>
+<p>  public boolean put(String tableName, List<Put> putList) throws Exception {</p>
+<p>​    boolean res &#x3D; false;</p>
+<p>​    ifNotConnTableJustConn(tableName);</p>
+<p>​    try {</p>
+<p>​      getTable(tableName).put(putList);</p>
+<p>​      res &#x3D; true;</p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>​    return res;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 读取一行记录，一个rowKey的所有记录</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param tableName</p>
+<p>   * @param row</p>
+<p>   * @return</p>
+<p>   * @throws IOException</p>
+<p>   *&#x2F;</p>
+<p>  public Result get(String tableName, String row) throws IOException {</p>
+<p>​    Result result &#x3D; null;</p>
+<p>​    ifNotConnTableJustConn(tableName);</p>
+<p>​    Table newTable &#x3D; getTable(tableName);</p>
+<p>​    Get get &#x3D; new Get(Bytes.toBytes(row));</p>
+<p>​    try {</p>
+<p>​      result &#x3D; newTable.get(get); </p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>​    return result;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 创建表</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param tableName</p>
+<p>   * @param columnFamilys</p>
+<p>   *&#x2F;</p>
+<p>  public boolean createTable(String tableName, String… columnFamilys) {</p>
+<p>​    boolean result &#x3D; false;</p>
+<p>​    try {</p>
+<p>​      if (admin.tableExists(TableName.valueOf(tableName))) {</p>
+<p>​        LOG.info(tableName + “表已经存在！”);</p>
+<p>​      } else {</p>
+<p>​        HTableDescriptor tableDesc &#x3D; new HTableDescriptor(TableName.valueOf(tableName));</p>
+<p>​        for (String columnFamily : columnFamilys) {</p>
+<p>​           tableDesc.addFamily(new HColumnDescriptor(columnFamily.getBytes()));</p>
+<p>​        }</p>
+<p>​        admin.createTable(tableDesc);</p>
+<p>​        result &#x3D; true;</p>
+<p>​        LOG.info(tableName + “表创建成功！”);</p>
+<p>​      }</p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​      LOG.info(tableName + “表创建失败 ！”);</p>
+<p>​    }</p>
+<p>​    return result;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 判断表是否存在</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param tableName</p>
+<p>   * @return</p>
+<p>   *&#x2F;</p>
+<p>  public boolean tableExists(String tableName) throws IOException {</p>
+<p>​     return admin.tableExists(TableName.valueOf(tableName));</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 停用表</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param tableName</p>
+<p>   *&#x2F;</p>
+<p>  public void disableTable(String tableName) throws IOException {</p>
+<p>​    if (tableExists(tableName)) {</p>
+<p>​       admin.disableTable(TableName.valueOf(tableName));</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 删除表</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param tableName</p>
+<p>   *&#x2F;</p>
+<p>  public void deleteTable(String tableName) throws IOException {</p>
+<p>​    disableTable(tableName);</p>
+<p>​    admin.deleteTable(TableName.valueOf(tableName));</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 查询所有表名</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @return</p>
+<p>   * @throws Exception</p>
+<p>   *&#x2F;</p>
+<p>  public List<String> getALLTableName() throws Exception {</p>
+<p>​    ArrayList<String> tableNames &#x3D; new ArrayList<String>();</p>
+<p>​    if (admin !&#x3D; null) {</p>
+<p>​      HTableDescriptor[] listTables &#x3D; admin.listTables();</p>
+<p>​      if (listTables.length &gt; 0) {</p>
+<p>​        for (HTableDescriptor tableDesc : listTables) {</p>
+<p>​          tableNames.add(tableDesc.getNameAsString());</p>
+<p>​        }</p>
+<p>​      }</p>
+<p>​    }</p>
+<p>​    return tableNames;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 删除所有表,慎用!仅用于测试环境</p>
+<p>   *&#x2F;</p>
+<p>  public void deleteAllTable() throws Exception {</p>
+<p>​    List<String> allTbName &#x3D; getALLTableName();</p>
+<p>​    for (String s : allTbName) {</p>
+<p>​      LOG.info(“Start delete table : “ + s + “……”);</p>
+<p>​      deleteTable(s);</p>
+<p>​      LOG.info(“done delete table : “ + s);</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 初始化配置</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param zkServer</p>
+<p>   *&#x2F;</p>
+<p>  public void init(String zkServer) {</p>
+<p>​    tables &#x3D; new HashMap&lt;String, Table&gt;();</p>
+<p>​    conf &#x3D; HBaseConfiguration.create();</p>
+<p>​    &#x2F;&#x2F;通过CSS cloudTable服务列表获取的ZK连接地址</p>
+<p>​    &#x2F;&#x2F;cloudtable-f7c2-zk1-nMuTH9Xv.cloudtable.com:2181,cloudtable-f7c2-zk2-5z92kpre.cloudtable.com:2181,cloudtable-f7c2-zk3-xVNq61Sb.cloudtable.com:2181</p>
+<p>​    &#x2F;&#x2F;192.168.0.121:2181 运行后可看到日志打印具体内网地址</p>
+<p>​    conf.set(“hbase.zookeeper.quorum”, zkServer);</p>
+<p>​    try {</p>
+<p>​      conn &#x3D; ConnectionFactory.createConnection(conf);</p>
+<p>​      admin &#x3D; conn.getAdmin();</p>
+<p>​    } catch (IOException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 清理所有连接</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @throws IOException</p>
+<p>   *&#x2F;</p>
+<p>  public void clear() throws IOException {</p>
+<p>​    for (Map.Entry&lt;String, Table&gt; m : tables.entrySet()) {</p>
+<p>​      m.getValue().close();</p>
+<p>​    }</p>
+<p>​    admin.close();</p>
+<p>​    conn.close();</p>
+<p>​     conf.clear();</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 关卡登记信息bayonet：姓名，身份证号，年龄，性别，关卡号，日期时间，通关形式</p>
+<p>   * 住宿登记信息hotel：姓名，身份证号，年龄，性别，起始日期，结束日期，同行人</p>
+<p>   * 网吧登记信息internet：姓名，身份证号，年龄，性别，网吧名，日期，逗留时长</p>
+<p>   *&#x2F;</p>
+<p>  &#x2F;&#x2F;用于提前建好表和列族</p>
+<p>  public static void preDeal() throws Exception {</p>
+<p>​    HBaseUtil hBaseUtils &#x3D; new HBaseUtil();</p>
+<p>​    hBaseUtils.createTable(ConstantUtil.TABLE_NAME, ConstantUtil.COLUMN_FAMILY_1, ConstantUtil.COLUMN_FAMILY_2);</p>
+<p>  }</p>
+<p>  &#x2F;&#x2F;测试</p>
+<p>  public static void test() throws Exception {</p>
+<p>​    HBaseUtil hBaseUtils &#x3D; new HBaseUtil();</p>
+<p>​    long startTime &#x3D; System.currentTimeMillis();</p>
+<p>​    String tb &#x3D; “testTb”;</p>
+<p>​    String colFamily &#x3D; “info”;</p>
+<p>​    String col &#x3D; “name”;</p>
+<p>​    String row &#x3D; “100000”;</p>
+<p>​    String value &#x3D; “张三”;</p>
+<p>​    hBaseUtils.createTable(tb, colFamily);</p>
+<p>​    List<Put> listPut &#x3D; new ArrayList&lt;&gt;();</p>
+<p>​    Put put &#x3D; new Put(Bytes.toBytes(row));</p>
+<p>​    put.addColumn(Bytes.toBytes(colFamily), Bytes.toBytes(col), Bytes.toBytes(value));</p>
+<p>​    listPut.add(put);</p>
+<p>​    hBaseUtils.put(tb, listPut);</p>
+<p>​    Result res &#x3D; hBaseUtils.get(“testTb”, “100000”);</p>
+<p>​    List<Cell> list &#x3D; res.getColumnCells(Bytes.toBytes(“info”), Bytes.toBytes(“name”));</p>
+<p>​    for (Cell c : list) {</p>
+<p>​      LOG.info(Bytes.toString(CellUtil.cloneFamily(c)));</p>
+<p>​      LOG.info(Bytes.toString(CellUtil.cloneQualifier(c)));</p>
+<p>​      LOG.info(Bytes.toString(CellUtil.cloneValue(c)));</p>
+<p>​    }</p>
+<p>​    long endTime &#x3D; System.currentTimeMillis();</p>
+<p>​    float seconds &#x3D; (endTime - startTime) &#x2F; 1000F;</p>
+<p>​    LOG.info(“ 耗时” + Float.toString(seconds) + “ seconds.”);</p>
+<p>  }</p>
+<p>  public static void main(String[] args) throws Exception {</p>
+<p>​    test();</p>
+<p>​    preDeal();</p>
+<p>  }</p>
+<p>}</p>
+<p>运行测试</p>
+<p>在主方法里将test方法设为非注释，preDeal方法设为注释</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image232.jpg" alt="img"></p>
+<p>右键HBaseUtil -&gt; Run As -&gt; Java Application，运行测试代码</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image234.png" alt="img"></p>
+<p>运行以后控制台输出如下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image236.png" alt="img"></p>
+<p>运行预处理</p>
+<p>在Main方法中，将preDeal方法设为非注释，test方法设为注释。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image238.jpg" alt="img"></p>
+<p>右键HBaseUtil -&gt; Run As -&gt; Java Application，运行预处理(建表和列族)代码。</p>
+<p>控制台输出如下信息：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image240.png" alt="img"> </p>
+<h3 id="3-2-7．步骤7-编写ElasticSearch工具类"><a href="#3-2-7．步骤7-编写ElasticSearch工具类" class="headerlink" title="3.2.7．步骤7 编写ElasticSearch工具类"></a>3.2.7．步骤7 编写ElasticSearch工具类</h3><p>新建类</p>
+<p>右键com.huawei.bigdata.utils -&gt; New -&gt; Class -&gt; 新建ElasticSearchUtil类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image242.jpg" alt="img"></p>
+<p>编辑类</p>
+<p>编辑该类的内容</p>
+<p>package com.huawei.bigdata.utils;</p>
+<p>import com.alibaba.fastjson.JSONObject;</p>
+<p>import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;</p>
+<p>import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;</p>
+<p>import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse;</p>
+<p>import org.elasticsearch.action.index.IndexRequestBuilder;</p>
+<p>import org.elasticsearch.action.index.IndexResponse;</p>
+<p>import org.elasticsearch.action.search.SearchRequestBuilder;</p>
+<p>import org.elasticsearch.action.search.SearchResponse;</p>
+<p>import org.elasticsearch.client.IndicesAdminClient;</p>
+<p>import org.elasticsearch.client.transport.TransportClient;</p>
+<p>import org.elasticsearch.common.settings.Settings;</p>
+<p>import org.elasticsearch.common.transport.TransportAddress;</p>
+<p>import org.elasticsearch.common.xcontent.XContentBuilder;</p>
+<p>import org.elasticsearch.common.xcontent.XContentType;</p>
+<p>import org.elasticsearch.index.query.QueryBuilder;</p>
+<p>import org.elasticsearch.index.query.QueryBuilders;</p>
+<p>import org.elasticsearch.search.SearchHit;</p>
+<p>import org.elasticsearch.search.SearchHits;</p>
+<p>import org.elasticsearch.transport.client.PreBuiltTransportClient;</p>
+<p>import org.slf4j.Logger;</p>
+<p>import java.io.IOException;</p>
+<p>import java.net.InetAddress;</p>
+<p>import java.net.UnknownHostException;</p>
+<p>import java.util.ArrayList;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>import java.util.Set;</p>
+<p>import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>public class ElasticSearchUtil {</p>
+<p>  &#x2F;&#x2F;构建Settings对象</p>
+<p>  private static Settings settings &#x3D; Settings.builder().put(“cluster.name”, ConstantUtil.CLUSTER_NAME)</p>
+<p>​      .put(“client.transport.sniff”, false).build();</p>
+<p>  &#x2F;&#x2F;TransportClient对象，用于连接ES集群</p>
+<p>  private volatile TransportClient client;</p>
+<p>  private final static Logger LOG &#x3D; ConstantUtil.LOG;</p>
+<p>  public ElasticSearchUtil() {</p>
+<p>​    init();</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 同步synchronized(*.class)代码块的作用和synchronized static方法作用一样,</p>
+<p>   * 对当前对应的*.class进行持锁,static方法和.class一样都是锁的该类本身,同一个监听器</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @return</p>
+<p>   * @throws UnknownHostException</p>
+<p>   *&#x2F;</p>
+<p>  public TransportClient getClient() {</p>
+<p>​    if (client &#x3D;&#x3D; null) {</p>
+<p>​      synchronized (TransportClient.class) {</p>
+<p>​        try {</p>
+<p>​          client &#x3D; new PreBuiltTransportClient(settings)</p>
+<p>​              .addTransportAddress(new TransportAddress(InetAddress.getByName(ConstantUtil.HOSTNAME), ConstantUtil.TCP_PORT));</p>
+<p>​        } catch (UnknownHostException e) {</p>
+<p>​          e.printStackTrace();</p>
+<p>​        }</p>
+<p>​      }</p>
+<p>​    }</p>
+<p>​    return client;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 获取索引管理的IndicesAdminClient</p>
+<p>   *&#x2F;</p>
+<p>  public IndicesAdminClient getAdminClient() {</p>
+<p>​    return getClient().admin().indices();</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 判定索引是否存在</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param indexName</p>
+<p>   * @return</p>
+<p>   *&#x2F;</p>
+<p>  public boolean isExistsIndex(String indexName) {</p>
+<p>​    IndicesExistsResponse response &#x3D; getAdminClient().prepareExists(indexName).get();</p>
+<p>​    return response.isExists() ? true : false;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 创建索引</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param indexName</p>
+<p>   * @return</p>
+<p>   *&#x2F;</p>
+<p>  public boolean createIndex(String indexName) {</p>
+<p>​    CreateIndexResponse createIndexResponse &#x3D; getAdminClient()</p>
+<p>​        .prepareCreate(indexName.toLowerCase())</p>
+<p>​        .get();</p>
+<p>​    return createIndexResponse.isAcknowledged() ? true : false;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 删除索引</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param indexName</p>
+<p>   * @return</p>
+<p>   *&#x2F;</p>
+<p>  public boolean deleteIndex(String indexName) {</p>
+<p>​    DeleteIndexResponse deleteResponse &#x3D; getAdminClient()</p>
+<p>​        .prepareDelete(indexName.toLowerCase())</p>
+<p>​        .execute()</p>
+<p>​        .actionGet();</p>
+<p>​    return deleteResponse.isAcknowledged() ? true : false;</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 位索引indexName设置mapping</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param indexName</p>
+<p>   * @param typeName</p>
+<p>   * @param mapping</p>
+<p>   *&#x2F;</p>
+<p>  public void setMapping(String indexName, String typeName, String mapping) {</p>
+<p>​    getAdminClient().preparePutMapping(indexName)</p>
+<p>​        .setType(typeName)</p>
+<p>​        .setSource(mapping, XContentType.JSON)</p>
+<p>​        .get();</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 创建文档,相当于往表里面insert一行数据</p>
+<ul>
+<li></li>
+</ul>
+<p>   * @param indexName</p>
+<p>   * @param typeName</p>
+<p>   * @param id</p>
+<p>   * @param document</p>
+<p>   * @return</p>
+<p>   * @throws IOException</p>
+<p>   *&#x2F;</p>
+<p>  public long addDocument(String indexName, String typeName, String id, Map&lt;String, Object&gt; document) throws IOException {</p>
+<p>​    Set&lt;Map.Entry&lt;String, Object&gt;&gt; documentSet &#x3D; document.entrySet();</p>
+<p>​    IndexRequestBuilder builder &#x3D; getClient().prepareIndex(indexName, typeName, id);</p>
+<p>​    XContentBuilder xContentBuilder &#x3D; jsonBuilder().startObject();</p>
+<p>​    for (Map.Entry e : documentSet) {</p>
+<p>​      xContentBuilder &#x3D; xContentBuilder.field(e.getKey().toString(), e.getValue());</p>
+<p>​    }</p>
+<p>​    IndexResponse response &#x3D; builder.setSource(xContentBuilder.endObject()).get();</p>
+<p>​    return response.getVersion();</p>
+<p>  }</p>
+<p>  public List&lt;Map&lt;String, Object&gt;&gt; queryStringQuery(String text) {</p>
+<p>​    List&lt;Map&lt;String, Object&gt;&gt; resListMap &#x3D; null;</p>
+<p>​    QueryBuilder match &#x3D; QueryBuilders.queryStringQuery(text);</p>
+<p>​    SearchRequestBuilder search &#x3D; getClient().prepareSearch()</p>
+<p>​        .setQuery(match); &#x2F;&#x2F;分页 可选</p>
+<p>​    &#x2F;&#x2F;搜索返回搜索结果</p>
+<p>​    SearchResponse response &#x3D; search.get();</p>
+<p>​    &#x2F;&#x2F;命中的文档</p>
+<p>​    SearchHits hits &#x3D; response.getHits();</p>
+<p>​    &#x2F;&#x2F;命中总数</p>
+<p>​    Long total &#x3D; hits.getTotalHits();</p>
+<p>​    SearchHit[] hitAarr &#x3D; hits.getHits();</p>
+<p>​    &#x2F;&#x2F;循环查看命中值</p>
+<p>​    resListMap &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</p>
+<p>​    for (SearchHit hit : hitAarr) {</p>
+<p>​      &#x2F;&#x2F;文档元数据</p>
+<p>​      String index &#x3D; hit.getIndex();</p>
+<p>​      &#x2F;&#x2F;文档的_source的值</p>
+<p>​      Map&lt;String, Object&gt; resultMap &#x3D; hit.getSourceAsMap();</p>
+<p>​      resListMap.add(resultMap);</p>
+<p>​    }</p>
+<p>​    return resListMap;</p>
+<p>  }</p>
+<p>  private void init() {</p>
+<p>​    try {</p>
+<p>​      client &#x3D; new PreBuiltTransportClient(settings)</p>
+<p>​          .addTransportAddress(new TransportAddress(InetAddress.getByName(ConstantUtil.HOSTNAME), ConstantUtil.TCP_PORT));</p>
+<p>​    } catch (UnknownHostException e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  &#x2F;&#x2F;用于提前建好索引，相当于关系型数据库当中的数据库</p>
+<p>  public static void preDealCreatIndex() {</p>
+<p>​    ElasticSearchUtil esUtils &#x3D; new ElasticSearchUtil();</p>
+<p>​    LOG.info(“start create index…………..”);</p>
+<p>​    esUtils.createIndex(ConstantUtil.INDEX_NAME);</p>
+<p>​    LOG.info(“finished create index !”);</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 关卡登记信息bayonet：姓名，身份证号，年龄，性别，关卡号，日期时间，通关形式</p>
+<p>   * 住宿登记信息hotel：姓名，身份证号，年龄，性别，起始日期，结束日期，同行人</p>
+<p>   * 网吧登记信息internet：姓名，身份证号，年龄，性别，网吧名，日期，逗留时长</p>
+<p>   * name,id,age,gender,</p>
+<p>   * hotelAddr,hotelInTime,hotelOutTime,acquaintancer,</p>
+<p>   * barAddr,internetDate,timeSpent,</p>
+<p>   * bayonetAddr,crossDate,tripType</p>
+<p>   *&#x2F;</p>
+<p>  public static void preDealSetMapping() {</p>
+<p>​    JSONObject mappingTypeJson &#x3D; new JSONObject();</p>
+<p>​    JSONObject propertiesJson &#x3D; new JSONObject();</p>
+<p>​    JSONObject idJson &#x3D; new JSONObject();</p>
+<p>​    idJson.put(“type”, “keyword”);</p>
+<p>​    idJson.put(“store”, “true”);</p>
+<p>​    propertiesJson.put(“id”, idJson);</p>
+<p>​    JSONObject nameJson &#x3D; new JSONObject();</p>
+<p>​    nameJson.put(“type”, “keyword”);</p>
+<p>​    propertiesJson.put(“name”, nameJson);</p>
+<p>​    JSONObject uidJson &#x3D; new JSONObject();</p>
+<p>​    uidJson.put(“type”, “keyword”);</p>
+<p>​    uidJson.put(“store”, “false”);</p>
+<p>​    propertiesJson.put(“uid”, uidJson);</p>
+<p>​    JSONObject hotelAddr &#x3D; new JSONObject();</p>
+<p>​    hotelAddr.put(“type”, “text”);</p>
+<p>​    propertiesJson.put(“address”, hotelAddr);</p>
+<p>​    JSONObject happenedDate &#x3D; new JSONObject();</p>
+<p>​    happenedDate.put(“type”, “date”);</p>
+<p>​    happenedDate.put(“format”, “yyyy-MM-dd”);</p>
+<p>​    propertiesJson.put(“happenedDate”, happenedDate);</p>
+<p>​    JSONObject endDate &#x3D; new JSONObject();</p>
+<p>​    endDate.put(“type”, “date”);</p>
+<p>​    endDate.put(“format”, “yyyy-MM-dd”);</p>
+<p>​    propertiesJson.put(“endDate”, endDate);</p>
+<p>​    JSONObject acquaintancer &#x3D; new JSONObject();</p>
+<p>​    acquaintancer.put(“type”, “keyword”);</p>
+<p>​    propertiesJson.put(“acquaintancer”, acquaintancer);</p>
+<p>​    mappingTypeJson.put(“properties”, propertiesJson);</p>
+<p>​    LOG.info(“start set mapping to “ + ConstantUtil.INDEX_NAME + “ “ + ConstantUtil.TYPE_NAME + “ …..”);</p>
+<p>​    LOG.info(mappingTypeJson.toString());</p>
+<p>​    ElasticSearchUtil esUtils &#x3D; new ElasticSearchUtil();</p>
+<p>​    esUtils.setMapping(ConstantUtil.INDEX_NAME, ConstantUtil.TYPE_NAME, mappingTypeJson.toString());</p>
+<p>​    LOG.info(“set mapping done!!!”);</p>
+<p>  }</p>
+<p>  &#x2F;&#x2F;用于测试</p>
+<p>  public static void test() {</p>
+<p>​    String index &#x3D; “esindex”;</p>
+<p>​    System.out.println(“createIndex…………..”);</p>
+<p>​    ElasticSearchUtil esUtils &#x3D; new ElasticSearchUtil();</p>
+<p>​    esUtils.createIndex(index);</p>
+<p>​    System.out.println(“createIndex done!!!!!!!!!!!”);</p>
+<p>​    System.out.println(“isExists &#x3D; “ + esUtils.isExistsIndex(index));</p>
+<p>​    System.out.println(“deleteIndex……………”);</p>
+<p>​    esUtils.deleteIndex(index);</p>
+<p>​    System.out.println(“deleteIndex done!!!!”);</p>
+<p>  }</p>
+<p>  public static void main(String[] args) throws IOException {</p>
+<p>​    preDealCreatIndex();</p>
+<p>​    preDealSetMapping();</p>
+<p>​    test();</p>
+<p>  }</p>
+<p>}</p>
+<p>运行测试</p>
+<p>在Main方法中，将test方法设为非注释，其余都注释，右键Run As -&gt; Java Application运行测试代码</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image244.jpg" alt="img"></p>
+<p>运行完成控制台输出如下信息</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image245.png" alt="img"></p>
+<p>运行预处理</p>
+<p>将test方法设为注释，preDealCreatIndex和preDealSetMapping方法设为非注释。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image247.jpg" alt="img"></p>
+<p>右键ElasticSearchUtil -&gt; Run As -&gt; Java Application，运行预处理代码。</p>
+<p>运行完成后控制台输出如下信息：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image249.png" alt="img"></p>
+<h3 id="3-2-8．步骤8-编写数据导入模块"><a href="#3-2-8．步骤8-编写数据导入模块" class="headerlink" title="3.2.8．步骤8 编写数据导入模块"></a>3.2.8．步骤8 编写数据导入模块</h3><p>新建包</p>
+<p>右键src&#x2F;main&#x2F;java -&gt; New -&gt; Package -&gt; 新建com.huawei.bigdata.insert包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image250.png" alt="img"></p>
+<p>新建类</p>
+<p>右键com.huawei.bigdata. insert -&gt; New -&gt; Class -&gt; 新建LoadData2HBaseAndElasticSearch类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image251.png" alt="img"></p>
+<p>编辑该类内容为：</p>
+<p>package com.huawei.bigdata.insert;</p>
+<p>import com.huawei.bigdata.utils.ConstantUtil;</p>
+<p>import com.huawei.bigdata.utils.ElasticSearchUtil;</p>
+<p>import com.huawei.bigdata.utils.HBaseUtil;</p>
+<p>import org.apache.hadoop.hbase.client.Put;</p>
+<p>import org.apache.hadoop.hbase.util.Bytes;</p>
+<p>import java.io.BufferedReader;</p>
+<p>import java.io.File;</p>
+<p>import java.io.FileReader;</p>
+<p>import java.util.*;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>&#x2F;**</p>
+<p> * 读取本地文件并解析数据，之后插入HBase、ElasticSearch和graphBase 。</p>
+<p> * 对应华为云服务为CloudTable、CSS、GES</p>
+<p> *&#x2F;</p>
+<p>public class LoadData2HBaseAndElasticSearch {</p>
+<p>  private HBaseUtil hBaseUtil;</p>
+<p>  private ElasticSearchUtil elasticSearchUtil;</p>
+<p>  public LoadData2HBaseAndElasticSearch() {</p>
+<p>  }</p>
+<p>  &#x2F;**</p>
+<p>   * 关卡登记信息bayonet：姓名，身份证号，年龄，性别，关卡号，日期时间，通关形式</p>
+<p>   * 住宿登记信息hotel：姓名，身份证号，年龄，性别，起始日期，结束日期，同行人</p>
+<p>   * 网吧登记信息internet：姓名，身份证号，年龄，性别，网吧名，日期，逗留时长</p>
+<p>   * name,uid,age,gender,</p>
+<p>   * hotelAddr,happenedDate,endDate,acquaintancer,</p>
+<p>   * barAddr,happenedDate,duration,</p>
+<p>   * bayonetAddr,happenedDate,tripType</p>
+<p>   *&#x2F;</p>
+<p>  public void insert() throws Exception {</p>
+<p>​    hBaseUtil &#x3D; new HBaseUtil();</p>
+<p>​    elasticSearchUtil &#x3D; new ElasticSearchUtil();</p>
+<p>​    String filePath &#x3D; ConstantUtil.INPUT_PATH;</p>
+<p>​    File dir &#x3D; new File(filePath);</p>
+<p>​    File[] files &#x3D; dir.listFiles();</p>
+<p>​    if (files !&#x3D; null) {</p>
+<p>​      for (File file : files) {</p>
+<p>​        if (file.isDirectory()) {</p>
+<p>​          System.out.println(file.getName() + “This is a directory!”);</p>
+<p>​        } else {</p>
+<p>​          &#x2F;&#x2F;住宿登记信息</p>
+<p>​          if (file.getName().contains(“hotel”)) {</p>
+<p>​            BufferedReader reader &#x3D; null;</p>
+<p>​            reader &#x3D; new BufferedReader(new FileReader(filePath + file.getName()));</p>
+<p>​            String tempString &#x3D; null;</p>
+<p>​            while ((tempString &#x3D; reader.readLine()) !&#x3D; null) {</p>
+<p>​              &#x2F;&#x2F;Blank line judgment</p>
+<p>​               if (!tempString.isEmpty()) {</p>
+<p>​                List<Put> putList &#x3D; new ArrayList<Put>();</p>
+<p>​                String[] elements &#x3D; tempString.split(“,”);</p>
+<p>​                &#x2F;&#x2F;生成不重复用户ID，</p>
+<p>​                String id &#x3D; UUID.randomUUID().toString();</p>
+<p>​                Put put &#x3D; new Put(Bytes.toBytes(id));</p>
+<p>​                &#x2F;&#x2F;将数据添加至hbase库</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“name”), Bytes.toBytes(elements[0]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“uid”), Bytes.toBytes(elements[1]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“age”), Bytes.toBytes(elements[2]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“gender”), Bytes.toBytes(elements[3]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“event”), Bytes.toBytes(“hotel”));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“address”), Bytes.toBytes(elements[4]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“happenedDate”), Bytes.toBytes(elements[5]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“endDate”), Bytes.toBytes(elements[6]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“acquaintancer”), Bytes.toBytes(elements[7]));</p>
+<p>​                putList.add(put);</p>
+<p>​                ConstantUtil.LOG.info(“hotel_info start putting to HBase ….:” + id + “ “ + tempString);</p>
+<p>​                hBaseUtil.put(ConstantUtil.TABLE_NAME, putList);</p>
+<p>​                &#x2F;&#x2F;将数据添加至ES库</p>
+<p>​                Map&lt;String, Object&gt; esMap &#x3D; new HashMap&lt;String, Object&gt;();</p>
+<p>​                esMap.put(“id”, id);</p>
+<p>​                esMap.put(“name”, elements[0]);</p>
+<p>​                esMap.put(“uid”, elements[1]);</p>
+<p>​                esMap.put(“address”, elements[4]);</p>
+<p>​                esMap.put(“happenedDate”, elements[5]);</p>
+<p>​                esMap.put(“endDate”, elements[6]);</p>
+<p>​                esMap.put(“acquaintancer”, elements[7]);</p>
+<p>​                elasticSearchUtil.addDocument(ConstantUtil.INDEX_NAME, ConstantUtil.TYPE_NAME, id, esMap);</p>
+<p>​                ConstantUtil.LOG.info(“start add document to ES…” + ConstantUtil.INDEX_NAME + “ “ + ConstantUtil.TYPE_NAME + “ “ + id + “ “ + esMap);</p>
+<p>​              }</p>
+<p>​            }</p>
+<p>​            reader.close();</p>
+<p>​          }</p>
+<p>​          &#x2F;&#x2F;网吧登记信息</p>
+<p>​          else if (file.getName().contains(“internet”)) {</p>
+<p>​            BufferedReader reader &#x3D; null;</p>
+<p>​            reader &#x3D; new BufferedReader(new FileReader(filePath + file.getName()));</p>
+<p>​            String tempString &#x3D; null;</p>
+<p>​            while ((tempString &#x3D; reader.readLine()) !&#x3D; null) {</p>
+<p>​              &#x2F;&#x2F;Blank line judgment</p>
+<p>​              if (!tempString.isEmpty()) {</p>
+<p>​                List<Put> putList &#x3D; new ArrayList<Put>();</p>
+<p>​                String[] elements &#x3D; tempString.split(“,”);</p>
+<p>​                &#x2F;&#x2F;生成不重复用户ID，</p>
+<p>​                String id &#x3D; UUID.randomUUID().toString();</p>
+<p>​                 Put put &#x3D; new Put(Bytes.toBytes(id));</p>
+<p>​                &#x2F;&#x2F;将数据添加至hbase库</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“name”), Bytes.toBytes(elements[0]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“uid”), Bytes.toBytes(elements[1]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“age”), Bytes.toBytes(elements[2]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“gender”), Bytes.toBytes(elements[3]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“event”), Bytes.toBytes(“internetBar”));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“address”), Bytes.toBytes(elements[4]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“happenedDate”), Bytes.toBytes(elements[5]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“duration”), Bytes.toBytes(elements[6]));</p>
+<p>​                putList.add(put);</p>
+<p>​                ConstantUtil.LOG.info(“internet_info start putting to HBase … :” + id + “ “ + tempString);</p>
+<p>​                hBaseUtil.put(ConstantUtil.TABLE_NAME, putList);</p>
+<p>​                &#x2F;&#x2F;将数据添加至ES库</p>
+<p>​                 Map&lt;String, Object&gt; esMap &#x3D; new HashMap&lt;String, Object&gt;();</p>
+<p>​                esMap.put(“id”, id);</p>
+<p>​                esMap.put(“name”, elements[0]);</p>
+<p>​                esMap.put(“uid”, elements[1]);</p>
+<p>​                 esMap.put(“address”, elements[4]);</p>
+<p>​                esMap.put(“happenedDate”, elements[5]);</p>
+<p>​                elasticSearchUtil.addDocument(ConstantUtil.INDEX_NAME, ConstantUtil.TYPE_NAME, id, esMap);</p>
+<p>​                ConstantUtil.LOG.info(“start add document to ES…” + ConstantUtil.INDEX_NAME + “ “ + ConstantUtil.TYPE_NAME + “ “ + id + “ “ + esMap);</p>
+<p>​              }</p>
+<p>​            }</p>
+<p>​            reader.close();</p>
+<p>​          }</p>
+<p>​          &#x2F;&#x2F;关卡登记信息</p>
+<p>​          else if (file.getName().contains(“bayonet”)) {</p>
+<p>​            BufferedReader reader &#x3D; null;</p>
+<p>​            reader &#x3D; new BufferedReader(new FileReader(filePath + file.getName()));</p>
+<p>​            String tempString &#x3D; null;</p>
+<p>​            while ((tempString &#x3D; reader.readLine()) !&#x3D; null) {</p>
+<p>​              &#x2F;&#x2F;Blank line judgment</p>
+<p>​               if (!tempString.isEmpty()) {</p>
+<p>​                List<Put> putList &#x3D; new ArrayList<Put>();</p>
+<p>​                String[] elements &#x3D; tempString.split(“,”);</p>
+<p>​                &#x2F;&#x2F;生成不重复用户ID，</p>
+<p>​                String id &#x3D; UUID.randomUUID().toString();</p>
+<p>​                Put put &#x3D; new Put(Bytes.toBytes(id));</p>
+<p>​                &#x2F;&#x2F;将数据添加至hbase库</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“name”), Bytes.toBytes(elements[0]));</p>
+<p>​                 put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“uid”), Bytes.toBytes(elements[1]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“age”), Bytes.toBytes(elements[2]));</p>
+<p>​                 put.addColumn(Bytes.toBytes(“Basic”), Bytes.toBytes(“gender”), Bytes.toBytes(elements[3]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“event”), Bytes.toBytes(“bayonet”));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“address”), Bytes.toBytes(elements[4]));</p>
+<p>​                put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“happenedDate”), Bytes.toBytes(elements[5]));</p>
+<p>​                 put.addColumn(Bytes.toBytes(“OtherInfo”), Bytes.toBytes(“tripType”), Bytes.toBytes(elements[6]));</p>
+<p>​                putList.add(put);</p>
+<p>​                hBaseUtil.put(ConstantUtil.TABLE_NAME, putList);</p>
+<p>​                ConstantUtil.LOG.info(“bayonet_info start putting to HBase….:” + id + “ “ + tempString);</p>
+<p>​                &#x2F;&#x2F;将数据添加至ES库</p>
+<p>​                Map&lt;String, Object&gt; esMap &#x3D; new HashMap&lt;String, Object&gt;();</p>
+<p>​                esMap.put(“id”, id);</p>
+<p>​                esMap.put(“name”, elements[0]);</p>
+<p>​                esMap.put(“uid”, elements[1]);</p>
+<p>​                esMap.put(“address”, elements[4]);</p>
+<p>​                 esMap.put(“happenedDate”, elements[5]);</p>
+<p>​                elasticSearchUtil.addDocument(ConstantUtil.INDEX_NAME, ConstantUtil.TYPE_NAME, id, esMap);</p>
+<p>​                ConstantUtil.LOG.info(“start add document to ES…” + ConstantUtil.INDEX_NAME + “ “ + ConstantUtil.TYPE_NAME + “ “ + id + “ “ + esMap);</p>
+<p>​              }</p>
+<p>​            }</p>
+<p>​            reader.close();</p>
+<p>​          }</p>
+<p>​          &#x2F;&#x2F;数据描述文件跳过</p>
+<p>​           else {</p>
+<p>​            continue;</p>
+<p>​          }</p>
+<p>​        }</p>
+<p>​      }</p>
+<p>​      ConstantUtil.LOG.info(“load and insert done !!!!!!!!!!!!!!!!!!”);</p>
+<p>​    }</p>
+<p>  }</p>
+<p>  public static void start() throws Exception {</p>
+<p>​    LoadData2HBaseAndElasticSearch load2DB &#x3D; new LoadData2HBaseAndElasticSearch();</p>
+<p>​    load2DB.insert();</p>
+<p>  }</p>
+<p>  public static void main(String[] args) throws Exception {</p>
+<p>​    start();</p>
+<p>  }</p>
+<p>}</p>
+<p>运行导入</p>
+<p>运行主方法开始导入</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image253.jpg" alt="img"></p>
+<p>右键LoadData2HbaseAndElasticSearch -&gt; Run As -&gt; Java Application。</p>
+<p>运行后需要一段时间数据才能执行完毕，运行完毕后可以看到</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image255.png" alt="img"></p>
+<h3 id="3-2-9．步骤9-编写ElasticSearch工具类"><a href="#3-2-9．步骤9-编写ElasticSearch工具类" class="headerlink" title="3.2.9．步骤9 编写ElasticSearch工具类"></a>3.2.9．步骤9 编写ElasticSearch工具类</h3><p>新建包</p>
+<p>右键src&#x2F;main&#x2F;java -&gt; New -&gt; Package -&gt; 新建com.huawei.bigdata.query包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image256.png" alt="img"></p>
+<p>新建类</p>
+<p>右键com.huawei.bigdata.query -&gt; New -&gt; Class -&gt; 新建Query类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image257.png" alt="img"></p>
+<p>编辑类内容为：</p>
+<p>package com.huawei.bigdata.query;</p>
+<p>import com.alibaba.fastjson.JSONObject;</p>
+<p>import com.huawei.bigdata.utils.ConstantUtil;</p>
+<p>import com.huawei.bigdata.utils.ElasticSearchUtil;</p>
+<p>import com.huawei.bigdata.utils.HBaseUtil;</p>
+<p>import org.apache.hadoop.hbase.Cell;</p>
+<p>import org.apache.hadoop.hbase.CellUtil;</p>
+<p>import org.apache.hadoop.hbase.client.Result;</p>
+<p>import org.apache.hadoop.hbase.util.Bytes;</p>
+<p>import java.io.IOException;</p>
+<p>import java.util.List;</p>
+<p>import java.util.Map;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> * 搜索逻辑是先搜索ElasticSearch，再查HBase</p>
+<p> *&#x2F;</p>
+<p>public class Query {</p>
+<p>  private HBaseUtil hBaseUtil &#x3D; new HBaseUtil();</p>
+<p>  private ElasticSearchUtil elasticSearchUtil &#x3D; new ElasticSearchUtil();</p>
+<p>  private JSONObject result &#x3D; new JSONObject();</p>
+<p>  private JSONObject tmpJS &#x3D; new JSONObject();</p>
+<p>  public String query(String target) {</p>
+<p>​    result.clear();</p>
+<p>​    tmpJS.clear();</p>
+<p>​    long startTime &#x3D; System.currentTimeMillis();</p>
+<p>​    List&lt;Map&lt;String, Object&gt;&gt; listMap &#x3D; elasticSearchUtil.queryStringQuery(target);</p>
+<p>​    long endTime &#x3D; System.currentTimeMillis();</p>
+<p>​    float seconds &#x3D; (endTime - startTime) &#x2F; 1000F;</p>
+<p>​    ConstantUtil.LOG.info(“ElasticSearch查询耗时” + Float.toString(seconds) + “ seconds.”);</p>
+<p>​    for (Map&lt;String, Object&gt; m : listMap) {</p>
+<p>​      String id &#x3D; m.get(“id”).toString();</p>
+<p>​      JSONObject tmpJS &#x3D; new JSONObject();</p>
+<p>​      tmpJS.put(“id”, id);</p>
+<p>​      Result res &#x3D; null;</p>
+<p>​      try {</p>
+<p>​        long s1 &#x3D; System.currentTimeMillis();</p>
+<p>​        res &#x3D; hBaseUtil.get(ConstantUtil.TABLE_NAME, id);</p>
+<p>​        long e1 &#x3D; System.currentTimeMillis();</p>
+<p>​        float se1 &#x3D; (e1 - s1) &#x2F; 1000F;</p>
+<p>​        ConstantUtil.LOG.info(“HBase查询耗时” + Float.toString(se1) + “ seconds.”);</p>
+<p>​        Cell[] cells &#x3D; res.rawCells();</p>
+<p>​        for (Cell cell : cells) {</p>
+<p>​          String col &#x3D; Bytes.toString(CellUtil.cloneQualifier(cell));</p>
+<p>​          System.out.println(col);</p>
+<p>​          String value &#x3D; Bytes.toString(CellUtil.cloneValue(cell));</p>
+<p>​          System.out.println(value);</p>
+<p>​          tmpJS.put(col, value);</p>
+<p>​        }</p>
+<p>​        result.put(id, tmpJS);</p>
+<p>​      } catch (IOException e) {</p>
+<p>​        e.printStackTrace();</p>
+<p>​        result.put(id, “查询失败!”);</p>
+<p>​      }</p>
+<p>​    }</p>
+<p>​    return result.toString();</p>
+<p>  }</p>
+<p>  public static void main(String[] args) throws Exception {</p>
+<p>​    Query query &#x3D; new Query();</p>
+<p>​    long startTime &#x3D; System.currentTimeMillis();</p>
+<p>​    System.out.println(query.query(“100004”));</p>
+<p>​    long endTime &#x3D; System.currentTimeMillis();</p>
+<p>​    float seconds &#x3D; (endTime - startTime) &#x2F; 1000F;</p>
+<p>​    ConstantUtil.LOG.info(“ 耗时” + Float.toString(seconds) + “ seconds.”);</p>
+<p>  }</p>
+<p>}</p>
+<p>运行测试</p>
+<p>运行查询测试代码</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image259.jpg" alt="img"></p>
+<p>右键Query -&gt; Run As -&gt; Java Application，运行测试代码。</p>
+<p>运行后控制台输出如下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image261.png" alt="img"></p>
+<h3 id="3-2-10．步骤10编写页面模块"><a href="#3-2-10．步骤10编写页面模块" class="headerlink" title="3.2.10．步骤10编写页面模块"></a>3.2.10．步骤10编写页面模块</h3><p>导入插件</p>
+<p>在src&#x2F;main&#x2F;resources下新建文件夹名为static</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Other -&gt; General -&gt; Folder -&gt; 新建static文件夹.</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image262.png" alt="img"></p>
+<p>在static下新建文件夹名为plugins</p>
+<p>右键static -&gt; New -&gt; Folder -&gt; 新建plugins文件夹.</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image263.png" alt="img"></p>
+<p>将两个插件复制进static.plugins文件夹下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image265.jpg" alt="img"></p>
+<p>导入HTML页面</p>
+<p>src&#x2F;main&#x2F;resources下新建文件夹名为templates</p>
+<p>右键src&#x2F;main&#x2F;resources -&gt; New -&gt; Folder -&gt; 新建templates文件夹.</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image266.png" alt="img"></p>
+<p>在templates文件夹下导入（复制）info_target_search.html文件</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image268.jpg" alt="img"></p>
+<p>info_target_search.html的内容如下：</p>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<pre><code>&lt;meta charset=&quot;utf-8&quot;&gt;
+
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre>
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>Bootstrap 101 Template</title>
+
+  <!-- Bootstrap -->
+
+  <link href="plugins/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+   <!--[if lt IE 9]>
+
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>;
+    
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>;
+
+  <![endif]-->
+
+</head>
+
+<body>
+
+<div class="container">
+
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+</code></pre>
+<p>​    <!-- onsubmit设置成return false,不再显式提交form --></p>
+<pre><code>    &lt;div class=&quot;col-md-8 col-md-offset-2 text-center&quot;
+</code></pre>
+<p>​       onsubmit&#x3D;”return false”&gt;</p>
+<p>​      <form class="form-inline"></p>
+<pre><code>            &lt;div class=&quot;form-group&quot;&gt;
+</code></pre>
+<p>​          <label for="target">请输入条件</label> &lt;input type&#x3D;”text”</p>
+<p>​                               class&#x3D;”form-control” id&#x3D;”target” name&#x3D;”target” placeholder&#x3D;”请输入条件”&gt;</p>
+<p>​        </div></p>
+<p>​        <button type="submit" id="submit" class="btn btn-primary">搜一下</button></p>
+<p>​      </form></p>
+<p>​    </div></p>
+  </div>
+
+  <!-- 在下一行中，添加一个bs系统自带的表格 -->
+
+<pre><code>&lt;div class=&quot;row&quot;&gt;
+
+    &lt;table id=&quot;table&quot;&gt;&lt;/table&gt;
+</code></pre>
+  </div>
+
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<script src="http://code.jquery.com/jquery-1.12.1.min.js" ;></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+<!-- 加入bootstrap table依赖 -->
+
+<script src="plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+<script src="plugins/bootstrap-table/bootstrap-table-locale-all.min.js"></script>
+
+<script type="text/javascript">
+
+  $(function () {
+
+​    <!--初始化表格的样式 -->
+
+​    $('#table').bootstrapTable({
+
+​      columns: [{
+
+​        field: 'id',
+
+​        title: '记录id',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      },{
+
+​        field: 'name',
+
+​        title: '姓名',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​           if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'uid',
+
+​        title: '用户id',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'age',
+
+​        title: '年龄',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'gender',
+
+​        title: '性别',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'event',
+
+​        title: '事件',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​           }
+
+​          return a;
+
+​        }
+
+​      },{
+
+​        field: 'address',
+
+​        title: '地址',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'happenedDate',
+
+​        title: '发生时间',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​             a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      }, {
+
+​        field: 'acquaintancer',
+
+​        title: '同行人',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​          }
+
+​          return a;
+
+​        }
+
+​      },{
+
+​        field: 'endDate',
+
+​        title: '结束时间',
+
+​        formatter: function (value, row, index) {
+
+​          var a = "";
+
+​          if (value == $("#target").val()) {
+
+​            a = '<span style="color:#5858FA">' + value + '</span>';
+
+​          } else {
+
+​            a = '<span style="color#190707">' + value + '</span>';
+
+​           }
+
+​          return a;
+
+​        }
+
+​      }]
+
+​    });
+
+​    //为submit按钮绑定click事件,填充点击查询后的数据查询
+
+​    $("#submit").click(function () {
+
+​      $.ajax({
+
+​        url: '/hw_bigdata/search',
+
+​         data: "target=" + $("#target").val(),
+
+​        cache: false,//false是不缓存，true为缓存
+
+​        async: true,//true为异步，false为同步
+
+​        beforeSend: function () {
+
+​          //请求前
+
+​        },
+
+​        success: function (result) {
+
+​          try {
+
+​            var resultArray = new Array();
+
+​            js = JSON.parse(result);
+
+​            for (var p in js) {
+
+​              resultArray.push(js[p])
+
+​               console.log(js[p]);
+
+​            }
+
+​            console.log(resultArray);
+
+​             $("#table").bootstrapTable('load', resultArray);
+
+ 
+
+​          } catch (e) {
+
+​            window.alert(result);
+
+​            $("#table").bootstrapTable('load', [{
+
+​              "result": "什么也没有找到"
+
+​            }]);
+
+​          }
+
+​        },
+
+​        complete: function () {
+
+​          //请求结束时
+
+​        },
+
+​        error: function () {
+
+​          //请求失败时
+
+​        }
+
+​      })
+
+​    });
+
+  });
+
+ 
+
+</script>
+
+</body>
+
+</html>
+
+ 
+
+<h3 id="3-2-11．步骤11部署搜索服务"><a href="#3-2-11．步骤11部署搜索服务" class="headerlink" title="3.2.11．步骤11部署搜索服务"></a>3.2.11．步骤11部署搜索服务</h3><p>新建manager包</p>
+<p>在com.huawei.bigdata包下新建manager包</p>
+<p>右键src&#x2F;main&#x2F;java -&gt; New -&gt; Package -&gt; 新建com.huawei.bigdata.manager包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image269.png" alt="img"></p>
+<p>在manager包新建Manager类</p>
+<p>右键com.huawei.bigdata.manager-&gt; New -&gt; Class -&gt; 新建Manager类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image270.png" alt="img"></p>
+<p>编辑Manager类内容：</p>
+<p>package com.huawei.bigdata.manager;</p>
+<p>import com.huawei.bigdata.query.Query;</p>
+<p>import org.springframework.stereotype.Component;</p>
+<p>@Component</p>
+<p>public class Manager {</p>
+<p>  private static Query query &#x3D; new Query();</p>
+<p>  public static String getQueryResult(String target) {</p>
+<p>​    try {</p>
+<p>​      String result &#x3D; query.query(target);</p>
+<p>​      System.out.println(result);</p>
+<p>​      return result;</p>
+<p>​    } catch (Exception e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​      return “查询出现异常，请通知研发人员!”;</p>
+<p>​    }</p>
+<p>  }</p>
+<p>   public static void main(String[] args) {</p>
+<p>​    String target &#x3D; “牧之桃”;</p>
+<p>​    String result &#x3D; Manager.getQueryResult(target);</p>
+<p>​    System.out.println(result);</p>
+<p>  }</p>
+<p>}</p>
+<p>右键Manager-&gt; Run As -&gt; Java Application，运行测试。</p>
+<p>运行控制台输出如下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image272.png" alt="img"></p>
+<p>新建controller包</p>
+<p>在com.huawei.bigdata包下新建controller包</p>
+<p>右键src&#x2F;main&#x2F;java -&gt; New -&gt; Package -&gt; 新建com.huawei.bigdata.controller包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image273.png" alt="img"></p>
+<p>在com.huawei.bigdata包下新建SearchController类</p>
+<p>右键com.huawei.bigdata.bigdata -&gt; New -&gt; Class -&gt; 新建SearchController类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image274.png" alt="img"></p>
+<p>编辑SearchController类内容如下：</p>
+<p>package com.huawei.bigdata.controller;</p>
+<p>import org.springframework.boot.SpringApplication;</p>
+<p>import org.springframework.stereotype.Controller;</p>
+<p>import org.springframework.ui.ModelMap;</p>
+<p>import org.springframework.web.bind.annotation.RequestMapping;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> * <p></p>
+<p> * 注解声明，该类为Controller类 并自动加载所需要的其它类</p>
+<p> *&#x2F;</p>
+<p>@Controller</p>
+<p>public class SearchController {</p>
+<p>  @RequestMapping(“&#x2F;search_target”)</p>
+<p>String testdo(ModelMap map) {</p>
+<p>&#x2F;&#x2F;这里返回HTML页面</p>
+<p>​    return “info_target_search”;</p>
+<p>  }</p>
+<p>  &#x2F;&#x2F; 主方法，像一般的Java类一般去右击run as application时候，执行该方法</p>
+<p>  public static void main(String[] args) {</p>
+<p>​    SpringApplication.run(SearchController.class, args);</p>
+<p>  }</p>
+<p>}</p>
+<p>新建rest包</p>
+<p>在controller包下新建rest包</p>
+<p>右键com.huawei.bigdata.controller-&gt; New -&gt; Package -&gt; 新建rest包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image275.png" alt="img"></p>
+<p>在rest包下新建SearchService类</p>
+<p>右键com.huawei.bigdata.controller.rest -&gt; New -&gt; Class -&gt; 新建SearchService类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image276.png" alt="img"></p>
+<p>编辑SearchService类内容</p>
+<p>package com.huawei.bigdata.controller.rest;</p>
+<p>import com.huawei.bigdata.manager.Manager;</p>
+<p>import org.springframework.boot.SpringApplication;</p>
+<p>import org.springframework.boot.autoconfigure.EnableAutoConfiguration;</p>
+<p>import org.springframework.context.annotation.ComponentScan;</p>
+<p>import org.springframework.web.bind.annotation.RequestMapping;</p>
+<p>import org.springframework.web.bind.annotation.RestController;</p>
+<p>&#x2F;**</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>@RestController</p>
+<p>@EnableAutoConfiguration</p>
+<p>@ComponentScan(basePackages &#x3D; {“com.huawei.bigdata”})</p>
+<p>public class SearchService {</p>
+<p>  @RequestMapping(“&#x2F;search”)</p>
+<p>  public String search(String target) {</p>
+<p>​    try {</p>
+<p>​      return Manager.getQueryResult(target);</p>
+<p>​    } catch (Exception e) {</p>
+<p>​      e.printStackTrace();</p>
+<p>​    }</p>
+<p>​    return “不小心出错了!”;</p>
+<p>  }</p>
+<p>  &#x2F;&#x2F; 主方法，像一般的Java类一般去右击run as application时候，执行该方法</p>
+<p>  public static void main(String[] args) throws Exception {</p>
+<p>​    SpringApplication.run(SearchService.class, args);</p>
+<p>  }</p>
+<p>}</p>
+<p>新建boot包</p>
+<p>在controller包下新建boot包</p>
+<p>右键com.huawei.bigdata.controller-&gt; New -&gt; Package -&gt; 新建boot包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image277.png" alt="img"></p>
+<p>在boot包下新建ApplicationBootController类</p>
+<p>右键com.huawei.bigdata.controller.boot -&gt; New -&gt; Class -&gt; 新建ApplicationBootController类</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image278.png" alt="img"></p>
+<p>编辑ApplicationBootController类内容：</p>
+<p>package com.huawei.bigdata.controller.boot;</p>
+<p>import org.springframework.boot.SpringApplication;</p>
+<p>import org.springframework.boot.autoconfigure.SpringBootApplication;</p>
+<p>import org.springframework.context.annotation.ComponentScan;</p>
+<p>&#x2F;**</p>
+<p> * 根启动类</p>
+<p> * Created by ThisPC on 2020&#x2F;8&#x2F;6.</p>
+<p> *&#x2F;</p>
+<p>@SpringBootApplication</p>
+<p>@ComponentScan(basePackages &#x3D; “com.huawei.bigdata”)</p>
+<p>public class ApplicationBootController {</p>
+<p>  public static void main(String[] args) {</p>
+<p>​    SpringApplication.run(ApplicationBootController.class, args);</p>
+<p>  }</p>
+<p>}</p>
+<p>此时项目完整结构为：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image279.png" alt="img"></p>
+<h3 id="3-2-12．步骤12效果演示"><a href="#3-2-12．步骤12效果演示" class="headerlink" title="3.2.12．步骤12效果演示"></a>3.2.12．步骤12效果演示</h3><p>启动服务</p>
+<p>右键ApplicationBootController-&gt; Run As -&gt; Java Application，运行ApplicationBootController</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image281.jpg" alt="img"></p>
+<p>启动成功后控制台输出如下：</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image283.png" alt="img"></p>
+<p>在浏览器查看Web页面</p>
+<p>打开ECS服务器的chrome浏览器，输入<a target="_blank" rel="noopener" href="http://localhost:8084/hw_bigdata/search_target">http://localhost:8084/hw_bigdata/search_target</a></p>
+<p>搜索演示</p>
+<p>ID查询</p>
+<p>输入100006</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image285.png" alt="img"></p>
+<p>输入100007</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image287.png" alt="img"></p>
+<p>姓名查询</p>
+<p>输入孙寻真</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image289.png" alt="img"></p>
+<p>输入陈友儿</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image291.png" alt="img"></p>
+<p>地址查询</p>
+<p>输入汉庭</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image293.png" alt="img"></p>
+<p>输入心悦</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image295.png" alt="img"></p>
+<p>输入时间2017-09-03</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image297.png" alt="img"></p>
+<p>实验完成。</p>
+<h3 id="3-2-13．步骤13释放资源"><a href="#3-2-13．步骤13释放资源" class="headerlink" title="3.2.13．步骤13释放资源"></a>3.2.13．步骤13释放资源</h3><p>删除云搜索服务</p>
+<p>进入云搜索服务管理页面删除云搜索服务CSS</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image299.png" alt="img"></p>
+<p>删除MapReduce服务</p>
+<p>进入MapReduce服务控制台页面删除MapReduce服务MRS</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image301.jpg" alt="img"></p>
+<p>删除弹性云服务器</p>
+<p>进入弹性云服务管理页面，删除弹性云服务服务器ECS和弹性公网IP</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image303.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image305.png" alt="img"></p>
+<h1 id="4-实验总结"><a href="#4-实验总结" class="headerlink" title="4.实验总结"></a>4.实验总结</h1><p><strong>（<strong><strong>1</strong></strong>）实验完成情况</strong></p>
+<p>实验完成率：100%。</p>
+<p><strong>（<strong><strong>2</strong></strong>）出现的问题与解决方案</strong></p>
+<p>问题1：ElasticSearch工具类的DeleteIndexResponse类无法正常导入</p>
+<p>org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse包。</p>
+<p>解决方法：ElasticSearch7.x版本更新所致。只要删除对应导入、将代码修改为直接返回结果。</p>
+<p>问题2：运行ElasticSearch.java失败，没能成功。</p>
+<p>解决方法：实验手册中给出的pom.xml是6.x版本，我的CSS使用的集群版本为7.10.2，这就造成了不匹配。因此，将pom.xml中Elasticsearch的版本信息都改为7.10.2即可，再次运行就会成功运行。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image307.png" alt="img"></p>
+<p>问题3：远程桌面连接弹性云服务器时出现错误</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX2RealTimeRetrieval/clip_image309.jpg" alt="img"></p>
+<p>解决方法：切换校园网为手机热点即可。</p>
+<h1 id="5-课程总结"><a href="#5-课程总结" class="headerlink" title="5.课程总结"></a>5.课程总结</h1><p>短短两个月的大数据技术原理与应用课程和对应的实验课程让我提升了很多。张老师大力发动学生们的积极性，让我们自己在QQ群里面自主提问，自主解答，营造了良好的互帮互助的学习氛围。我是第一次见到原来可以这样学习，通过课程群的积极交流和讨论，不知不觉就解决了自己的问题。同时允许提前完成实验的同学当助教，教学相长也。当过助教的同学也对实验可能出现的问题有了更广更深的理解。</p>
+<p>在张天成老师循循善诱又充满幽默和笑声的课堂上，我对分布式有了初步理解。可以讲Hadoop的核心内容看作是两个部分，一个是分布式存储，一个是分布式计算。</p>
+<p>对于分布式存储，Hadoop有自己的一套系统来处理叫Hadoop distribution file system。为什么分布式存储需要一个额外的系统来处理呢，而不是就把1TB以上的文件分开存放就好了呢。如果不采用新的系统，我们存放的东西没办进行一个统一的管理。存放在A电脑的东西只能在连接到A去找，存在B的又得单独去B找。繁琐且不便于管理。而这个分布式存储文件系统能把这些文件分开存储的过程透明化，用户看不到文件是怎么存储在不同电脑上，看到的只是一个统一的管理界面。现在的云盘就是很好的给用户这种体验。</p>
+<p>对于分布式计算。在对海量数据进行处理的时候，一台机器肯定也是不够用的。所以也需要考虑将将数据分在不同的机器上并行的进行计算，这样不经可以节省大量的硬件的I&#x2F;O开销。也能够将加快计算的速度。Hadoop对分布式计算的系统为MapReduce。Map即将数据分开存放进行计算，Reduce将分布计算的得到的结果进行整合，最后汇总得到一个最终的结果。这样对Hadoop的技术有一个清晰框架思路。</p>
+<p>张老师的引导让我对分布式系统架构Hadoop有了较为扎实的理论基础，我与同学多次花费大量课外时间自学java，最终掌握了JAVA这门语言，它具有良好的可移植性和跨平台性，与C++一样都是面对对象的。学习Java的过程中，我对类、接口、包有了自己的理解。凭借着C和C++的基础，我们借助java实践切身感受了Hadoop的强大功能。不仅如此，我们通过大数据技术原理与应用的实验1、实验2、实验3、实验4、实验5分别了解并照着实验手册实践感受了Hbase、Redis、MongoDB以及NoSQL数据库、MapReduce的使用。</p>
+<p>张天成老师给我们布置了更加具有挑战性和实践意义的华为云实验来代替大数据技术原理与应用的实验6和实验7。同时充分考虑了班级同学的需求和经济水平，给我们每位同学申请了代金券，这才让每位同学都能够获得这个来之不易的实验机会。虽然没有在课堂上学到Flink和Spark，我课余时间自己进行了摸索。</p>
+<p>感谢张老师的悉心教导和助教学长们的热情帮助，两个月的时间收获颇丰，也给了我的未来一种新的可能性。总而言之，选了大数据方向我很庆幸。我真心感激自己有机会上这门课程，我原本对未来的方向没有确定，但学习这门课程之后，我深深地爱上了大数据这一领域，并且想要继续探索。我对分布式数据库还有想了解的东西，对并行处理还想深入学习。作为知行合一的东大人，站在东大百年校庆的风口上，虽然这门课的学习告一段落，但是大数据的学习远远没有终点。</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\20\大数据技术原理与应用实验5MapReduce初级编程实践\" rel="bookmark">大数据技术原理与应用实验5MapReduce初级编程实践</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\05\大数据技术原理与应用实验4NoSQL和关系数据库的操作比较\" rel="bookmark">大数据技术原理与应用实验4NoSQL和关系数据库的操作比较</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\05\大数据技术原理与应用实验3熟悉常用的HBase操作\" rel="bookmark">大数据技术原理与应用实验3熟悉常用的HBase操作</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\05\大数据技术原理与应用实验2熟悉常用的HDFS操作\" rel="bookmark">大数据技术原理与应用实验2熟悉常用的HDFS操作</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\05\大数据技术原理与应用实验1熟悉常用的Linux操作和Hadoop操作\" rel="bookmark">大数据技术原理与应用实验1熟悉常用的Linux操作和Hadoop操作</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/" title="大数据技术原理与应用华为云实验实时检索">https://bradtorres.github.io/2023/04/25/大数据技术原理与应用华为云实验实时检索/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"> <i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag"> <i class="fa fa-tag"></i> 学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/20/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%AE%9E%E9%AA%8C5MapReduce%E5%88%9D%E7%BA%A7%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/" rel="prev" title="大数据技术原理与应用实验5MapReduce初级编程实践">
+      <i class="fa fa-chevron-left"></i> 大数据技术原理与应用实验5MapReduce初级编程实践
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E9%AA%8C%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">1.实验介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%9E%E9%AA%8C%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.实验概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="nav-number">1.2.</span> <span class="nav-text">1.2.实验目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%AE%9E%E9%AA%8C%E8%A7%84%E5%88%92"><span class="nav-number">1.3.</span> <span class="nav-text">1.3.实验规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E5%AE%9E%E9%AA%8C%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">1.4.实验思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%AE%9E%E9%AA%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">1.5.</span> <span class="nav-text">1.5.实验流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%9E%E9%AA%8C%E5%B9%B3%E5%8F%B0%E4%B8%8E%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">2.实验平台与服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%E4%B8%8E%E7%BB%93%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">3.实验步骤与结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%B4%AD%E4%B9%B0%E4%B8%8E%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 大数据相关服务的购买与基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E5%BC%80%E9%80%9AVPC%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1. 开通VPC服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E5%BC%80%E9%80%9AMRS%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2. 开通MRS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-%E5%BC%80%E9%80%9A%E4%BA%91%E6%90%9C%E7%B4%A2CSS%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3. 开通云搜索CSS服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-%E8%B4%AD%E4%B9%B0%E5%BC%B9%E6%80%A7%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8ECS"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4. 购买弹性云服务器ECS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-%E8%AE%BF%E9%97%AEWindows%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.1.5.</span> <span class="nav-text">3.1.5. 访问Windows云服务器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. 大数据实时数据分析开发实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%AD%A5%E9%AA%A41-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1. 步骤1 新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E6%AD%A5%E9%AA%A42-%E4%BF%AE%E6%94%B9%E4%BE%9D%E8%B5%96%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2. 步骤2 修改依赖文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3%EF%BC%8E%E6%AD%A5%E9%AA%A43-%E7%BC%96%E8%BE%91%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3．步骤3 编辑配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4%EF%BC%8E%E6%AD%A5%E9%AA%A44-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.4．步骤4 导入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5%EF%BC%8E%E6%AD%A5%E9%AA%A45-%E7%BC%96%E5%86%99%E5%B8%B8%E9%87%8F%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.2.5.</span> <span class="nav-text">3.2.5．步骤5 编写常量工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-6%EF%BC%8E%E6%AD%A5%E9%AA%A46-%E7%BC%96%E5%86%99Hbase%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.2.6.</span> <span class="nav-text">3.2.6．步骤6 编写Hbase工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-7%EF%BC%8E%E6%AD%A5%E9%AA%A47-%E7%BC%96%E5%86%99ElasticSearch%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.2.7.</span> <span class="nav-text">3.2.7．步骤7 编写ElasticSearch工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-8%EF%BC%8E%E6%AD%A5%E9%AA%A48-%E7%BC%96%E5%86%99%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.8.</span> <span class="nav-text">3.2.8．步骤8 编写数据导入模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-9%EF%BC%8E%E6%AD%A5%E9%AA%A49-%E7%BC%96%E5%86%99ElasticSearch%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.2.9.</span> <span class="nav-text">3.2.9．步骤9 编写ElasticSearch工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-10%EF%BC%8E%E6%AD%A5%E9%AA%A410%E7%BC%96%E5%86%99%E9%A1%B5%E9%9D%A2%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.10.</span> <span class="nav-text">3.2.10．步骤10编写页面模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-11%EF%BC%8E%E6%AD%A5%E9%AA%A411%E9%83%A8%E7%BD%B2%E6%90%9C%E7%B4%A2%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.2.11.</span> <span class="nav-text">3.2.11．步骤11部署搜索服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-12%EF%BC%8E%E6%AD%A5%E9%AA%A412%E6%95%88%E6%9E%9C%E6%BC%94%E7%A4%BA"><span class="nav-number">3.2.12.</span> <span class="nav-text">3.2.12．步骤12效果演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-13%EF%BC%8E%E6%AD%A5%E9%AA%A413%E9%87%8A%E6%94%BE%E8%B5%84%E6%BA%90"><span class="nav-number">3.2.13.</span> <span class="nav-text">3.2.13．步骤13释放资源</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">4.实验总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5.课程总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">184k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:47</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

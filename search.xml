@@ -138,6 +138,55 @@
       </tags>
   </entry>
   <entry>
+    <title>NEU计算机体系结构速通</title>
+    <url>/2023/04/29/NEU%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E9%80%9F%E9%80%9A/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="NEU计算机体系结构速通"><a href="#NEU计算机体系结构速通" class="headerlink" title="NEU计算机体系结构速通"></a>NEU计算机体系结构速通</h1><p>本文记载了本人速通NEU计算机体系结构期末考试的一些方法和心得以及一些自己的关于类似现象的思考。话说在前头，这不是什么了不起的事情，因为考的非常简单而且考试题型固定，完完全全可以对症下药。我的同学大多都是速通的，甚至有个室友在我们的帮助下就复习了半天。仅仅是我的一些思考，如果与你的想法有分歧，那就是我错了。最后感谢上课的老师，他的课讲得非常好，但是大家都大三下了，已经没有人会听课了。老师也非常豁达通情达理，完全没有为难我们。毕竟取舍是必须的。</p>
+ <span id="more"></span>
+
+<h2 id="复习资料汇总"><a href="#复习资料汇总" class="headerlink" title="复习资料汇总"></a>复习资料汇总</h2><h3 id="NEU上课用的PPT"><a href="#NEU上课用的PPT" class="headerlink" title="NEU上课用的PPT"></a>NEU上课用的PPT</h3><p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-1.ppt">计算机系统结构-1.ppt</a></p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-2.PPT">计算机系统结构-2.PPT</a></p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-5.PPT">计算机系统结构-5.PPT</a></p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84-34.PPT">计算机系统结构-34.PPT</a></p>
+<h3 id="PPT使用的参考书籍"><a href="#PPT使用的参考书籍" class="headerlink" title="PPT使用的参考书籍"></a>PPT使用的参考书籍</h3><p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/12138_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84%E6%95%99%E7%A8%8B%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89.pdf">12138_计算机系统结构教程（第2版）.pdf</a></p>
+<h3 id="乔老师最后划的重点"><a href="#乔老师最后划的重点" class="headerlink" title="乔老师最后划的重点"></a>乔老师最后划的重点</h3><p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0.doc">期末复习.doc</a></p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0final%E8%87%AA%E6%95%B4%E7%90%86%E7%AD%94%E6%A1%88%E7%89%88%E6%9C%AC.doc">期末复习final自整理答案版本.doc</a></p>
+<h2 id="针对考试的复习总结"><a href="#针对考试的复习总结" class="headerlink" title="针对考试的复习总结"></a>针对考试的复习总结</h2><p>因为是开卷考试，所以可以带入相关资料。我带了四个PPT，课本，<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0final%E8%87%AA%E6%95%B4%E7%90%86%E7%AD%94%E6%A1%88%E7%89%88%E6%9C%AC.doc">期末复习final自整理答案版本.doc</a>和往年题（只有17年之前的，但不知道怎么回事，22期末和21期中都流出来了）</p>
+<p>整体复习流程以上面的资料为主，同时我拿到了我们学校以往的计算机体系结构的真题。实话实说，很负责的说，上面7个资料加起来都没有往年真题效果好😂。</p>
+<p>这可能就是像我们这样的普通大学的通病吧。</p>
+<p>因为开卷考试，出卷子的老师不故意为难我们，总是会考往年的原题。以前可能在选择题和填空题里面出原题，然后大题计算题考点是固定的，公式知识点简单理解一下背诵记住就可以了。五道计算题每年几乎只有一道题型会变动，另外四道题型不变动。</p>
+<p>今年甚至更离谱，计算题直接考了两道原题，一道数据都不变，另一道就改了一下数字。🤡</p>
+<h2 id="复习过程中的意外收获"><a href="#复习过程中的意外收获" class="headerlink" title="复习过程中的意外收获"></a>复习过程中的意外收获</h2><p>我花了两天时间速通，早上起的也不算早，晚上复习到11点就没有复习了。饭也是正常吃的。前前后后花的时间并不多，总而言之，足以见到开卷考试的难度，就是很水的考试。（考试没有含金量，也不能说明我怎么样，再三申明，我是很菜很菜的菜狗。）</p>
+<h3 id="第一个难点-理解概念"><a href="#第一个难点-理解概念" class="headerlink" title="第一个难点 理解概念"></a>第一个难点 理解概念</h3><p>我是对照着<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0.doc">期末复习.doc</a>在老师给的四个PPT里面ctrl+f定位到相应页数，然后阅读一遍相关概念，如果还是不懂的话，就看更加详细的书本阅读理解一遍。同时定位ppt相关内容的过程，我顺便制作了<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0final%E8%87%AA%E6%95%B4%E7%90%86%E7%AD%94%E6%A1%88%E7%89%88%E6%9C%AC.doc">期末复习final自整理答案版本.doc</a>分享给我的室友参考。（后来那位仅复习了半天的室友称赞这个<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0final%E8%87%AA%E6%95%B4%E7%90%86%E7%AD%94%E6%A1%88%E7%89%88%E6%9C%AC.doc">期末复习final自整理答案版本.doc</a>是神级资料😉，看来制作知识点的索引还是挺有效的嘛）</p>
+<h3 id="第二个难点-计算题"><a href="#第二个难点-计算题" class="headerlink" title="第二个难点 计算题"></a>第二个难点 计算题</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>通过复习（<del>预习</del>）PPT上面的例题以及课后的练习题<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E4%BD%9C%E4%B8%9A.doc">第一章作业.doc</a>和<a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E4%BD%9C%E4%B8%9A%E9%A2%98.doc">第二章作业题.doc</a>。同时在网上找相关题目的讲解（并没有完善的视频，但是能找到一道题目的正确讲解都算是很大的帮助了，例如这个视频<a href="https://www.bilibili.com/video/BV1iY411g7HJ/?p=6&share_source=copy_web">【【自考】计算机系统结构 02325 零基础大题保姆式精讲 学完必过】</a>就只有P6的大题对我有帮助，仅仅是一题，但讲的够好就足够了）。如果还是不懂的话，就看课本对应章节的例题，课本上面的文字总是非常详细的。</p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>寻求同学帮助。</p>
+<p>事实上，这种方式比方法一好得多得多。教学相长也。跟着室友一起学，他看一个题型的计算题，我看另一个题型的计算题，看懂之后在互相教对方，效率极高。而且能够在对方的提问中，让自己对这道题的理解更深。当然具体方法实施策略肯定不止于此，但是跟着室友一起复习，相信我，只有交流的是考试题目，无论是提问者还是被提问者的消化吸收理解概念记忆做题套路的速度都非常快。非常非常适合速通。</p>
+<h3 id="第三个难点-没有合适练习题"><a href="#第三个难点-没有合适练习题" class="headerlink" title="第三个难点 没有合适练习题"></a>第三个难点 没有合适练习题</h3><p>就我而言，因为是速通，因为考试本身就是很水，因此只要做真题就够了。</p>
+<p>真题不会就问会的同学，互相交流学习提问。会了一个题型就看别的年份考的相同的题型来检测巩固自己。因为是开卷，就算忘记公式或者是做题步骤，直接翻资料就好。</p>
+<h2 id="贴上一些复习过程中别的帮助"><a href="#贴上一些复习过程中别的帮助" class="headerlink" title="贴上一些复习过程中别的帮助"></a>贴上一些复习过程中别的帮助</h2><p>1.这是一个同学不知道从哪里找到的资料。我瞥了一眼，有些东西有用，但是我当时速通进入尾声，题型资料都找好对应的，不需要再带这个。所以就没有打印</p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.pdf">计算机体系结构.pdf</a></p>
+<p>2.这是我们期中考试的资料（事实上NEUer考过这门课期中考试DDDD）最终期末复习时甚至完全没看这份资料，打印更是不可能了。</p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E6%9C%9F%E4%B8%AD%E8%AF%95%E5%8D%B72023.pdf">期中试卷2023.pdf</a></p>
+<p>3.这是BILIBILI搜到的一个讲的很好的面向考试的UP主。其中有讲大题的章节对我理解题目的思路很有帮助。其实还是很有帮助的，类似于旁敲侧击的学习。还是愿称之为BILIBILI最好的计算机体系结构的视频。</p>
+<p><a href="https://www.bilibili.com/video/BV11f4y1A7BH/?share_source=copy_web">【【从开学到期末】计算机体系结构——学习伴侣&#x2F;小白必备&#x2F;三分钟知识点&#x2F;预习复习考试一条龙】 </a></p>
+<p>这是她的笔记</p>
+<p><a href="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/ComputerArchitecture/%E5%95%8A%E6%88%91%E6%9C%89%E5%85%94%E5%AD%90%E7%89%99%E2%80%94%E2%80%94%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0.docx">啊我有兔子牙——体系结构复习.docx</a></p>
+<h2 id="最后考完的马后炮"><a href="#最后考完的马后炮" class="headerlink" title="最后考完的马后炮"></a>最后考完的马后炮</h2><p>（考完之后才发现，还是对着真题做，理解，背更有针对性）</p>
+<h1 id="考后余声"><a href="#考后余声" class="headerlink" title="考后余声"></a>考后余声</h1><p>0.更加巩固了我之前的感悟，就我这种普通人，学习不过是背诵记忆。</p>
+<p>1.就算是理科或者是工科也是。理解那些复杂的概念，不过是帮助你更好更快的背诵记忆而已。老师讲的思路，做题的方法，要怎么这么思考，这些抽象的东西，其实你只要记忆就好，然后做题的时候运用出来。虽然不是文科那样子具体的概念，但是对我们而言没有区别，只要理解记忆做题的时候运用就好了。甚至考试的时候你才会发现，底层的概念根本不考，自己第一遍学的时候完完全全理解一边就够了，其余的全是浪费时间。（举例子，100分的卷子，可能你学20小时拿到了98分，但是你一定可以花10小时拿到80分，相信我，你只要记忆就好了，纠结概念牛角尖没有意义，考完试就忘的干净。难听一点说，考试的意义就是拿分数，其余的都是别人自欺欺人，笑死我了。😋。高考的分数就是一切的意义，不用自己骗自己，也不要拿热爱所谓的自己宝贵的附加价值来欺骗自己，很无聊很蠢。你高考完成为一个旁观者清，才明白，高考学的东西没有任何意义，唯一的意义就是学历，那学历是什么，不过是敲门砖，入场券。如果你把高考看得太重你会考的很烂，从高一开始就明白考试的意义就是拿分数的话，，就能考得很好）（对我们这样的普通人来说，完完全全不会创造新的东西，而且无论是什么考试，满分100分只会拿出0分来检测你的新想法hhhhhhhhhhhhhh。当然竞赛除外，因为弄竞赛的都是不是普通人。）</p>
+<p>很难理解是吧，我也感觉我有点偏激，但是事实就是如此，真话总是如此难听么？？😫😫</p>
+<p>事实就是如此，针对各种类型的考试对症下药，以最少的代价拿到性价比的东西，同时不要自己骗自己投入太多宝贵的感情价值。跟很多别的事情比起来，考试是真的简单，只要记忆就够了。</p>
+<p>打个比方，人总是无法与自己的初恋最终走到一起，因为大家都把自己的初恋看的太高太重，失去了自己与白月光的相处平衡，它事实上完完全全没有你想的那么好。当局者迷，旁观者清。自己成为了当局者，失去了最基本的判断对错的能力。一个盲人又怎么能确定东南西北呢？自己就成了那个盲人，乱走一通，最终失败也不明白自己为什么失败。</p>
+<p>所以不要把任何事情看到太高太重，理性的客观的甚至于冷酷的严苛的看待事物，实事求是说真话总是让自己难受，但是温柔乡只会诞生被温水煮四的青蛙。至少到目前为止，2023年4月29日星期六，我所接触到的考试（除开竞赛），本质都是理解记忆背诵。</p>
+<p>同时我能明显感受到很多很多过去完完全全是浪费时间，学校啊老师啊都没有搞清楚考试的意义就是拿分数这个根本宗旨。在一些额外的附加情感评价能力价值上面去花时间，浪费了很多很多的时间。到头来还是自己骗自己不愿意承认。最终导致学校的意义就是给你找事情做，给你消遣时间的场所，不让你做坏事的场所。至于最后的考试，可能自己在学校里面和家里面用来学习的时间只用1&#x2F;10就可以考出一样的成绩。另外9&#x2F;10都是学校和老师再给你找事情做，给KillTime罢了。笑死了🤣🤣🤣，事实就是如此，真相总是如此丑陋。🤡卸下所有伪装和防备，从第三人的视角审视自己的结果，就是能发现自己什么都是不是。同时也能发现，别人是都在这种环境里面自欺欺人，9&#x2F;10的时间都被拿来killtime没有在自己目标的道路上面挪动任何一步。</p>
+]]></content>
+      <categories>
+        <category>NEU课程</category>
+      </categories>
+      <tags>
+        <tag>课内学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据技术原理与应用华为云实验实时检索</title>
     <url>/2023/04/25/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E6%A3%80%E7%B4%A2/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="1-实验介绍"><a href="#1-实验介绍" class="headerlink" title="1.实验介绍"></a>1.实验介绍</h1><h2 id="1-1-实验概述"><a href="#1-1-实验概述" class="headerlink" title="1.1.实验概述"></a>1.1.实验概述</h2><p>本实验基于华为云服务。通过模拟开发流程，包括数据导入库，组件应用开发，构建搜索服务，最终完成实时检索功能。</p>

@@ -138,6 +138,101 @@
       </tags>
   </entry>
   <entry>
+    <title>大数据技术原理与应用华为云实验实时分析</title>
+    <url>/2023/04/30/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%97%B6%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1.实验目的"></a>1.实验目的</h1><p>l 掌握大数据相关服务的购买及基础配置</p>
+<p>l 掌握使用Flume采集数据</p>
+<p>l 掌握Flink SQL代码的编写</p>
+<p>l 掌握使用DLV进行数据可视化</p>
+<p>l 掌握实时流数据的处理流程</p>
+<h1 id="2-实验平台与服务"><a href="#2-实验平台与服务" class="headerlink" title="2.实验平台与服务"></a>2.实验平台与服务</h1><p>l <strong>MRS (MapReduce Service)</strong></p>
+<p>MapReduce服务是一个在华为云上部署和管理Hadoop系统的服务，一键即可部署Hadoop集群。</p>
+<p>l <strong>DLI (Data Lake Insight)</strong></p>
+<p>数据湖探索是完全兼容Apache Spark、Apache Flink、openLooKeng（基于Apache Presto）生态，提供一站式的流处理、批处理、交互式分析的Serverless融合处理分析服务。</p>
+<p>l <strong>RDS (Relational Database Service)</strong></p>
+<p>华为云关系型数据库是一种基于云计算平台的即开即用、稳定可靠、弹性伸缩、便捷管理的在线关系型数据库服务，支持单机和主备部署模式，支持MySQL、PostgreSQL、SQL Server等主流的关系型数据库引擎。</p>
+<p>l <strong>CDM (Cloud Data Migration)</strong></p>
+<p>云数据迁移是提供同构&#x2F;异构数据源之间批量数据迁移服务，帮助客户实现数据自由流动。</p>
+<p>l <strong>DLV (Data Lake Visualization)</strong></p>
+<p>数据可视化是一站式数据可视化开发平台，提供丰富多样的2D、3D可视化组件，采用拖拽式自由布局，旨在帮助用户快速定制和应用属于自己的数据大屏。</p>
+<h1 id="3-实验步骤与结果"><a href="#3-实验步骤与结果" class="headerlink" title="3.实验步骤与结果"></a>3.实验步骤与结果</h1><h2 id="3-1-大数据相关服务的购买与基本配置"><a href="#3-1-大数据相关服务的购买与基本配置" class="headerlink" title="3.1.大数据相关服务的购买与基本配置"></a>3.1.大数据相关服务的购买与基本配置</h2><h3 id="3-1-1-申请弹性公网ip"><a href="#3-1-1-申请弹性公网ip" class="headerlink" title="3.1.1.申请弹性公网ip"></a>3.1.1.申请弹性公网ip</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image002.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image004.jpg" alt="img"></p>
+<h3 id="3-1-2-开通MapReduce服务"><a href="#3-1-2-开通MapReduce服务" class="headerlink" title="3.1.2.开通MapReduce服务"></a>3.1.2.开通MapReduce服务</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image006.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image008.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image010.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image012.jpg" alt="img"></p>
+<h3 id="3-1-3-开通云数据库服务RDS"><a href="#3-1-3-开通云数据库服务RDS" class="headerlink" title="3.1.3.开通云数据库服务RDS"></a>3.1.3.开通云数据库服务RDS</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image014.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image016.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image018.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image020.jpg" alt="img"></p>
+<h3 id="3-1-4-开通数据湖探索服务"><a href="#3-1-4-开通数据湖探索服务" class="headerlink" title="3.1.4.开通数据湖探索服务"></a>3.1.4.开通数据湖探索服务</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image022.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image024.jpg" alt="img"></p>
+<p><strong>配置跨源链接</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image026.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image028.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image030.jpg" alt="img"></p>
+<h3 id="3-1-5-开通数据迁移服务CDM"><a href="#3-1-5-开通数据迁移服务CDM" class="headerlink" title="3.1.5.开通数据迁移服务CDM"></a>3.1.5.开通数据迁移服务CDM</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image032.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image034.jpg" alt="img"></p>
+<h3 id="3-1-6-开通数据可视化服务DLV"><a href="#3-1-6-开通数据可视化服务DLV" class="headerlink" title="3.1.6.开通数据可视化服务DLV"></a>3.1.6.开通数据可视化服务DLV</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image036.jpg" alt="img"></p>
+<h2 id="3-2-大数据实时数据分析开发实战"><a href="#3-2-大数据实时数据分析开发实战" class="headerlink" title="3.2.大数据实时数据分析开发实战"></a>3.2.大数据实时数据分析开发实战</h2><h3 id="3-2-1-Python脚本生成测试数据"><a href="#3-2-1-Python脚本生成测试数据" class="headerlink" title="3.2.1.Python脚本生成测试数据"></a>3.2.1.Python脚本生成测试数据</h3><p>（1）执行Python命令，测试生成100条数据</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image038.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image040.jpg" alt="img"></p>
+<p>（2）使用more命令查看生成的数据。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image042.jpg" alt="img"></p>
+<h3 id="3-2-2-配置Kafka"><a href="#3-2-2-配置Kafka" class="headerlink" title="3.2.2.配置Kafka"></a>3.2.2.配置Kafka</h3><p>（1）创建topic</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image044.jpg" alt="img"></p>
+<p>（2）查看topic信息</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image046.jpg" alt="img"></p>
+<h3 id="3-2-3-安装Flume客户端"><a href="#3-2-3-安装Flume客户端" class="headerlink" title="3.2.3.安装Flume客户端"></a>3.2.3.安装Flume客户端</h3><p>（1）进入到MRS Manager界面</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image048.jpg" alt="img"></p>
+<p>下载完成后会有弹出框提示下载到哪一台服务器上（这台机器就是master节点），路径就是&#x2F;tmp&#x2F;MRS-client。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image050.jpg" alt="img"></p>
+<p>（2）校验下载的客户端文件包</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image052.png" alt="img"></p>
+<p>（3）安装Flume运行环境</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image054.png" alt="img"></p>
+<h3 id="3-2-4-配置Flume采集数据"><a href="#3-2-4-配置Flume采集数据" class="headerlink" title="3.2.4.配置Flume采集数据"></a>3.2.4.配置Flume采集数据</h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image056.png" alt="img"></p>
+<h3 id="3-2-5-MySQL中准备结果表和维度数据表"><a href="#3-2-5-MySQL中准备结果表和维度数据表" class="headerlink" title="3.2.5.MySQL中准备结果表和维度数据表"></a>3.2.5.MySQL中准备结果表和维度数据表</h3><p>（1）新建数据库</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image058.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image060.jpg" alt="img"></p>
+<p>（2）执行SQL</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image062.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image064.jpg" alt="img"></p>
+<p>（3）创建数据表</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image066.jpg" alt="img"></p>
+<h3 id="3-2-6-使用DLI中的Flink作业进行数据分析"><a href="#3-2-6-使用DLI中的Flink作业进行数据分析" class="headerlink" title="3.2.6.使用DLI中的Flink作业进行数据分析"></a>3.2.6.使用DLI中的Flink作业进行数据分析</h3><p>（1）编辑SQL并进行语义校验</p>
+<p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image068.png" alt="img"></strong></p>
+<p>（2）输入kafka_bootstrap_servers地址，测试连通性</p>
+<p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image070.png" alt="img"></strong></p>
+<p>（3）查看作业运行详情      </p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image072.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image074.png" alt="img"></p>
+<p>（3）验证数据分析</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image076.jpg" alt="img"></p>
+<h3 id="3-2-7-DLV数据可视化"><a href="#3-2-7-DLV数据可视化" class="headerlink" title="3.2.7.DLV数据可视化"></a>3.2.7.DLV数据可视化</h3><p>（1）展示销售额排行前5的门店信息</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image078.jpg" alt="img"></p>
+<p>（2）定时执行数据生成脚本</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image079.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image081.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image083.jpg" alt="img"></p>
+<h1 id="4-实验总结"><a href="#4-实验总结" class="headerlink" title="4.实验总结"></a>4.实验总结</h1><h2 id="（1）实验完成情况"><a href="#（1）实验完成情况" class="headerlink" title="（1）实验完成情况"></a>（1）实验完成情况</h2><p>实验完成率：100%。</p>
+<h2 id="（2）出现的问题与解决方案"><a href="#（2）出现的问题与解决方案" class="headerlink" title="（2）出现的问题与解决方案"></a>（2）出现的问题与解决方案</h2><p>问题1：查找Zookeeper的IP时，Zookeeper的ip有三个，不知道要用哪个。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/BigDataExperimentEX1RealTimeAnalysis/clip_image085.jpg" alt="img"></p>
+<p>解决：使用两个node-master里面的其中一个IP即可</p>
+<p>问题1：对于linux命令不太熟悉。</p>
+<p>解决：查找“菜鸟教程”或者命令行下直接在命令末尾“- - h”查看帮助。</p>
+<p>问题2：Putty没有显示菜单键，无法duplicate session</p>
+<p>解决：重新开启一个Putty，登录相同IP</p>
+]]></content>
+      <categories>
+        <category>大数据技术原理与应用</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NEU计算机体系结构速通</title>
     <url>/2023/04/29/NEU%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E9%80%9F%E9%80%9A/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="NEU计算机体系结构速通"><a href="#NEU计算机体系结构速通" class="headerlink" title="NEU计算机体系结构速通"></a>NEU计算机体系结构速通</h1><p>本文记载了本人速通NEU计算机体系结构期末考试的一些方法和心得以及一些自己的关于类似现象的思考。话说在前头，这不是什么了不起的事情，因为考的非常简单而且考试题型固定，完完全全可以对症下药。我的同学大多都是速通的，甚至有个室友在我们的帮助下就复习了半天。仅仅是我的一些思考，如果与你的想法有分歧，那就是我错了。最后感谢上课的老师，他的课讲得非常好，但是大家都大三下了，已经没有人会听课了。老师也非常豁达通情达理，完全没有为难我们。毕竟取舍是必须的。</p>

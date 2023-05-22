@@ -6,7 +6,7 @@
   <link href="https://bradtorres.github.io/atom.xml" rel="self"/>
   
   <link href="https://bradtorres.github.io/"/>
-  <updated>2023-05-22T11:36:43.246Z</updated>
+  <updated>2023-05-22T12:52:50.216Z</updated>
   <id>https://bradtorres.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>40分钟学会Git</title>
+    <link href="https://bradtorres.github.io/2023/05/22/Git/"/>
+    <id>https://bradtorres.github.io/2023/05/22/Git/</id>
+    <published>2023-05-22T11:44:56.000Z</published>
+    <updated>2023-05-22T12:52:50.216Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>pilipili(bilibili)上面相关的教程大多数对着晦涩难懂的条例念经，为了让小白快速入门，我发现了一个讲的深入浅出的up主，讲解干货满满，弹幕清一色地在视频最后自发地感谢这位up主——<a href="https://space.bilibili.com/20467058">冯雨</a></p><p>本人也是看了这位up主的视频，才从一知半解的使用git到现在熟练掌握git的常用操作，秉持着传播优质的开源分享内容给大家，也为了表达自己对他的优质视频的感激之情，特地将他的视频安利给大家。（也算是为他引一波流）</p><p>哪怕你是什么都不知道的小白，看了他的视频讲解，动手一起做，你也完全可以轻松掌握绝大部分的git命令行和相关工具的使用。✌</p><p>所以还在等什么，快快为他的视频一键三连吧！</p><p>【40 分钟学会 Git | 日常开发全程大放送&amp;搭配Github】 <a href="https://www.bilibili.com/video/BV1db4y1d79C/?share_source=copy_web&vd_source=12b49fdcdd0ffebaac761ae3ad9f8764">https://www.bilibili.com/video/BV1db4y1d79C/?share_source=copy_web&amp;vd_source=12b49fdcdd0ffebaac761ae3ad9f8764</a></p><span id="more"></span><h1 id="课代表笔记"><a href="#课代表笔记" class="headerlink" title="课代表笔记"></a>课代表笔记</h1><p>示例项目 GoGoCode的仓库 <a href="https://github.com/thx/gogocode/">https://github.com/thx/gogocode/</a></p><p>搭配食用更佳的 Github 新手够用指南：</p><p>【Github 新手够用指南 | 全程演示&amp;个人找项目技巧放送】 <a href="https://www.bilibili.com/video/BV1e541137Tc/?share_source=copy_web&vd_source=12b49fdcdd0ffebaac761ae3ad9f8764">https://www.bilibili.com/video/BV1e541137Tc/?share_source=copy_web&amp;vd_source=12b49fdcdd0ffebaac761ae3ad9f8764</a></p><p>软件下载地址：</p><p><a href="https://gitforwindows.org/">https://gitforwindows.org/</a><br><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p><p>用到的命令：</p><p>克隆仓库：git clone &lt;git地址&gt;<br>初始化仓库：git init </p><p>添加文件到暂存区：git add -A<br>把暂存区的文件提交到仓库：git commit -m “提交信息”<br>查看提交的历史记录：git log –stat</p><p>工作区回滚：git checkout <filename><br>撤销最后一次提交：git reset HEAD^1</p><p>以当前分支为基础新建分支：git checkout -b <branchname><br>列举所有的分支：git branch<br>单纯地切换到某个分支：git checkout <branchname><br>删掉特定的分支：git branch -D <branchname><br>合并分支：git merge <branchname></p><p>推送当前分支最新的提交到远程：git push<br>拉取远程分支最新的提交到本地：git pull</p><h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p><code>fatal: unable to access &#39;https://github.com/BradTorres/neu-os-experiments.git/&#39;: Recv failure: Connection was reset</code></p><p>解决方法：</p><p>①依次将如下两条语句复制到git中后，点击回车。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure><p>②从Windows搜索中输入打开cmd，将<code>ipconfig/flushdns</code>复制，点击回车，清理DNS缓存</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/Git/image-20230522205013070.png" alt="image-20230522205013070"></p><p>再重新试一遍就行了</p><h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><p><code>Git 提示fatal: remote origin already exists 错误解决办法</code></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/CSEfromNEU/Git/image-20230522205126840.png" alt="image-20230522205126840"></p><p>解决办法如下：<br>1、先删除远程 Git 仓库</p><blockquote><p>$ git remote rm origin</p></blockquote><p>2、再添加远程 Git 仓库</p><blockquote><p>$ git remote add origin <a href="https://github.com/BradTorres/neu-os-experiments.git">https://github.com/BradTorres/neu-os-experiments.git</a></p></blockquote>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h1&gt;&lt;p&gt;pilipili(bilibili)上面相关的教程大多数对着晦涩难懂的条例念经，为了让小白快速入门，我发现了一个讲的深入浅出的up主，讲解干货满满，弹幕清一色地在视频最后自发地感谢这位up主——&lt;a href=&quot;https://space.bilibili.com/20467058&quot;&gt;冯雨&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;本人也是看了这位up主的视频，才从一知半解的使用git到现在熟练掌握git的常用操作，秉持着传播优质的开源分享内容给大家，也为了表达自己对他的优质视频的感激之情，特地将他的视频安利给大家。（也算是为他引一波流）&lt;/p&gt;
+&lt;p&gt;哪怕你是什么都不知道的小白，看了他的视频讲解，动手一起做，你也完全可以轻松掌握绝大部分的git命令行和相关工具的使用。✌&lt;/p&gt;
+&lt;p&gt;所以还在等什么，快快为他的视频一键三连吧！&lt;/p&gt;
+&lt;p&gt;【40 分钟学会 Git | 日常开发全程大放送&amp;amp;搭配Github】 &lt;a href=&quot;https://www.bilibili.com/video/BV1db4y1d79C/?share_source=copy_web&amp;vd_source=12b49fdcdd0ffebaac761ae3ad9f8764&quot;&gt;https://www.bilibili.com/video/BV1db4y1d79C/?share_source=copy_web&amp;amp;vd_source=12b49fdcdd0ffebaac761ae3ad9f8764&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="NEU课程" scheme="https://bradtorres.github.io/categories/NEU%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+    <category term="课内学习" scheme="https://bradtorres.github.io/tags/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>neu-os-experiments</title>
@@ -455,29 +480,6 @@
     <category term="大数据" scheme="https://bradtorres.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
     <category term="学习" scheme="https://bradtorres.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>说再见</title>
-    <link href="https://bradtorres.github.io/2023/04/04/%E8%AF%B4%E5%86%8D%E8%A7%81/"/>
-    <id>https://bradtorres.github.io/2023/04/04/%E8%AF%B4%E5%86%8D%E8%A7%81/</id>
-    <published>2023-04-04T05:13:32.000Z</published>
-    <updated>2023-04-05T07:15:04.653Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="说再见"><a href="#说再见" class="headerlink" title="说再见"></a>说再见</h1><p>（美化回忆没有意义，只会自欺欺人）</p><p>长话短说，我再也不踢足球了。包括一切对足球有关的东西，都不接触了。</p><p>理由也很简单，很真实。</p><p><u>足球在功利性上没用。</u></p><p>（学校杯赛我因为身体原因参加不了，计算机学院内部的院级比赛因为同队的院队队友不想参加，我也不参加了。</p><p>这样我就没有比赛踢了，所以平常的计算机学院每周一次的训练我也不必再去了。）</p><p><strong>写进博客里面，是希望自己能真正做到不接触，以此作为见证。</strong></p><p>下面是浅浅的记录我的”职业生涯”，含有大量足球术语和圈内话，全是自己的不成熟的牢骚，不想被影响心情的可以看到这里就结束了。</p><h2 id="Phase-I"><a href="#Phase-I" class="headerlink" title="Phase I"></a>Phase I</h2><p>小学踢过一点足球，有过接触。</p><p>但周围的小朋友都不熟，自己也不爱说话。因此就踢了一会。</p><h2 id="Phase-II"><a href="#Phase-II" class="headerlink" title="Phase II"></a>Phase II</h2><p>初中与认识的人一起跟着学校的体育教练训练，整个队伍的气氛很好，大家都其乐融融的。</p><p>我是选拔之后，留下来的唯一一个初一学生。其余的都是初二的。可能是因为喜欢足球，我进步得比较快。</p><p><em>比赛成绩</em></p><p><em>初二时代表嘉鱼县参加咸宁市第一届青少年校园足球联赛拿到亚军。</em></p><p><em>初二时代表咸宁市参加湖北省第一届青少年校园足球联赛拿到十六强。</em></p><p><em>初三时代表嘉鱼县参加咸宁市第二届青少年校园足球联赛拿到亚军。</em></p><p><em>初三时代表咸宁市参加湖北省第二届青少年校园足球联赛鄂东南赛区拿到第六名。</em></p><p>其实看到这里也就清楚了，我参加的是不入流的比赛。</p><p>加上体育教练其实是教篮球转行过来的业余教练，我并没有多厉害。</p><p>虽然足球一直都只是一个爱好，但是队友的陪伴，比赛的收获，让我深信我会一直踢下去。</p><p>（背景知识：我们能碰上这个风口，有人带我们训练，有人组织比赛，全都是响应国家那句“足球要从娃娃抓起”的号召。据我所知，从那句话开始，各种推广足球运动普及化大众化的文件如雨后春笋般纷纷涌出。全国各地每年的足球体育特长生的招生人数是原来的三倍，以及足球二级运动员的标准大大降低了。与此同时，每个省每个市都紧锣密鼓地开展着足球进校园的活动，以此为代表的就是第一届青少年校园足球联赛的开启。</p><p>没错，看到这你也多多少少猜到了。</p><p>与<strong>过去专业化的，让孩子早早的放弃学业，去读职业化的足球学校或是体校的道路</strong>不同，为了增加全国人民的足球热情，培养中国足球人口基数，国家开辟了一条<strong>全新的非职业化的校园业余足球普及推广赛道</strong>。</p><p>我们并没有放弃学业，对我们而言，足球只是一个兴趣爱好的选择。我们享受着更多更多校园足球资源喷涌带来的红利，从而有机会去接触业余的足球训练，参加业余性质的足球比赛。</p><p>）</p><p>留下来的记忆比较深的只有初三的班级五人制足球赛，有着集体荣誉感的加持，为班级为同学争名次总是让人更加开心。</p><p>很可惜班级五人制足球赛只拿到了第二名，射手榜我也只是排在第三。但对我而言，已经足够快乐了。</p><h3 id="Foreshadowing"><a href="#Foreshadowing" class="headerlink" title="Foreshadowing"></a>Foreshadowing</h3><p>初中的尾声。</p><p>被鄂南高中提前录取的时候。</p><p>我的体育教练：</p><p>​“你要考上鄂南高中，鄂南高中足球特别厉害，去年他们拿了湖北省第一届青少年校园足球高中联赛第六名”</p><p>我的数学老师：</p><p>​”高中就别踢足球了，想要成绩好，就要专心，专注于学习。足球可以放一边，大学再继续。“</p><p>我的物理老师：</p><p>​”恭喜你！不过高中就别踢足球了，大学再继续。“</p><p>……</p><p>有很多很多声音，我心里也清楚，高中我不会再继续了。顶多体育课踢足球放松放松。</p><h2 id="Phase-III"><a href="#Phase-III" class="headerlink" title="Phase III"></a>Phase III</h2><p>上了高中，我也确实没有再花很多时间在足球上面。</p><p>也就平常体育课踢一踢，平常和同学们聊一聊。</p><p>在野球场上碰到了初中参加咸宁市青少年校园足球联赛碰到的对手，可谓不打不相识。</p><p>但是在高中那么枯燥的环境下，就算不那么有趣的东西也会变得非常有趣。</p><p>或多或少还是有影响的，这是无法否认的。</p><h3 id="又入”歧途“"><a href="#又入”歧途“" class="headerlink" title="又入”歧途“"></a>又入”歧途“</h3><p>高一<strong>班级足球比赛拿了第三名</strong>。这也成为鄂南高中足球教练请我进入足球队参加比赛的契机。</p><p>（背景知识：</p><p>我记得班级足球比赛第一场前一天晚上，我激动的睡不着。过了两年再次踢比赛让我激动的睡不着觉，大概是两点我才睡着。</p><p>后来进了足球队，我才知道，如果有射手榜的话，这次比赛我是射手榜第二名。</p><p>）</p><p>高二的时候，鄂南高中足球教练找到我班主任说好话，希望我能代表鄂南高中足球队，参加湖北省青少年校园足球高中联赛。</p><p>说我不开心是不可能的。但是要整整两周出去宜昌踢比赛，不能上课。</p><p>班主任同意了，我家长没同意。虽然闹了一点矛盾，但我还是留在学校继续上课了。</p><p>（后来回想，这是对的决策）</p><p>不过足球教练当时告诉我，虽然你这次湖北省省级的比赛没法参加，但是一个月后在咸宁本地举行的咸宁市青少年校园足球高中联赛补赛你可以参加，这次比赛不会影响学业，就在本地举办。</p><p>终于这一次我的家长也同意。</p><p>我们拿到了<strong>咸宁市青少年校园足球高中联赛补赛第三名</strong>。</p><p>（因为太久没运动，缺乏锻炼，同时我与队友的磨合也不够，我这次比赛的表现平平。只是作为首发打满了所有比赛，没有评为队内最佳球员。）</p><p>整体而言，如果把踢足球的时间拿来学习，毫无疑问我成绩会好一点。</p><p>但是对当时的我而言，这并不是亏本买卖。踢足球很开心很值得，成绩的起伏最主要的因素不是足球，而是另外一个。（这里不细讲）</p><h3 id="遗憾的尾巴"><a href="#遗憾的尾巴" class="headerlink" title="遗憾的尾巴"></a>遗憾的尾巴</h3><p>高考之前，足球教练跟我讲了二十年前，一个同样是一班的学生，他也是足球队的，最后考上北航的故事。希望我也能读。</p><p>高考结束后，校外又碰上足球教练，他关心的问我有把握上哪所大学，我支支吾吾的蒙混过去了。</p><p>第二天足球队队友找我，说我们这一届足球队有一场毕业散伙饭，是教练组织的，让我也去参加。我当时心情低落，婉拒了。</p><p>回嘉鱼县后，在体育场碰到初中的足球教练，他也问我考了多少分，我也蒙混过去了。</p><h3 id="插曲"><a href="#插曲" class="headerlink" title="插曲"></a>插曲</h3><p>高考完的暑假，很孤单。初中的队友找到我，带着我踢球忘记痛苦。</p><p><strong>嘉鱼县业余七人制成人足球比赛第三名</strong></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/ShuoZaiJian/psc.jpg" alt="psc"></p><h2 id="Phase-IV"><a href="#Phase-IV" class="headerlink" title="Phase IV"></a>Phase IV</h2><p>上了大学，因为疫情，校内并没有多少体育活动，足球赛也是。</p><p>就算有足球赛，我因为身体原因也没有参加。</p><p>我只是跟着计算机足球队训练，作为锻炼身体的手段。不过光是大家在一起训练有说有笑的，就很好了。</p><p>至少一开始是这样的。</p><p>后来大家渐渐的都很忙，我也是。</p><p>足球带来的快乐没有了。就算单纯的作为健身方式，也远远比不上我自己跑步或者是力量训练。</p><p>同时自己考研的压力增大了。</p><p>在这个时刻，<strong>功利主义地说，足球的性价比变得非常低。</strong></p><p>期间计算机原足球队队长想让我当下一届队长，我婉拒了。</p><p>我把足球的时间分出来一部分进行我自己的锻炼。我的锻炼是一种更加高效的减肥塑形方法。</p><p><strong>到现在所有到比赛都参加不了，我也就没有继续训练，继续接触足球的动力了。包括足球比赛集锦，足球资讯我也不会再看了。</strong> </p><h3 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h3><p>其实这本来就是爱好，喜欢不喜欢坚持不坚持都是我个人的抉择，怎么样都无所谓的。</p><p>本来都无所谓的。我的选择无可厚非，无可指责。</p><p>只是陪伴我这么久，放弃真的不简单。</p><p>放弃足球是一个毋庸置疑的正确的选择。当局者迷，旁观者清。冷静下来理智客观的衡量之后，毫无疑问，我只有放弃一个选择。</p><p><em>到此为止，再见已经说完了。</em></p><p>（补充背景知识：</p><ol><li>可能是因为南北足球风格的差异，北方的足球风格更偏向激烈的身体对抗，非常非常的吃身体素质。技术根本就不存在。因此各种各样的足球活动都是十一人制的，是相当累的。对我而言很不适应，我身体差的很多，尤其是正式比赛，全都是新疆壮汉和留学生，我们的冠军也永远是国际交流学院。汉族人念书的身体差的太多太多了。</li><li>有一个考到北京的学弟跟我讲，他们大一直接踢五人制。我心想，北京也算是北方吧，怎么五人制这么如同小孩子过家家一样，一场踢下来汗都不会留的比赛还让大一学生踢。至少得是七人制吧。还有留在武汉的同学，他们也天天踢五人制比赛和七人制比赛，极少听到他们组织十一人制的。或许跟他们一样，我还能坚持足球吧。</li><li>说到足球，我本质上不过是吃了“足球要从娃娃抓起”这个政策的红利。我没有什么真本事，也没什么天赋。现在能明显感觉到篮球更吃香，如果我打篮球的话，会不会不会像现在这么矮呢？？这都是后话了。</li><li>这篇文章都是我的胡言乱语。有意见不同的就当我是错的就行了。</li></ol><p>）</p>]]></content>
-    
-    
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; class=&quot;aplayer-secondary-script-marker&quot;&gt;&lt;/script&gt;&lt;script class=&quot;meting-secondary-script-marker&quot; src=&quot;\assets\js\Meting.min.js&quot;&gt;&lt;/script&gt;&lt;h1 id=&quot;说再见&quot;&gt;&lt;a href=&quot;#说再见&quot; class=&quot;headerlink&quot; title=&quot;说再见&quot;&gt;&lt;/a&gt;说再见&lt;/h1&gt;&lt;p&gt;（美化回忆没有意义，只会自欺欺人）&lt;/p&gt;
-&lt;p&gt;长话短说，我再也不踢足球了。包括一切对足球有关的东西，都不接触了。&lt;/p&gt;
-&lt;p&gt;理由也很简单，很真实。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日记间隙随笔" scheme="https://bradtorres.github.io/categories/%E6%97%A5%E8%AE%B0%E9%97%B4%E9%9A%99%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="生活碎碎念" scheme="https://bradtorres.github.io/tags/%E7%94%9F%E6%B4%BB%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   

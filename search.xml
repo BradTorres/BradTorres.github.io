@@ -144,18 +144,18 @@
   <span id="more"></span>
 
 <p>现在越来越多的人使用IntelliJ IDEA，你是否想要一个好看的IDEA主题呢？本篇博客教你如何设置一个美美哒IDEA主题，你也可以根据个人喜好自定义喜欢的主题样式。</p>
-<h2 id="1-0▾-系统主题设置"><a href="#1-0▾-系统主题设置" class="headerlink" title="1|0▾ 系统主题设置"></a>1|0<strong>▾</strong> <strong>系统主题设置</strong></h2><p>首先进到设置里：File➞Settings➞Appearance&amp;Behavior➞Appearance。</p>
+<h2 id="系统主题设置"><a href="#系统主题设置" class="headerlink" title="系统主题设置"></a><strong>系统主题设置</strong></h2><p>首先进到设置里：File➞Settings➞Appearance&amp;Behavior➞Appearance。</p>
 <p>这里默认提供了三套主题：IntelliJ,Darcula，high contrast。这里可以根据个人爱好进行设置。</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121215728060-285111197.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image002.png" alt="img"></a></p>
-<p><strong>IntelliJ****样式</strong></p>
+<p>IntelliJ样式</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121215921841-532285755.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image004.png" alt="img"></a></p>
-<p><strong>Darcula****样式</strong></p>
+<p>Darcula样式</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121220249836-262681155.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image006.png" alt="img"></a></p>
-<p><strong>high constract****样式</strong></p>
+<p>high constract样式</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121220428580-680571332.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image008.png" alt="img"></a></p>
 <p><strong>系统字体样式</strong></p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121220830476-103133641.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image010.png" alt="img"></a></p>
-<h2 id="2-0▾-导入其他IDEA主题"><a href="#2-0▾-导入其他IDEA主题" class="headerlink" title="2|0▾ 导入其他IDEA主题"></a>2|0<strong>▾</strong> 导入其他IDEA主题</h2><p>IDEA默认主题</p>
+<h2 id="导入其他IDEA主题"><a href="#导入其他IDEA主题" class="headerlink" title="导入其他IDEA主题"></a>导入其他IDEA主题</h2><p>IDEA默认主题</p>
 <p>IDEA默认提供了三个编辑区主题，可以通过如下的方式进行选择。</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121221157590-1069385493.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image012.png" alt="img"></a></p>
 <p>更多IDEA主题</p>
@@ -169,16 +169,16 @@
 <p>➣ Color Themes官网: <a href="http://color-themes.com/?view=index">☛ 传送门</a></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326120744544-348966698.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image020.png" alt="img"></a></p>
 <p>这里给大家提供几个比较好看的主题</p>
-<p><strong>One Dark theme****样式</strong></p>
+<p>One Dark theme样式</p>
 <p><a href="https://plugins.jetbrains.com/plugin/11938-one-dark-theme/versions">https://plugins.jetbrains.com/plugin/11938-one-dark-theme/versions</a></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326121111730-746073794.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image022.png" alt="img"></a></p>
 <p><strong>Hiberbee theme</strong></p>
 <p><a href="https://plugins.jetbrains.com/plugin/12118-hiberbee-theme/versions">https://plugins.jetbrains.com/plugin/12118-hiberbee-theme/versions</a></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326122133131-1123202268.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image024.png" alt="img"></a></p>
-<p><strong>Monokai_2****样式</strong></p>
+<p><strong>Monokai_2</strong>样式</p>
 <p><a href="https://www.riaway.com/themeshow.php?tid=52$cid=1">https://www.riaway.com/themeshow.php?tid=52$cid=1</a></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326124337431-728203461.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image026.png" alt="img"></a></p>
-<p><strong>Bluloco Light****样式</strong></p>
+<p><strong>Bluloco Light样式</strong></p>
 <p>链接失效<br> <del><a href="http://easycolor.cc/idea/detail/28426.html">http://easycolor.cc/idea/detail/28426.html</a></del></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326125115203-1995625159.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image028.png" alt="img"></a></p>
 <p>下载后为如下jar包：</p>
@@ -192,7 +192,7 @@
 <p>卸载编辑区主题插件：</p>
 <p>选中要卸载的主题 →Delete，然后重启IDEA</p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121225829357-154821125.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image035.png" alt="img"></a></p>
-<h2 id="3-0▾-主题优化及字体设置"><a href="#3-0▾-主题优化及字体设置" class="headerlink" title="3|0▾ 主题优化及字体设置"></a>3|0<strong>▾</strong> <strong>主题优化及字体设置</strong></h2><p><strong>设置鼠标滚轮修改字体大小</strong></p>
+<h2 id="主题优化及字体设置"><a href="#主题优化及字体设置" class="headerlink" title="主题优化及字体设置"></a><strong>主题优化及字体设置</strong></h2><p><strong>设置鼠标滚轮修改字体大小</strong></p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200121231358058-66957090.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image037.png" alt="img"></a></p>
 <p>我们可以勾选此选项，设置为CTR+鼠标滚轮来控制代码字体大小显示</p>
 <p><strong>设置鼠标悬浮提示</strong></p>
@@ -221,7 +221,7 @@
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200122000209382-1153877851.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image055.png" alt="img"></a></p>
 <p><strong>修改当前主题的控制台输出的字体及字体大小</strong></p>
 <p><a href="https://img2018.cnblogs.com/i-beta/1924746/202001/1924746-20200122000110506-295663345.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image057.png" alt="img"></a></p>
-<h2 id="4-0▾-自定义IDEA主题"><a href="#4-0▾-自定义IDEA主题" class="headerlink" title="4|0▾ 自定义IDEA主题"></a>4|0<strong>▾</strong> 自定义IDEA主题</h2><p>本部分是主题设置的高级部分，不建议小白使用，当然可以以此为基础修改原有主题的部分设置</p>
+<h2 id="自定义IDEA主题"><a href="#自定义IDEA主题" class="headerlink" title="自定义IDEA主题"></a>自定义IDEA主题</h2><p>本部分是主题设置的高级部分，不建议小白使用，当然可以以此为基础修改原有主题的部分设置</p>
 <p>首先需要进入到选中主题的设置界面：File➞Settings➞Editor➞Color Scheme</p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326131144945-228816871.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image058.png" alt="img"></a></p>
 <p><strong>设置关键字说明</strong></p>
@@ -295,7 +295,7 @@
 <p> Text:注释文字，我的配色#5E7798</p>
 <p>☃ Line coment:行注释，我的配色# 9B9B9B</p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326150002336-513790726.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image083.png" alt="img"></a></p>
-<p><strong>Identifiers****：Java标识符设置</strong></p>
+<p><strong>Identifiers：Java标识符设置</strong></p>
 <p>Constant :常量</p>
 <p>Default：默认值</p>
 <p>Function Call：调用方法名样式设置</p>
@@ -305,7 +305,7 @@
 <p>Global variable：全局变量样式设置</p>
 <p>Local variable：局部变量样式</p>
 <p>Parameter：参数样式</p>
-<p><strong>Inline parameter hints****内联参数样式</strong></p>
+<p><strong>Inline parameter hints内联参数样式</strong></p>
 <p>Current</p>
 <p>Default</p>
 <p>Highlighted</p>
@@ -314,7 +314,7 @@
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326154330070-1960133958.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image088.png" alt="img"></a></p>
 <p><strong>Number****数字样式</strong></p>
 <p><a href="https://img2020.cnblogs.com/blog/1924746/202003/1924746-20200326154624400-753432817.png"><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Zhehang_practical_training/clip_image089.png" alt="img"></a></p>
-<p>**String:**<strong>字符串相关样式</strong></p>
+<p><strong>String:字符串相关样式</strong></p>
 <p>☃ Escape Sequence</p>
 <p> Invalid: 无效的，如%?</p>
 <p> Valid: 有效的，如\n\t</p>

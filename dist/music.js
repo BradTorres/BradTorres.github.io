@@ -13,9 +13,30 @@ const ap = new APlayer({
 
     audio: [
 	{
+        name: "Ditto",
+        artist: 'New Jeans',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/New%20Jeans%20-%20Ditto.flac',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
         name: "Round & Laundry",
         artist: 'Nai Br.XX、Celeina Ann',
         url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0412/Nai%20Br.XX%E3%80%81Celeina%20Ann%20-%20Round%20%26%20Laundry.flac',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: "暗号",
+        artist: '周杰伦',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/%E5%91%A8%E6%9D%B0%E4%BC%A6%20-%20%E6%9A%97%E5%8F%B7.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: "As It Was",
+        artist: 'Harry Styles',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/Harry%20Styles%20-%20As%20It%20Was.mp3',
         cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
         lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
       },
@@ -41,9 +62,44 @@ const ap = new APlayer({
         lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
       },
       {
-        name: 'Bloom of Youth (风华正茂)',
-        artist: '清水準一',
-        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0412/%E6%B8%85%E6%B0%B4%E6%BA%96%E4%B8%80%20-%20Bloom%20of%20Youth%20%28%E9%A3%8E%E5%8D%8E%E6%AD%A3%E8%8C%82%29.flac',
+        name: 'NFT',
+        artist: 'MC HotDog 热狗',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/MC%20HotDog%20%E7%83%AD%E7%8B%97%20-%20NFT.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: 'Made You Look',
+        artist: 'Meghan Trainor',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/Meghan%20Trainor%20-%20Made%20You%20Look.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: 'We Belong Together',
+        artist: 'Mariah Carey',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/Mariah%20Carey%20-%20We%20Belong%20Together.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: 'Bad Habit (Explicit)',
+        artist: 'Steve Lacy',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/Steve%20Lacy%20-%20Bad%20Habit%20%28Explicit%29.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: '烟 Distance',
+        artist: '柑橘涩子',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/%E6%9F%91%E6%A9%98%E6%B6%A9%E5%AD%90%20-%20%E7%83%9F%20Distance.mp3',
+        cover: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/Cover0412/The_Loneliest_Girl.png',
+        lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
+      },
+      {
+        name: '雪 Distance',
+        artist: 'Capper、罗言RollFlash ',
+        url: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/MusicURL0601/Capper%E3%80%81%E7%BD%97%E8%A8%80RollFlash%20-%20%E9%9B%AA%20Distance.mp3',
         cover: 'http://p1.music.126.net/c5NVKUIAUcyN4BQUDbGnEg==/109951163221157827.jpg?param=130y130',
         lrc: 'https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Music/LRC0412/Shake%20It%20Off-Taylor%20Swift_revise.lrc',
       }

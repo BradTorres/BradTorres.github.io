@@ -6,7 +6,7 @@
   <link href="https://bradtorres.github.io/atom.xml" rel="self"/>
   
   <link href="https://bradtorres.github.io/"/>
-  <updated>2023-06-07T03:22:07.548Z</updated>
+  <updated>2023-06-07T03:53:30.344Z</updated>
   <id>https://bradtorres.github.io/</id>
   
   <author>
@@ -17,11 +17,50 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>解决Failed to connect to github.com port 443:Connection refused</title>
+    <link href="https://bradtorres.github.io/2023/06/07/%E8%A7%A3%E5%86%B3Failed-to-connect-to-github-com-port-443-Connection-refused/"/>
+    <id>https://bradtorres.github.io/2023/06/07/%E8%A7%A3%E5%86%B3Failed-to-connect-to-github-com-port-443-Connection-refused/</id>
+    <published>2023-06-07T03:50:35.000Z</published>
+    <updated>2023-06-07T03:53:30.344Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="解决Failed-to-connect-to-github-com-port-443-Connection-refused"><a href="#解决Failed-to-connect-to-github-com-port-443-Connection-refused" class="headerlink" title="解决Failed to connect to github.com port 443:Connection refused"></a><strong>解决Failed to connect to github.com port 443:Connection refused</strong></h1><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/2/clip_image002.png" alt="img"></p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>因为我是一直挂着代理的。因此如果你也是本地有连接vpn的情况。</p><p>通过在终端输入以下命令解决：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy http://127.0.0.1:7890</span><br></pre></td></tr></table></figure><p>说明：7890为本地混合配置的端口号</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/2/clip_image004.png" alt="img"></p><p>在输入git clone 可以看见成功了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; class=&quot;aplayer-secondary-script-marker&quot;&gt;&lt;/script&gt;&lt;script class=&quot;meting-secondary-script-marker&quot; src=&quot;\assets\js\Meting.min.js&quot;&gt;&lt;/script&gt;&lt;h1 id=&quot;解决Failed-to-connect-to-github-com-port-443-Connection-refused&quot;&gt;&lt;a href=&quot;#解决Failed-to-connect-to-github-com-port-443-Connection-refused&quot; class=&quot;headerlink&quot; title=&quot;解决Failed to connect to github.com port 443:Connection refused&quot;&gt;&lt;/a&gt;&lt;strong&gt;解决Failed to connect to github.com port 443:Connection refused&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/2/clip_image002.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h2&gt;&lt;p&gt;因为我是一直挂着代理的。因此如果你也是本地有连接vpn的情况。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>配置Java环境</title>
+    <link href="https://bradtorres.github.io/2023/06/07/%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/"/>
+    <id>https://bradtorres.github.io/2023/06/07/%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</id>
+    <published>2023-06-07T03:44:48.000Z</published>
+    <updated>2023-06-07T03:47:05.703Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="配置Java环境"><a href="#配置Java环境" class="headerlink" title="配置Java环境"></a>配置Java环境</h1><p>因为大一的时候配置过java环境，但当时不是很懂，加上我后来删除了一次jdk</p><p>所以这次重新下载jdk和配置环境变量都多多少少出了问题</p><p>其实只要照着菜鸟教程就应该没有问题</p><p>配置环境变量的菜鸟教程</p><p><a href="https://www.runoob.com/w3cnote/windows10-java-setup.html">https://www.runoob.com/w3cnote/windows10-java-setup.html</a></p> <span id="more"></span><p>但我还是在这里贴上我非常混乱的环境变量的图片</p><p>用户变量这里</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image002.png" alt="img"></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image004.png" alt="img"></p><p>系统变量这里</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image006.png" alt="img"></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image008.png" alt="img"></p><p>检测是否配置成功</p><p>Cmd窗口输入</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image010.png" alt="img"></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -version</span><br></pre></td></tr></table></figure><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image012.png" alt="img"></p><p>或者是</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java</span><br></pre></td></tr></table></figure><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image014.png" alt="img"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;配置Java环境&quot;&gt;&lt;a href=&quot;#配置Java环境&quot; class=&quot;headerlink&quot; title=&quot;配置Java环境&quot;&gt;&lt;/a&gt;配置Java环境&lt;/h1&gt;&lt;p&gt;因为大一的时候配置过java环境，但当时不是很懂，加上我后来删除了一次jdk&lt;/p&gt;
+&lt;p&gt;所以这次重新下载jdk和配置环境变量都多多少少出了问题&lt;/p&gt;
+&lt;p&gt;其实只要照着菜鸟教程就应该没有问题&lt;/p&gt;
+&lt;p&gt;配置环境变量的菜鸟教程&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.runoob.com/w3cnote/windows10-java-setup.html&quot;&gt;https://www.runoob.com/w3cnote/windows10-java-setup.html&lt;/a&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hexo框架Next主题添加自定义Page和专题系列</title>
     <link href="https://bradtorres.github.io/2023/06/07/Hexo%E6%A1%86%E6%9E%B6Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89Page%E5%92%8C%E4%B8%93%E9%A2%98%E7%B3%BB%E5%88%97/"/>
     <id>https://bradtorres.github.io/2023/06/07/Hexo%E6%A1%86%E6%9E%B6Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89Page%E5%92%8C%E4%B8%93%E9%A2%98%E7%B3%BB%E5%88%97/</id>
     <published>2023-06-07T03:10:47.000Z</published>
-    <updated>2023-06-07T03:22:07.548Z</updated>
+    <updated>2023-06-07T03:22:50.090Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Hexo框架Next主题添加自定义Page和专题系列"><a href="#Hexo框架Next主题添加自定义Page和专题系列" class="headerlink" title="Hexo框架Next主题添加自定义Page和专题系列"></a>Hexo框架Next主题添加自定义Page和专题系列</h1><p>每天都会解决一些小技术，想发博客但是篇幅太短，总感觉没有水的必要，但是积少成多感觉还是要发，因此为了方便索引。就用专题的形式来组织文章。主要思想是新建一个标签页，然后手动利用站内引用来组织想组织的文章。</p> <span id="more"></span><p>在整理博客的过程中，发现需要新增一些页面，对于 Hexo 框架来说是 <strong>page</strong> 的概念，例如 <strong>首页</strong> 、 <strong>关于</strong> 、 <strong>分类</strong> 、 <strong>搜索</strong> 等页面。这种页面不同于每一篇博客文章那种发表的内容，对于 Hexo 框架来说是 <strong>post</strong>，而是可以交互的页面，例如可以在 <strong>搜索</strong> 页面中搜索博客的内容，可以在 <strong>分类</strong> 页面中查看博客文章的分类统计。当然，类似于 <strong>关于</strong> 这种页面也是静态的，没有交互的概念。</p><p>上面提到的这些页面都是 Next 主题自带的，只要在 <strong>_config.yml</strong> 配置文件中开启相关配置即可，不需要关心它是怎么实现的，例如开启了 <strong>分类</strong> 页面，它会自动把博客的分类统计好，展示出来。但是我的想法其实是新增一个页面，并且自定义图标、名称、内容，其实也可以实现，本文记录这个过程。</p><h1 id="自带的页面"><a href="#自带的页面" class="headerlink" title="自带的页面"></a><strong>自带的页面</strong></h1><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image002.png" alt="img"></p><p>这里面的配置有固定的格式，一共有四列：第一列是展示的名字以及页面标识、第二列是 url 地址、第三列是固定的双竖线、第四列是图标名称。我这里使用 <code>about: /about/ || user</code> 举例，<strong>about</strong> 就是页面的名字【虽然配置的是英文，但是有汉化字典转为中文，汉化字典文件为：<code>themes/next/languages/zh-CN.yml</code>，**&#x2F;about&#x2F;** 是页面的 url 地址，表示从主页跳转的地址，前面加上域名可以直接访问，**||** 双竖线是固定标识符，<strong>user</strong> 是图标名称，来自于一个图标库：<a href="https://fontawesome.com/">https://fontawesome.com</a> 。</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image004.png" alt="img"></p><h2 id="新增页面"><a href="#新增页面" class="headerlink" title="新增页面"></a>新增页面</h2><p>了解完了自带的页面，接下来准备新增自定义页面。</p><p>我需要新增的是一个静态页面，名称为 <strong>技术</strong> ，里面会列出我的碰到的一些技术问题，并给出这些技术问题解决的博客的跳转地址。</p><h2 id="生成页面并编辑"><a href="#生成页面并编辑" class="headerlink" title="生成页面并编辑"></a>生成页面并编辑</h2><p>经过查询 Hexo 的语法，生成新页面的命令为：**<code>hexo new page name</code>**，page 是关键字，name 表示页面的名字，我直接使用 <strong><code>hexo new page technology</code></strong> 即可。</p><p>执行完命令后，可以在 <strong>source</strong> 目录看到生成了一个 technology 目录，</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image006.png" alt="img"></p><p>里面有一个 index.md 文件，直接编辑这个页面即可。</p><p>简单编辑内容如图：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image008.png" alt="img"></p><p>这里需要注意文件头的内容，有固定的格式：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: technology</span><br><span class="line"></span><br><span class="line">date: 2023-06-07 10:41:56</span><br><span class="line"></span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure><p>其中，title 就是渲染后 html 网页的居中标题以及网页的 title 标签值，会在浏览器的 tab 页上面显示【这里也可以使用英文名称 technology，但是需要在汉化文件的 title 选项下面增加中英文配置，和后面的 menu 汉化类似】。此外 comments 切记关闭，因为博客如果开启了评论功能，会默认在所有的页面都开启评论框，而这种自定义页面是不需要评论框的，因此选择关闭，即设置为 false。</p><h2 id="开启页面配置"><a href="#开启页面配置" class="headerlink" title="开启页面配置"></a>开启页面配置</h2><p>在主题的配置文件 <strong><code>themes/next/_config.yml</code></strong> 中，配置自定义页面，在 <strong>menu</strong> 选项下面，配置内容如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: /technology/ || fa fa-calendar</span><br></pre></td></tr></table></figure><p>截图如下：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image009.png" alt="img"></p><p>其中，<strong>technology</strong> 是新建的页面名称，**&#x2F;technology&#x2F;** 是链接.</p><h2 id="汉化页面名称"><a href="#汉化页面名称" class="headerlink" title="汉化页面名称"></a>汉化页面名称</h2><p>配置 <strong><code>themes/next/languages/zh-CN.yml</code></strong> 文件，也是在 <strong>menu</strong> 选项下面，配置内容如下：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: 技术</span><br></pre></td></tr></table></figure><p>截图如下：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image010.png" alt="img"></p><h2 id="打开页面预览"><a href="#打开页面预览" class="headerlink" title="打开页面预览"></a>打开页面预览</h2><p>在博客直接输入 <strong>域名</strong> <strong>&#x2F;technology&#x2F;</strong> 链接，打开页面。</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image012.png" alt="img"></p><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>注意，图标是来自于图标库：<a href="https://fontawesome.com/">https://fontawesome.com</a> ，只要提供图标的名字即可，Hexo 会自动匹配对应的图标展示。需要特别注意的是，这里面的图标有大部分是收费的【搜索时会显示灰色状态，能免费使用的才会显示黑色状态】，</p><p>失败的图案</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image013.png" alt="img"></p><p>成功的图案</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image014.png" alt="img"></p><p>搜索图标结果<br> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image016.png" alt="img"></p><h1 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h1><p>由于有些文章有内在的关联性，除了用目录和标签还可以用专题的形式来组织。</p><h2 id="新建标签页"><a href="#新建标签页" class="headerlink" title="新建标签页"></a>新建标签页</h2><p>首先利用 hexo 命令新建一个标签页。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page technology</span><br></pre></td></tr></table></figure><p>然后修改 themes&#x2F;next&#x2F;_config.yaml menu 配置，增加一行：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: /technology/ || fa fa-desktop</span><br></pre></td></tr></table></figure><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image017.png" alt="img"></p><p>然后新增对应中文：修改 <code>themes/next/languages/zh-CN.yml</code> 中的 menu 一项下面添加 </p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: 技术</span><br></pre></td></tr></table></figure><h2 id="编辑-index-md-组织专题目录"><a href="#编辑-index-md-组织专题目录" class="headerlink" title="编辑 index.md 组织专题目录"></a>编辑 index.md 组织专题目录</h2><p>像文章一样编辑 index.md 即可，引用站内文章可以用如下 hexo 语法：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post<span class="emphasis">_link post-name post-title %&#125;</span></span><br></pre></td></tr></table></figure><p><em>post_link</em>：为站内文章引用的关键字，照抄就行。</p><p><em>post-name</em>：为你的 md 文件的名字，不带日期。</p><p><em>post-title</em>：给该文章起的链接标题，为空的话就会从文章中提取。</p><p>更加详细的标签插件见</p><p>Hexo的中文使用说明文档</p><p><a href="https://hexo.io/zh-cn/docs/tag-plugins.html#%E5%BC%95%E7%94%A8%E6%96%87%E7%AB%A0">https://hexo.io/zh-cn/docs/tag-plugins.html#%E5%BC%95%E7%94%A8%E6%96%87%E7%AB%A0</a></p>]]></content>
     
@@ -417,53 +456,6 @@
     
     
     <category term="考研笔记" scheme="https://bradtorres.github.io/tags/%E8%80%83%E7%A0%94%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Diary0411</title>
-    <link href="https://bradtorres.github.io/2023/04/11/Diary0411/"/>
-    <id>https://bradtorres.github.io/2023/04/11/Diary0411/</id>
-    <published>2023-04-11T09:44:13.000Z</published>
-    <updated>2023-04-12T09:34:58.164Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>维护更新博客的时候才会一并更新日记。</p><p>鸽掉日记的可能性也很大。</p><p>我的日记主要是流水账，以及只有自己才能看得懂的谜语。</p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>最近算是学习状态好了很多。</p><p>不过越是有状态，越是能看到很多很多自己做的愚蠢的低效的事情。</p><p>一是越来越明白人的主观能动性与环境气氛和从众效应的相互影响。很多转折点分析来分析去都是命，谁都说不好。真到了那个点，都是看运气。因为自己就是一个人，甚至机器也有自己的性能极限，唯心主义的一定能做到到头来伤害自己。</p><p>二是很多东西从实用主义，甚至从精致的利己主义来讲的话，自己做个样子不过是自己安慰自己，根本就没有用，到头来还是浪费了时间。出发点应该是效率，而不是自己获得的一种虚假的安全感，做样子不能带给自己任何安全感。</p><p>三是某些事情，为什么别人看上去做得那么简单，自己却总是绕不出来。其实你站在旁观者的角度来看，对比两个人的不同。绝大多数时候，都只是自己再绕自己，事情本身就是这样，钻牛角尖只会伤害自己。当局者迷，旁观者清。</p><p>四是从旁观者角度看事实的话总是让人难以接受，真的好想歪曲事实。但若是保持客观态度看全貌，一下就发现自己又笨又蠢，连一个普通人也当不好。</p><p>五是对自己又要重拾八股文的看法，没什么看法。只要看清楚自己的目标就好了。自己的目标从来只是八股文高作为一个工具，考试结束就什么都没了。所以自己不要投入太多无意义的东西情感价值和成本在非目标上，所谓的自豪感，自负感，高人一等感都是骗自己的。摆正视角就能发现以前太多重复的无意义的刷了。但在哪个环境下面，又不可能让我们做别的事情，充其量也就是找事情让我们做，至于效果，就是找事情让我们做的效果。就像给驴找一辆没有粮食的石磨拉，就是让驴白天不睡觉而找的事情，至于事情有没有意义，没有人会问这个问题。自己也在那种畸形的压抑的异性的愚蠢的气氛里面受到感染，或是受到了别人源于他自己压力和私心从而对我的蛊惑。人家就是逢场作戏，缓解自己的当头之急，你这个笨蛋看不清潜规则，自己还误以为真，把整个人搭进去。为了做怪异游戏里面的先驱者而自我催眠，到头来偏离了目标，一场狂欢醒来，原来自己活着的一口气全靠自己的催眠，别人上面都没给你。啊Q都没自己会骗自己。</p>]]></content>
-    
-    
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; class=&quot;aplayer-secondary-script-marker&quot;&gt;&lt;/script&gt;&lt;script class=&quot;meting-secondary-script-marker&quot; src=&quot;\assets\js\Meting.min.js&quot;&gt;&lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;维护更新博客的时候才会一并更新日记。&lt;/p&gt;
-&lt;p&gt;鸽掉日记的可能性也很大。&lt;/p&gt;
-&lt;p&gt;我的日记主要是流水账，以及只有自己才能看得懂的谜语。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="日记间隙随笔" scheme="https://bradtorres.github.io/categories/%E6%97%A5%E8%AE%B0%E9%97%B4%E9%9A%99%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="生活碎碎念" scheme="https://bradtorres.github.io/tags/%E7%94%9F%E6%B4%BB%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    <category term="Diary" scheme="https://bradtorres.github.io/tags/Diary/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo静态博客设置文章加密访问</title>
-    <link href="https://bradtorres.github.io/2023/04/11/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E8%AE%BE%E7%BD%AE%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86%E8%AE%BF%E9%97%AE/"/>
-    <id>https://bradtorres.github.io/2023/04/11/Hexo%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E8%AE%BE%E7%BD%AE%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86%E8%AE%BF%E9%97%AE/</id>
-    <published>2023-04-11T09:24:39.000Z</published>
-    <updated>2023-04-11T10:12:35.987Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Hexo静态博客设置文章加密访问"><a href="#Hexo静态博客设置文章加密访问" class="headerlink" title="Hexo静态博客设置文章加密访问"></a>Hexo静态博客设置文章加密访问</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>总有一些想法，自己想说出来，但又找不到人倾诉。别人不一定能理解你，你也害怕受到别人异样的目光。</p><p>于是你发布在博客上面，但是自己有时候请同学室友来看自己的博客，这样又会造成尴尬。你只想把这些话，说给你觉得值得的人听，所以接下来这个插件，可以轻松实现文章的加密功能，让自己的想法只展示给懂你的人看。👀</p><h2 id="安装hexo-blog-encrypt插件"><a href="#安装hexo-blog-encrypt插件" class="headerlink" title="安装hexo-blog-encrypt插件"></a>安装hexo-blog-encrypt插件</h2><p>在hexo目录下</p><p><code>npm install hexo-blog-encrypt</code></p><h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>在想要使用加密功能的Blog头部加上对应文字：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Hello World</span><br><span class="line">categories: 日记间隙随笔</span><br><span class="line">password: MyPassword</span><br><span class="line">abstract: Here&#x27;s something encrypted, password is required to continue reading.</span><br><span class="line">message: Hey, password is required here.</span><br><span class="line">wrong_pass_message: Oh, this is an invalid password. Check and try again, please.</span><br><span class="line">---</span><br></pre></td></tr></table></figure><ul><li><code>abstract</code>：用于设置加密文章显示的摘要。</li><li><code>message</code>：输入密码提示。</li><li><code>wrong_pass_message</code>: 输入错误提示。</li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; class=&quot;aplayer-secondary-script-marker&quot;&gt;&lt;/script&gt;&lt;script class=&quot;meting-secondary-script-marker&quot; src=&quot;\assets\js\Meting.min.js&quot;&gt;&lt;/script&gt;&lt;h1 id=&quot;Hexo静态博客设置文章加密访问&quot;&gt;&lt;a href=&quot;#Hexo静态博客设置文章加密访问&quot; class=&quot;headerlink&quot; title=&quot;Hexo静态博客设置文章加密访问&quot;&gt;&lt;/a&gt;Hexo静态博客设置文章加密访问&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;总有一些想法，自己想说出来，但又找不到人倾诉。别人不一定能理解你，你也害怕受到别人异样的目光。&lt;/p&gt;
-&lt;p&gt;于是你发布在博客上面，但是自己有时候请同学室友来看自己的博客，这样又会造成尴尬。你只想把这些话，说给你觉得值得的人听，所以接下来这个插件，可以轻松实现文章的加密功能，让自己的想法只展示给懂你的人看。👀&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Hexo" scheme="https://bradtorres.github.io/categories/Hexo/"/>
-    
-    
-    <category term="Hexo" scheme="https://bradtorres.github.io/tags/Hexo/"/>
     
   </entry>
   

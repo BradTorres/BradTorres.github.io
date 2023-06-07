@@ -138,6 +138,50 @@
       </tags>
   </entry>
   <entry>
+    <title>解决Failed to connect to github.com port 443:Connection refused</title>
+    <url>/2023/06/07/%E8%A7%A3%E5%86%B3Failed-to-connect-to-github-com-port-443-Connection-refused/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="解决Failed-to-connect-to-github-com-port-443-Connection-refused"><a href="#解决Failed-to-connect-to-github-com-port-443-Connection-refused" class="headerlink" title="解决Failed to connect to github.com port 443:Connection refused"></a><strong>解决Failed to connect to github.com port 443:Connection refused</strong></h1><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/2/clip_image002.png" alt="img"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>因为我是一直挂着代理的。因此如果你也是本地有连接vpn的情况。</p>
+<p>通过在终端输入以下命令解决：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global http.proxy http://127.0.0.1:7890</span><br></pre></td></tr></table></figure>
+
+<p>说明：7890为本地混合配置的端口号</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/2/clip_image004.png" alt="img"></p>
+<p>在输入git clone 可以看见成功了。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>配置Java环境</title>
+    <url>/2023/06/07/%E9%85%8D%E7%BD%AEJava%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="配置Java环境"><a href="#配置Java环境" class="headerlink" title="配置Java环境"></a>配置Java环境</h1><p>因为大一的时候配置过java环境，但当时不是很懂，加上我后来删除了一次jdk</p>
+<p>所以这次重新下载jdk和配置环境变量都多多少少出了问题</p>
+<p>其实只要照着菜鸟教程就应该没有问题</p>
+<p>配置环境变量的菜鸟教程</p>
+<p><a href="https://www.runoob.com/w3cnote/windows10-java-setup.html">https://www.runoob.com/w3cnote/windows10-java-setup.html</a></p>
+ <span id="more"></span>
+
+<p>但我还是在这里贴上我非常混乱的环境变量的图片</p>
+<p>用户变量这里</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image002.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image004.png" alt="img"></p>
+<p>系统变量这里</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image006.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image008.png" alt="img"></p>
+<p>检测是否配置成功</p>
+<p>Cmd窗口输入</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image010.png" alt="img"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image012.png" alt="img"></p>
+<p>或者是</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">java</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/1/clip_image014.png" alt="img"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hexo框架Next主题添加自定义Page和专题系列</title>
     <url>/2023/06/07/Hexo%E6%A1%86%E6%9E%B6Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89Page%E5%92%8C%E4%B8%93%E9%A2%98%E7%B3%BB%E5%88%97/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Hexo框架Next主题添加自定义Page和专题系列"><a href="#Hexo框架Next主题添加自定义Page和专题系列" class="headerlink" title="Hexo框架Next主题添加自定义Page和专题系列"></a>Hexo框架Next主题添加自定义Page和专题系列</h1><p>每天都会解决一些小技术，想发博客但是篇幅太短，总感觉没有水的必要，但是积少成多感觉还是要发，因此为了方便索引。就用专题的形式来组织文章。主要思想是新建一个标签页，然后手动利用站内引用来组织想组织的文章。</p>

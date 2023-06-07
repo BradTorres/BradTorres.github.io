@@ -6,7 +6,7 @@
   <link href="https://bradtorres.github.io/atom.xml" rel="self"/>
   
   <link href="https://bradtorres.github.io/"/>
-  <updated>2023-06-01T02:49:51.705Z</updated>
+  <updated>2023-06-07T03:22:07.548Z</updated>
   <id>https://bradtorres.github.io/</id>
   
   <author>
@@ -15,6 +15,23 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo框架Next主题添加自定义Page和专题系列</title>
+    <link href="https://bradtorres.github.io/2023/06/07/Hexo%E6%A1%86%E6%9E%B6Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89Page%E5%92%8C%E4%B8%93%E9%A2%98%E7%B3%BB%E5%88%97/"/>
+    <id>https://bradtorres.github.io/2023/06/07/Hexo%E6%A1%86%E6%9E%B6Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89Page%E5%92%8C%E4%B8%93%E9%A2%98%E7%B3%BB%E5%88%97/</id>
+    <published>2023-06-07T03:10:47.000Z</published>
+    <updated>2023-06-07T03:22:07.548Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Hexo框架Next主题添加自定义Page和专题系列"><a href="#Hexo框架Next主题添加自定义Page和专题系列" class="headerlink" title="Hexo框架Next主题添加自定义Page和专题系列"></a>Hexo框架Next主题添加自定义Page和专题系列</h1><p>每天都会解决一些小技术，想发博客但是篇幅太短，总感觉没有水的必要，但是积少成多感觉还是要发，因此为了方便索引。就用专题的形式来组织文章。主要思想是新建一个标签页，然后手动利用站内引用来组织想组织的文章。</p> <span id="more"></span><p>在整理博客的过程中，发现需要新增一些页面，对于 Hexo 框架来说是 <strong>page</strong> 的概念，例如 <strong>首页</strong> 、 <strong>关于</strong> 、 <strong>分类</strong> 、 <strong>搜索</strong> 等页面。这种页面不同于每一篇博客文章那种发表的内容，对于 Hexo 框架来说是 <strong>post</strong>，而是可以交互的页面，例如可以在 <strong>搜索</strong> 页面中搜索博客的内容，可以在 <strong>分类</strong> 页面中查看博客文章的分类统计。当然，类似于 <strong>关于</strong> 这种页面也是静态的，没有交互的概念。</p><p>上面提到的这些页面都是 Next 主题自带的，只要在 <strong>_config.yml</strong> 配置文件中开启相关配置即可，不需要关心它是怎么实现的，例如开启了 <strong>分类</strong> 页面，它会自动把博客的分类统计好，展示出来。但是我的想法其实是新增一个页面，并且自定义图标、名称、内容，其实也可以实现，本文记录这个过程。</p><h1 id="自带的页面"><a href="#自带的页面" class="headerlink" title="自带的页面"></a><strong>自带的页面</strong></h1><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image002.png" alt="img"></p><p>这里面的配置有固定的格式，一共有四列：第一列是展示的名字以及页面标识、第二列是 url 地址、第三列是固定的双竖线、第四列是图标名称。我这里使用 <code>about: /about/ || user</code> 举例，<strong>about</strong> 就是页面的名字【虽然配置的是英文，但是有汉化字典转为中文，汉化字典文件为：<code>themes/next/languages/zh-CN.yml</code>，**&#x2F;about&#x2F;** 是页面的 url 地址，表示从主页跳转的地址，前面加上域名可以直接访问，**||** 双竖线是固定标识符，<strong>user</strong> 是图标名称，来自于一个图标库：<a href="https://fontawesome.com/">https://fontawesome.com</a> 。</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image004.png" alt="img"></p><h2 id="新增页面"><a href="#新增页面" class="headerlink" title="新增页面"></a>新增页面</h2><p>了解完了自带的页面，接下来准备新增自定义页面。</p><p>我需要新增的是一个静态页面，名称为 <strong>技术</strong> ，里面会列出我的碰到的一些技术问题，并给出这些技术问题解决的博客的跳转地址。</p><h2 id="生成页面并编辑"><a href="#生成页面并编辑" class="headerlink" title="生成页面并编辑"></a>生成页面并编辑</h2><p>经过查询 Hexo 的语法，生成新页面的命令为：**<code>hexo new page name</code>**，page 是关键字，name 表示页面的名字，我直接使用 <strong><code>hexo new page technology</code></strong> 即可。</p><p>执行完命令后，可以在 <strong>source</strong> 目录看到生成了一个 technology 目录，</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image006.png" alt="img"></p><p>里面有一个 index.md 文件，直接编辑这个页面即可。</p><p>简单编辑内容如图：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image008.png" alt="img"></p><p>这里需要注意文件头的内容，有固定的格式：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: technology</span><br><span class="line"></span><br><span class="line">date: 2023-06-07 10:41:56</span><br><span class="line"></span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure><p>其中，title 就是渲染后 html 网页的居中标题以及网页的 title 标签值，会在浏览器的 tab 页上面显示【这里也可以使用英文名称 technology，但是需要在汉化文件的 title 选项下面增加中英文配置，和后面的 menu 汉化类似】。此外 comments 切记关闭，因为博客如果开启了评论功能，会默认在所有的页面都开启评论框，而这种自定义页面是不需要评论框的，因此选择关闭，即设置为 false。</p><h2 id="开启页面配置"><a href="#开启页面配置" class="headerlink" title="开启页面配置"></a>开启页面配置</h2><p>在主题的配置文件 <strong><code>themes/next/_config.yml</code></strong> 中，配置自定义页面，在 <strong>menu</strong> 选项下面，配置内容如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: /technology/ || fa fa-calendar</span><br></pre></td></tr></table></figure><p>截图如下：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image009.png" alt="img"></p><p>其中，<strong>technology</strong> 是新建的页面名称，**&#x2F;technology&#x2F;** 是链接.</p><h2 id="汉化页面名称"><a href="#汉化页面名称" class="headerlink" title="汉化页面名称"></a>汉化页面名称</h2><p>配置 <strong><code>themes/next/languages/zh-CN.yml</code></strong> 文件，也是在 <strong>menu</strong> 选项下面，配置内容如下：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: 技术</span><br></pre></td></tr></table></figure><p>截图如下：</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image010.png" alt="img"></p><h2 id="打开页面预览"><a href="#打开页面预览" class="headerlink" title="打开页面预览"></a>打开页面预览</h2><p>在博客直接输入 <strong>域名</strong> <strong>&#x2F;technology&#x2F;</strong> 链接，打开页面。</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image012.png" alt="img"></p><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>注意，图标是来自于图标库：<a href="https://fontawesome.com/">https://fontawesome.com</a> ，只要提供图标的名字即可，Hexo 会自动匹配对应的图标展示。需要特别注意的是，这里面的图标有大部分是收费的【搜索时会显示灰色状态，能免费使用的才会显示黑色状态】，</p><p>失败的图案</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image013.png" alt="img"></p><p>成功的图案</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image014.png" alt="img"></p><p>搜索图标结果<br> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image016.png" alt="img"></p><h1 id="专题系列"><a href="#专题系列" class="headerlink" title="专题系列"></a>专题系列</h1><p>由于有些文章有内在的关联性，除了用目录和标签还可以用专题的形式来组织。</p><h2 id="新建标签页"><a href="#新建标签页" class="headerlink" title="新建标签页"></a>新建标签页</h2><p>首先利用 hexo 命令新建一个标签页。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page technology</span><br></pre></td></tr></table></figure><p>然后修改 themes&#x2F;next&#x2F;_config.yaml menu 配置，增加一行：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: /technology/ || fa fa-desktop</span><br></pre></td></tr></table></figure><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Hexo/Page/clip_image017.png" alt="img"></p><p>然后新增对应中文：修改 <code>themes/next/languages/zh-CN.yml</code> 中的 menu 一项下面添加 </p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">technology: 技术</span><br></pre></td></tr></table></figure><h2 id="编辑-index-md-组织专题目录"><a href="#编辑-index-md-组织专题目录" class="headerlink" title="编辑 index.md 组织专题目录"></a>编辑 index.md 组织专题目录</h2><p>像文章一样编辑 index.md 即可，引用站内文章可以用如下 hexo 语法：</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post<span class="emphasis">_link post-name post-title %&#125;</span></span><br></pre></td></tr></table></figure><p><em>post_link</em>：为站内文章引用的关键字，照抄就行。</p><p><em>post-name</em>：为你的 md 文件的名字，不带日期。</p><p><em>post-title</em>：给该文章起的链接标题，为空的话就会从文章中提取。</p><p>更加详细的标签插件见</p><p>Hexo的中文使用说明文档</p><p><a href="https://hexo.io/zh-cn/docs/tag-plugins.html#%E5%BC%95%E7%94%A8%E6%96%87%E7%AB%A0">https://hexo.io/zh-cn/docs/tag-plugins.html#%E5%BC%95%E7%94%A8%E6%96%87%E7%AB%A0</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Hexo框架Next主题添加自定义Page和专题系列&quot;&gt;&lt;a href=&quot;#Hexo框架Next主题添加自定义Page和专题系列&quot; class=&quot;headerlink&quot; title=&quot;Hexo框架Next主题添加自定义Page和专题系列&quot;&gt;&lt;/a&gt;Hexo框架Next主题添加自定义Page和专题系列&lt;/h1&gt;&lt;p&gt;每天都会解决一些小技术，想发博客但是篇幅太短，总感觉没有水的必要，但是积少成多感觉还是要发，因此为了方便索引。就用专题的形式来组织文章。主要思想是新建一个标签页，然后手动利用站内引用来组织想组织的文章。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>酷狗下载的kgma和kmg格式转为flac和mp3格式</title>
@@ -447,26 +464,6 @@
     
     
     <category term="Hexo" scheme="https://bradtorres.github.io/tags/Hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>测试</title>
-    <link href="https://bradtorres.github.io/2023/04/07/%E6%B5%8B%E8%AF%95/"/>
-    <id>https://bradtorres.github.io/2023/04/07/%E6%B5%8B%E8%AF%95/</id>
-    <published>2023-04-07T10:47:36.000Z</published>
-    <updated>2023-04-18T10:16:19.203Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>用aplayer当作博客的播放器以及修改博客的显示字体，但当hexo d之后博客没有变化。吓得我以为出问题了，感觉发了这篇文章来测试测试，结果文章还是能同步的，但是音乐和字体好像还是没有变化。</p><p>暂时先不管了，我我要修改几个文章了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
     
   </entry>
   

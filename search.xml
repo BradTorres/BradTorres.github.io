@@ -2668,8 +2668,8 @@
 <p>如果有人知道了如何显示歌词，可以在评论区留言。</p>
 <span id="more"></span>
 
-<h1 id="Hexo个人博客添加APlayer音乐播放器功能"><a href="#Hexo个人博客添加APlayer音乐播放器功能" class="headerlink" title="Hexo个人博客添加APlayer音乐播放器功能"></a>Hexo个人博客添加APlayer音乐播放器功能</h1><h2 id="一、效果图"><a href="#一、效果图" class="headerlink" title="一、效果图"></a><strong>一、效果图</strong></h2><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image004.png" alt="img"></p>
-<h2 id="二、引入APlayer音乐播放器"><a href="#二、引入APlayer音乐播放器" class="headerlink" title="二、引入APlayer音乐播放器"></a><strong>二、引入APlayer音乐播放器</strong></h2><h3 id="下载APlayer源码"><a href="#下载APlayer源码" class="headerlink" title="下载APlayer源码"></a>下载APlayer源码</h3><p><a href="https://github.com/MoePlayer/APlayer">APlayer源码下载地址：</a><a href="https://github.com/MoePlayer/APlayer">https://github.com/MoePlayer/APlayer</a></p>
+<h1 id="Hexo个人博客添加APlayer音乐播放器功能"><a href="#Hexo个人博客添加APlayer音乐播放器功能" class="headerlink" title="Hexo个人博客添加APlayer音乐播放器功能"></a>Hexo个人博客添加APlayer音乐播放器功能</h1><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a><strong>效果图</strong></h2><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image004.png" alt="img"></p>
+<h2 id="引入APlayer音乐播放器"><a href="#引入APlayer音乐播放器" class="headerlink" title="引入APlayer音乐播放器"></a><strong>引入APlayer音乐播放器</strong></h2><h3 id="下载APlayer源码"><a href="#下载APlayer源码" class="headerlink" title="下载APlayer源码"></a>下载APlayer源码</h3><p><a href="https://github.com/MoePlayer/APlayer">APlayer源码下载地址：</a><a href="https://github.com/MoePlayer/APlayer">https://github.com/MoePlayer/APlayer</a></p>
 <h3 id="将源码放到next主题的source文件夹中"><a href="#将源码放到next主题的source文件夹中" class="headerlink" title="将源码放到next主题的source文件夹中"></a><strong>将源码放到next主题的source文件夹中</strong></h3><p>下载到APlayer源码压缩包，解压后把dist文件夹复制到\themes\next\source目录中。</p>
 <p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image006.jpg" alt="img"></p>
 <h3 id="放入自己喜欢的音乐"><a href="#放入自己喜欢的音乐" class="headerlink" title="放入自己喜欢的音乐"></a>放入自己喜欢的音乐</h3><p>在dist目录里，新建music.js文件，并把如下代码粘贴进去。</p>
@@ -2898,6 +2898,11 @@
 <p>后者望文生义，可以下载视频的封面。</p>
 <p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/HexoPersonalBlogAddsAPlayerMusicPlayerFunction//clip_image056.png" alt="img"></p>
 <p>点击另存图片为，我们就成功下载了自己喜欢歌曲的封面到本地电脑。</p>
+<p>—————————————————————–分割线—————————————————————</p>
+<p>六月七日补充</p>
+<p>下载哔哩哔哩是视频，，还可以通过唧唧DOWN下载。（这个支持分P的视频一次性下载，功能更加全面人性化，同时还是完全免费的</p>
+<p>进入他的官网下载即可</p>
+<p><a href="http://client.jijidown.com/">http://client.jijidown.com/</a></p>
 <h4 id="添加歌词的尝试"><a href="#添加歌词的尝试" class="headerlink" title="添加歌词的尝试"></a>添加歌词的尝试</h4><p>这一步我是花费了最多时间的。</p>
 <p>在开源作者的GitHub上APlayer播放器的展示网页里面是可以显示歌词的。</p>
 <p><a href="https://aplayer.js.org/#/">https://aplayer.js.org/#/</a></p>
@@ -2951,7 +2956,7 @@
 <p><a href="https://juejin.cn/post/7117427620190355486">https://juejin.cn/post/7117427620190355486</a></p>
 <p><strong>HTML5 —— APlayer 音乐播放器</strong></p>
 <p><a href="https://victor72.github.io/blog/2016/06/18/html5-audio-player/">https://victor72.github.io/blog/2016/06/18/html5-audio-player/</a></p>
-<h2 id="三、折腾后的碎碎念"><a href="#三、折腾后的碎碎念" class="headerlink" title="三、折腾后的碎碎念"></a><strong>三、折腾后的碎碎念</strong></h2><h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><p>整个过程花费了相当长的时间，经常性的忘记自己做到哪一步，看着近五十个网页找不着北，甚至做着做着开始忘记自己的目标，东一步西一步。效率极低，可能以后要在自己学习的时候加入番茄钟，或者做之前就估算自己每一步用多长时间做完，这样能够监视自己的效率。客观冷静的分析和优化策略。</p>
+<h2 id="折腾后的碎碎念"><a href="#折腾后的碎碎念" class="headerlink" title="折腾后的碎碎念"></a><strong>折腾后的碎碎念</strong></h2><h3 id="效率"><a href="#效率" class="headerlink" title="效率"></a>效率</h3><p>整个过程花费了相当长的时间，经常性的忘记自己做到哪一步，看着近五十个网页找不着北，甚至做着做着开始忘记自己的目标，东一步西一步。效率极低，可能以后要在自己学习的时候加入番茄钟，或者做之前就估算自己每一步用多长时间做完，这样能够监视自己的效率。客观冷静的分析和优化策略。</p>
 <h3 id="性价比"><a href="#性价比" class="headerlink" title="性价比"></a>性价比</h3><p>做完之后在发觉，添加播放器的这部分真的花了太长时间了，尤其是添加歌词功能。我明明还有更加重要的事情去做，沉没成本太大让人更愿意吊死在一棵树上，要理性的看待，及时止损。</p>
 <h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p> 如果自己学了前端的话，那我的折腾还算有点用。但是我没学，所以这些东西都是step by step的鼠标点点点的操作，花了时间却没有用。以后不能只看兴趣，想干啥就干啥，还是要有一个详尽的精确的每一小时的学习规划表。学习来了兴致往往不是好事，这只可能是迷失和偏离航道的前奏。</p>
 <h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>后续我会专心更新博客内容，提升博客的质量，不弄这些花里胡哨的东西。如果有一些简单实用的美化博客方法我会做的，但是像这次的花费巨额时间收效甚微的我就不在重蹈覆辙了。</p>

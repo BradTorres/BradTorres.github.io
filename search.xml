@@ -138,6 +138,49 @@
       </tags>
   </entry>
   <entry>
+    <title>win10操作系统下python3.7环境配置</title>
+    <url>/2023/06/25/win10%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8Bpython3-7%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="win10操作系统下python3-7环境配置"><a href="#win10操作系统下python3-7环境配置" class="headerlink" title="win10操作系统下python3.7环境配置"></a><strong>win10操作系统下python3.7环境配置</strong></h1><h2 id="下载并安装python3-7"><a href="#下载并安装python3-7" class="headerlink" title="下载并安装python3.7"></a>下载并安装python3.7</h2><h3 id="官网下载"><a href="#官网下载" class="headerlink" title="官网下载"></a><strong>官网下载</strong></h3><p> <strong><a href="https://www.python.org/">https://www.python.org/</a></strong></p>
+<p>我下载的是3.7.0 for windows executable installer</p>
+<h3 id="运行安装文件"><a href="#运行安装文件" class="headerlink" title="运行安装文件"></a><strong>运行安装文件</strong></h3><p> （1）进入下载页面并下载</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image002.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image003.png" alt="img"></p>
+<p>想查看schedule的可以进入<a href="https://peps.python.org/pep-0537/">https://peps.python.org/pep-0537/</a></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image005.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image006.png" alt="img"></p>
+<p>直接贴上3.7.0版本的下载网页<a href="https://www.python.org/downloads/release/python-370/">https://www.python.org/downloads/release/python-370/</a></p>
+<h4 id="设置安装路径（安装位置）"><a href="#设置安装路径（安装位置）" class="headerlink" title="设置安装路径（安装位置）"></a>设置安装路径（安装位置）</h4><p>E:\python37</p>
+<p>选择定制安装</p>
+<p>记得要选择合适的版本，看你的电脑是64位还是32位</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image008.png" alt="img"></p>
+<h4 id="进入下载页面"><a href="#进入下载页面" class="headerlink" title="进入下载页面"></a><strong>进入下载页面</strong></h4><p> 1.选择</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image010.jpg" alt="img"></p>
+<p>2.下一步</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image012.jpg" alt="img"></p>
+<p>3.指定储存路径</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image014.jpg" alt="img"></p>
+<p>4.完成安装</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image016.png" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image018.png" alt="img"></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p><strong>1.右键此电脑-&gt;属性</strong><br> <strong>2.进入系统面板，点击高级设置</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image020.jpg" alt="img"></p>
+<p><strong>3.点击环境变量</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image021.png" alt="img"> </p>
+<p><strong>4.系统环境变量编辑：</strong>  </p>
+<p>（01）、如果PATH变量源本不存在进行新建；   </p>
+<p>（02）、如果PATH变量源本存在则进行更改；    </p>
+<p>系统变量设置如下: </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">%</span><span class="language-bash">SystemRoot%\system32</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">SystemRoot%</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">SystemRoot%\System32\Wbem</span></span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">SYSTEMROOT%\System32\WindowsPowerShell\v1.0\</span></span><br><span class="line"><span class="language-bash">E:\python37</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（1）新建 <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image023.jpg" alt="img"> </p>
+<p>（2）填写系统变量的变量值和变量名 </p>
+<p>（3）编辑 <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image024.png" alt="img">   </p>
+<p>（4）在变量值最后一行添加你的存储路径 <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image025.png" alt="img">       </p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><strong>1.windows键加r，在出现的窗口输入cmd并确定</strong><br> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image026.png" alt="img"><br> <strong>2.运行cmd</strong><br> 进入到我的安装目录下，运行语句：<a href="https://so.csdn.net/so/search?q=python&spm=1001.2101.3001.7020">python</a> -V 若显示出Python对应版本信息就成功   <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image028.png" alt="img"> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/technology/3/clip_image030.png" alt="img">   </p>
+<h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p> <a href="https://www.runoob.com/python3/python3-install.html">https://www.runoob.com/python3/python3-install.html</a>  </p>
+]]></content>
+  </entry>
+  <entry>
     <title>论究竟谁是小丑？</title>
     <url>/2023/06/08/%E8%AE%BA%E7%A9%B6%E7%AB%9F%E8%B0%81%E6%98%AF%E5%B0%8F%E4%B8%91%EF%BC%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">

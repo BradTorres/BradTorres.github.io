@@ -6,7 +6,7 @@
   <link href="https://bradtorres.github.io/atom.xml" rel="self"/>
   
   <link href="https://bradtorres.github.io/"/>
-  <updated>2023-06-26T08:28:08.400Z</updated>
+  <updated>2023-06-26T08:53:06.921Z</updated>
   <id>https://bradtorres.github.io/</id>
   
   <author>
@@ -21,15 +21,19 @@
     <link href="https://bradtorres.github.io/2023/06/26/%E8%A7%A3%E5%86%B3-windows-powershell-%E5%92%8C-CMD-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E9%97%AE%E5%8F%B7%E5%8F%8A%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E7%9A%84%E5%B0%9D%E8%AF%95/"/>
     <id>https://bradtorres.github.io/2023/06/26/%E8%A7%A3%E5%86%B3-windows-powershell-%E5%92%8C-CMD-%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E9%97%AE%E5%8F%B7%E5%8F%8A%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E7%9A%84%E5%B0%9D%E8%AF%95/</id>
     <published>2023-06-26T08:28:08.000Z</published>
-    <updated>2023-06-26T08:28:08.400Z</updated>
+    <updated>2023-06-26T08:53:06.921Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起因是vscode 的terminal输出中文乱码</p><p>使用 powershell 或者 CMD 时中文显示乱码，每次都要手动执行 <code>chcp 65001</code></p><p>但是修改系统之后</p><p>Chcp 还是返回936</p><p>虽然vscode输出中文成功了</p><p>但是输出中文是失败的</p><p>同时解压压缩文件的时候出现了乱码</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image002.png" alt="img"></p><span id="more"></span><h2 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>参考的是下面这种方式</p><p><a href="http://t.csdn.cn/Iqa15">http://t.csdn.cn/Iqa15</a></p><h2 id="第一次尝试的后遗症"><a href="#第一次尝试的后遗症" class="headerlink" title="第一次尝试的后遗症"></a>第一次尝试的后遗症</h2><p>重启后发现解压压缩文件的时候出现了乱码</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image003.png" alt="img"></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image005.png" alt="img"></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image006.png" alt="img"></p><p>取消</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image007.png" alt="img"></p><p>后重启乱码又恢复了正常</p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image009.png" alt="img"></p><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image011.png" alt="img"></p>]]></content>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;起因是vscode 的terminal输出中文乱码&lt;/p&gt;
+&lt;p&gt;使用 powershell 或者 CMD 时中文显示乱码，每次都要手动执行 &lt;code&gt;chcp 65001&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但是修改系统之后&lt;/p&gt;
+&lt;p&gt;Chcp 还是返回936&lt;/p&gt;
+&lt;p&gt;虽然vscode输出中文成功了&lt;/p&gt;
+&lt;p&gt;但是输出中文是失败的&lt;/p&gt;
+&lt;p&gt;同时解压压缩文件的时候出现了乱码&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://bradtorresblog.oss-cn-beijing.aliyuncs.com/chcp65001/clip_image002.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;</summary>
     
     
     

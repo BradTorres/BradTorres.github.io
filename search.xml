@@ -138,6 +138,56 @@
       </tags>
   </entry>
   <entry>
+    <title>408上机刷题note</title>
+    <url>/2023/07/07/408%E4%B8%8A%E6%9C%BA%E5%88%B7%E9%A2%98note/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script>]]></content>
+  </entry>
+  <entry>
+    <title>Anaconda安装与使用</title>
+    <url>/2023/07/07/Anaconda%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h1 id="Anacond的介绍"><a href="#Anacond的介绍" class="headerlink" title="Anacond的介绍"></a>Anacond的介绍</h1><p>Anaconda指的是一个开源的Python发行版本，号称有两千万用户。Anaconda基于云的存储库，可查找并安装超过7,500个数据科学和机器学习模块。</p>
+<p>Anaconda官网：<a href="https://link.zhihu.com/?target=https://www.anaconda.com/">https://www.anaconda.com/</a></p>
+<p>其包含了conda、Python等180多个科学包及其依赖项。 因为包含了大量的科学包，Anaconda 的下载文件比较大（约 531 MB），如果只需要某些包，或者需要节省带宽或存储空间，也可以使用Miniconda这个较小的发行版（仅包含conda和 Python）。</p>
+<p>Conda是一个开源的包、环境管理器，可以用于在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换</p>
+<p>Anaconda包括Conda、Python以及一大堆安装好的工具包，比如：numpy、pandas等</p>
+<p>Miniconda包括Conda、Python</p>
+<p>Anaconda使用conda-install命令，您可以开始使用数千个开源模块。因为包含了大量的科学包，Anaconda 的下载文件比较大500 MB左右。不同版本Anaconda大小不一样。如果只需要某些包，或者需要节省带宽或存储空间，也可以使用Miniconda这个较小的发行版（仅包含conda和 Python）。conda是一个开源的包、环境管理器，可以用于在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。</p>
+<p>Anaconda主要特点包括：</p>
+<p>1.安装过程简单</p>
+<p>2.包含了数百个科学模块，高效运用于各种项目</p>
+<p>3.可下载python2和python3版本，并根据项目需求切换使用。</p>
+<p>Anaconda使用开源社区构建的最佳Python软件包（包括scikit-learn，TensorFlow和PyTorch）构建和训练机器学习模型。</p>
+<p>从机器人技术到数据可视化，Anaconda高效运用于各种项目，特别是在数据科学领域有杰出应用。</p>
+<p>Anaconda Navigator是Anaconda的桌面可视化窗口导航。 它使启动应用程序以及管理软件包和环境变得很容易，而无需使用命令行命令。 “Anaconda-Navigator”中已经包含“Jupyter Notebook”、“Jupyterlab”、“Qtconsole”和“Spyder”。 用户可以轻松访问培训材料，文档和社区资源（包括<a href="https://link.zhihu.com/?target=http://Anaconda.org">http://Anaconda.org</a>），可加速您的数据科学之旅。</p>
+<h2 id="Anaconda下载"><a href="#Anaconda下载" class="headerlink" title="Anaconda下载"></a>Anaconda下载</h2><h3 id="Anaconda官网首页地址"><a href="#Anaconda官网首页地址" class="headerlink" title="Anaconda官网首页地址"></a>Anaconda官网首页地址</h3><p><a href="https://www.anaconda.com/">Anaconda官网</a></p>
+<p>进入官网后如下图所示，点击<strong>Download</strong>即可开始下载（若无法下载，请转至清华源下载）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image002.jpg" alt="img"></p>
+<p>下载完成后将会得到exe文件，双击即可开始安装（一般下载完成后会自动打开安装界面无需点击exe文件，若没有自动打开安装页面再点击此exe文件）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image004.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image006.jpg" alt="img"></p>
+<h2 id="Anaconda安装"><a href="#Anaconda安装" class="headerlink" title="Anaconda安装"></a>Anaconda安装</h2><p>在此选择<strong>Just Me(recommended)</strong>—-&gt;点击<strong>Next</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image008.jpg" alt="img"></p>
+<p>在此笔者将Anaconda装入E盘（注意安装路径不要包含汉字并且不要包含空格）尽量不要装入系统盘，系统盘的空间资源太宝贵了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image010.jpg" alt="img"></p>
+<p>打勾即为使用自动配置环境变量，使用自动配置的环境变量之后在cmd中就可直接运行conda命令，python命令等。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image012.jpg" alt="img"></p>
+<p>开始安装</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image014.jpg" alt="img"></p>
+<p>点击<strong>Next</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image016.jpg" alt="img"></p>
+<p>此处为pycharm的推广，如果有需要的可以点击如图所示链接，当然pycharm也可自行下载，在此笔者直接点击<strong>Next</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image018.jpg" alt="img"></p>
+<p>点击<strong>Finish</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image020.jpg" alt="img"></p>
+<h2 id="测试Anaconda是否安装配置成功"><a href="#测试Anaconda是否安装配置成功" class="headerlink" title="测试Anaconda是否安装配置成功"></a>测试Anaconda是否安装配置成功</h2><p>输入<a href="https://so.csdn.net/so/search?q=conda%E5%91%BD%E4%BB%A4&spm=1001.2101.3001.7020">conda命令</a>查看是否安装成功</p>
+<p> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image022.jpg" alt="img"></p>
+<p>输入conda -V命令（注意conda与-V之间有一个空格，评论区有好多童鞋反馈文章空格难以看到）可查看当前Anaconda版本</p>
+<p> <img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image024.jpg" alt="img"></p>
+<p>输入python命令查看是否可以使用python</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Anaconda/downloadANDinstructions/clip_image026.jpg" alt="img"><br> OK！安装完成！</p>
+]]></content>
+  </entry>
+  <entry>
     <title>science free online</title>
     <url>/2023/06/26/science-free-online/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>qq</p>

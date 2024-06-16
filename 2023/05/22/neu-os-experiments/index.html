@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="neu-os-experiments注意注意一定要看！！！使用阿里OSS+typora+picgo图床一键自动上传图片的时候，总是会出现复制到md文档里面的图片顺序出现混乱的情况，我的初步猜测是picgo图片上传的时候速度不一样与阿里OSS自动生成的图片ID不一样导致的矛盾。（事实上，我相信有基础的兄弟们就算是看乱序的图片也能对应的上正确的位置） 我想修改来着，但工作量繁琐且收效甚微。（因为我的G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="neu-os-experiments">
+<meta property="og:url" content="https://bradtorres.github.io/2023/05/22/neu-os-experiments/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="neu-os-experiments注意注意一定要看！！！使用阿里OSS+typora+picgo图床一键自动上传图片的时候，总是会出现复制到md文档里面的图片顺序出现混乱的情况，我的初步猜测是picgo图片上传的时候速度不一样与阿里OSS自动生成的图片ID不一样导致的矛盾。（事实上，我相信有基础的兄弟们就算是看乱序的图片也能对应的上正确的位置） 我想修改来着，但工作量繁琐且收效甚微。（因为我的G">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image004.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image006.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image008.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image010.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image012.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image004.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image006.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image008.jpg">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image010.jpg">
+<meta property="article:published_time" content="2023-05-22T11:00:29.000Z">
+<meta property="article:modified_time" content="2023-05-22T11:36:43.246Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="课内学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.jpg">
+
+<link rel="canonical" href="https://bradtorres.github.io/2023/05/22/neu-os-experiments/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>neu-os-experiments | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2023/05/22/neu-os-experiments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          neu-os-experiments
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-22 19:00:29 / 修改时间：19:36:43" itemprop="dateCreated datePublished" datetime="2023-05-22T19:00:29+08:00">2023-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NEU%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">NEU课程</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/05/22/neu-os-experiments/" class="post-meta-item leancloud_visitors" data-flag-title="neu-os-experiments" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/05/22/neu-os-experiments/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/05/22/neu-os-experiments/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="neu-os-experiments"><a href="#neu-os-experiments" class="headerlink" title="neu-os-experiments"></a>neu-os-experiments</h1><h2 id="注意注意一定要看！！！"><a href="#注意注意一定要看！！！" class="headerlink" title="注意注意一定要看！！！"></a>注意注意一定要看！！！</h2><p>使用阿里OSS+typora+picgo图床一键自动上传图片的时候，总是会出现复制到md文档里面的图片顺序出现混乱的情况，我的初步猜测是picgo图片上传的时候速度不一样与阿里OSS自动生成的图片ID不一样导致的矛盾。（事实上，我相信有基础的兄弟们就算是看乱序的图片也能对应的上正确的位置）</p>
+<p>我想修改来着，但工作量繁琐且收效甚微。（因为我的GitHub仓库有完整的报告，所以直接上我的GitHub仓库吧，</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/BradTorres/neu-os-experiments">https://github.com/BradTorres/neu-os-experiments</a></p>
+<p>如果想看初步粗略看的话，可以接着往下看）</p>
+<span id="more"></span>
+
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p><strong>NEU操作系统实验（共四次）</strong></p>
+<p><strong>详情见实验ppt</strong></p>
+<p><strong>实验一：三状态转换（五状态，七状态）</strong></p>
+<p><strong>实验二：生产者消费者模型</strong></p>
+<p><strong>实验三：管道通信与进程同步</strong></p>
+<p><strong>实验四：页面置换算法</strong></p>
+<p><strong>实验内容说明请参考实验PPT</strong></p>
+<h2 id="实验一"><a href="#实验一" class="headerlink" title="实验一"></a><strong>实验一</strong></h2><h3 id="一．-实验内容"><a href="#一．-实验内容" class="headerlink" title="一． 实验内容"></a><strong>一．</strong> <strong>实验内容</strong></h3><p>1.设计并实现一个模拟进程状态转换及其相应PCB组织结构变化的程序。</p>
+<p>2.独立设计、编写、调试程序。</p>
+<p>3.程序界面应能反映出在模拟条件下，进程之间状态转换及其对应的PCB组织的变化。</p>
+<p>4.进程的状态模型（三状态、五状态、七状态或其它）可自行选择。</p>
+<h3 id="二．-程序流程图"><a href="#二．-程序流程图" class="headerlink" title="二． 程序流程图"></a><strong>二．</strong> <strong>程序流程图</strong></h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.jpg" alt="img"></p>
+<h3 id="三．-程序描述"><a href="#三．-程序描述" class="headerlink" title="三． 程序描述"></a><strong>三．</strong> <strong>程序描述</strong></h3><p>使用C++进行开发，实现了一个五状态的进程间状态转移的模型。同时设定了内存的机制，具备一定的运行内存限制（100M），若处理进程内存超过系统内存限制则会先被放入等待队列中。完成了界面功能，可以显示实时的不同队列中的进程的id。</p>
+<p>自定义了结构体 pcb，组织方式采用的是链表。结构体 pcb用来存储一个进程的 id和指向下一个节点的指针next。同一状态的进程其PCB成一队列，多个状态对应多个不同的队列；</p>
+<p>所以这里形成了不同的队列：新建队列、就绪队列、运行队列、阻塞队列。可以实现初始化新建队列、就绪队列、运行队列、阻塞队列以及下述七个操作。</p>
+<p>0:exit</p>
+<p>1:Dispatch(ReadyQueue-&gt;RunningQueue)</p>
+<p>2:Timeout(RunningQueue-&gt;ReadyQueue)</p>
+<p>3:Event Wait(RunningQueue-&gt;BlockedQueue)</p>
+<p>4:Event Occurs(BlockedQueue-&gt;ReadyQueue)</p>
+<p>5:Admit(NewQueue-&gt;ReadyQueue)</p>
+<p>6:Release(RunningQueue-&gt;Exit)</p>
+<p>定义了 4 个队列，分别用来储存 Ready,Running,Block,New 队列。同时考虑到了非法的输入，对于不同的非法输入都有处理。同时设定了不同操作之间的在不同情况下的连带关系，例如结束进程后会自动把新的就绪态进程派遣到运行队列中等等。</p>
+<h3 id="四．-实验结果（部分截图）"><a href="#四．-实验结果（部分截图）" class="headerlink" title="四． 实验结果（部分截图）"></a><strong>四．</strong> <strong>实验结果（部分截图）</strong></h3><p>创建进程</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif" alt="img"></p>
+<p>5:Admit(NewQueue-&gt;ReadyQueue)进入就绪队列。其他操作类似，都是实现进程队列的切换。</p>
+<h3 id="五．-部分核心代码"><a href="#五．-部分核心代码" class="headerlink" title="五． 部分核心代码"></a><strong>五．</strong> <strong>部分核心代码</strong></h3><h4 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">pcb</span></span><br><span class="line">&#123;</span><br><span class="line">    ElemType id;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">pcb</span> *next;</span><br><span class="line">&#125; pcb;</span><br><span class="line"></span><br><span class="line">pcb *NewQueue, *ReadyQueue, *RunningQueue, *BlockedQueue, *ExitQueue;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="具体函数见我的GitHub仓库"><a href="#具体函数见我的GitHub仓库" class="headerlink" title="具体函数见我的GitHub仓库"></a>具体函数见我的GitHub仓库</h4><h4 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    NewQueue = <span class="built_in">create</span>();</span><br><span class="line">    ReadyQueue = <span class="keyword">new</span> pcb;</span><br><span class="line">    ReadyQueue-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    RunningQueue = <span class="keyword">new</span> pcb;</span><br><span class="line">    RunningQueue-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    BlockedQueue = <span class="keyword">new</span> pcb;</span><br><span class="line">    BlockedQueue-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    ExitQueue = <span class="keyword">new</span> pcb;</span><br><span class="line">    ExitQueue-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="comment">// RunningQueue和BlockedQueue没有对第一个结点的id赋值，在insert（）之后，属于带头结点的队列，保持和ReadyQueue一样的结构</span></span><br><span class="line">    <span class="built_in">show</span>();</span><br><span class="line">    <span class="type">int</span> ChangeNum;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Please choose one of the following actions&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;0:exit&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;1:Dispatch(ReadyQueue-&gt;RunningQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;2:Timeout(RunningQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;3:Event Wait(RunningQueue-&gt;BlockedQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;4:Event Occurs(BlockedQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;5:Admit(NewQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;6:Release(RunningQueue-&gt;Exit)&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cin &gt;&gt; ChangeNum)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (ChangeNum == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (ReadyQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (RunningQueue-&gt;next)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(BlockedQueue, RunningQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">insert</span>(RunningQueue, ReadyQueue-&gt;next);</span><br><span class="line">                <span class="built_in">del</span>(ReadyQueue);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (BlockedQueue-&gt;next)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(BlockedQueue, RunningQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                    <span class="built_in">insert</span>(RunningQueue, BlockedQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(BlockedQueue);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (RunningQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (ReadyQueue-&gt;next)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(ReadyQueue, RunningQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                    <span class="built_in">insert</span>(RunningQueue, ReadyQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(ReadyQueue);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (RunningQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (ReadyQueue-&gt;next)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(BlockedQueue, RunningQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                    <span class="built_in">insert</span>(RunningQueue, ReadyQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(ReadyQueue);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(BlockedQueue, RunningQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                    <span class="built_in">insert</span>(RunningQueue, BlockedQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(BlockedQueue);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">4</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (BlockedQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">insert</span>(ReadyQueue, BlockedQueue-&gt;next);</span><br><span class="line">                <span class="built_in">del</span>(BlockedQueue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">5</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (NewQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">insert</span>(ReadyQueue, NewQueue-&gt;next);</span><br><span class="line">                <span class="built_in">del</span>(NewQueue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (ChangeNum == <span class="number">6</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (RunningQueue-&gt;next)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">insert</span>(ExitQueue, RunningQueue-&gt;next);</span><br><span class="line">                <span class="built_in">del</span>(RunningQueue);</span><br><span class="line">                <span class="comment">// del(ExitQueue);释放处于结束状态的进程结点</span></span><br><span class="line">                <span class="comment">// 也可以直接释放RunnningQueue的结点</span></span><br><span class="line">                <span class="keyword">if</span> (ReadyQueue-&gt;next)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">insert</span>(RunningQueue, ReadyQueue-&gt;next);</span><br><span class="line">                    <span class="built_in">del</span>(ReadyQueue);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;You can only type in numbers in range(0~6)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">show</span>();</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Please choose one of the following actions&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;0:exit&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;1:Dispatch(ReadyQueue-&gt;RunningQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;2:Timeout(RunningQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;3:Event Wait(RunningQueue-&gt;BlockedQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;4:Event Occurs(BlockedQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;5:Admit(NewQueue-&gt;ReadyQueue)&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;6:Release(RunningQueue-&gt;Exit)&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="实验二"><a href="#实验二" class="headerlink" title="实验二"></a><strong>实验二</strong></h2><h3 id="一．-实验内容-1"><a href="#一．-实验内容-1" class="headerlink" title="一． 实验内容"></a><strong>一．</strong> <strong>实验内容</strong></h3><p>1.调试、运行给出的程序，从操作系统原理的角度验证程序的正确性。</p>
+<p>2.发现并修改程序中的原理性错误或不完善的地方。 </p>
+<p>3.鼓励在程序中增加新的功能。完成基本。</p>
+<h3 id="二．-程序流程图-1"><a href="#二．-程序流程图-1" class="headerlink" title="二． 程序流程图"></a><strong>二．</strong> <strong>程序流程图</strong></h3><p>见我的GitHub仓库</p>
+<h3 id="三．-程序描述-1"><a href="#三．-程序描述-1" class="headerlink" title="三． 程序描述"></a><strong>三．</strong> <strong>程序描述</strong></h3><p>利用写指针和读指针实现了生产者和消费者对缓冲区按顺序进行生产和消费。同时设定了缓冲区 BUFFER，设定了缓冲区的大小。</p>
+<p>当缓冲区已满时，再次创建的生产进程会进入阻塞队列中，而下次消费者消费了一个产品后，会自动将阻塞队列中的生产进程执行并将产品放入缓冲区。同理消费者也有消费者阻塞队列，也能在产品生产后自动执行消费进程。</p>
+<h3 id="四．-实验结果（部分截图）-1"><a href="#四．-实验结果（部分截图）-1" class="headerlink" title="四． 实验结果（部分截图）"></a><strong>四．</strong> <strong>实验结果（部分截图）</strong></h3><p>按P创建生产进程，将产出产品放入缓冲区。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif" alt="img"></p>
+<p>按C创建消费进程，对缓存区产品进行消费。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image004.gif" alt="img"></p>
+<p>当缓冲区满时，新创建的生产者进程会被加入生产者阻塞队列。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image006.gif" alt="img"></p>
+<p>当消费者进程执行后，缓冲区重新获得空间，会自动执行阻塞队列中的生产者进程。</p>
+<p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image008.gif" alt="img"></strong></p>
+<p>消费者进程同样会被阻塞，并放入阻塞队列。</p>
+<p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image010.gif" alt="img"></strong></p>
+<p><strong><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image012.gif" alt="img"></strong></p>
+<h3 id="五．-部分核心代码-1"><a href="#五．-部分核心代码-1" class="headerlink" title="五． 部分核心代码"></a><strong>五．</strong> <strong>部分核心代码</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 生产</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">produce</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">findEmpty</span>(buffer, BUFFER_SIZE) == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区满,阻塞</span></span><br><span class="line">        number = number + <span class="number">1</span>;</span><br><span class="line">        producer++;</span><br><span class="line">        pQueue.<span class="built_in">push</span>(number);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isEmpty</span>(buffer, BUFFER_SIZE))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区空</span></span><br><span class="line">        <span class="keyword">if</span> (cQueue.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 消费者等待队列为空,直接写入即可</span></span><br><span class="line">            number = number + <span class="number">1</span>;</span><br><span class="line">            buffer[writeptr] = number;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 有阻塞的消费者，先写入再读出</span></span><br><span class="line">            number = number + <span class="number">1</span>;</span><br><span class="line">            buffer[writeptr] = number;</span><br><span class="line">            <span class="built_in">show</span>(); <span class="comment">// 不仅在produce函数运行全部完成后show，在中间就show一次</span></span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">2</span>);</span><br><span class="line">            buffer[readptr] = <span class="number">0</span>;</span><br><span class="line">            readptr = (readptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">            consumer--;</span><br><span class="line">            cQueue.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        writeptr = (writeptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区不空也不满,直接写入即可</span></span><br><span class="line">        number = number + <span class="number">1</span>;</span><br><span class="line">        buffer[writeptr] = number;</span><br><span class="line">        writeptr = (writeptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 消费</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">consume</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">findDirty</span>(buffer, BUFFER_SIZE) == <span class="number">-1</span>) <span class="comment">// buffer里面全都是0</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区空,则阻塞</span></span><br><span class="line">        <span class="comment">// ++number;但事实上不能让number++，不然number的数值就变了，</span></span><br><span class="line">        consumer++;</span><br><span class="line">        cQueue.<span class="built_in">push</span>(number);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">isFull</span>(buffer, BUFFER_SIZE))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区满</span></span><br><span class="line">        <span class="keyword">if</span> (!pQueue.<span class="built_in">empty</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 生产者等待队列不空，则先读出再写入</span></span><br><span class="line">            buffer[readptr] = <span class="number">0</span>;</span><br><span class="line">            readptr = (readptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">            <span class="built_in">show</span>(); <span class="comment">// 不仅在consume函数运行全部完成后show，在中间就show一次</span></span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">2</span>);</span><br><span class="line">            buffer[writeptr] = pQueue.<span class="built_in">front</span>();</span><br><span class="line">            writeptr = (writeptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">            pQueue.<span class="built_in">pop</span>();</span><br><span class="line">            producer--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 生产者队列为空</span></span><br><span class="line">            buffer[readptr] = <span class="number">0</span>;</span><br><span class="line">            readptr = (readptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 缓冲区不空也不满,直接读取即可</span></span><br><span class="line">        buffer[readptr] = <span class="number">0</span>;</span><br><span class="line">        readptr = (readptr + <span class="number">1</span>) % BUFFER_SIZE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="实验三"><a href="#实验三" class="headerlink" title="实验三"></a><strong>实验三</strong></h2><h3 id="一．-实验内容-2"><a href="#一．-实验内容-2" class="headerlink" title="一． 实验内容"></a><strong>一．</strong> <strong>实验内容</strong></h3><p>1.使用系统调用pipe()建立一条管道，系统调用fork()分别创建两个子进程，它们分别向管道写一句话，如：</p>
+<p>   Child process1 is sending a message!</p>
+<p>   Child process2 is sending a message!</p>
+<p>2.父进程分别从管道读出来自两个子进程的信息，显示在屏幕上。</p>
+<h3 id="二．-程序流程图-2"><a href="#二．-程序流程图-2" class="headerlink" title="二． 程序流程图"></a><strong>二．</strong> <strong>程序流程图</strong></h3><p>见我的GitHub仓库</p>
+<h3 id="三．-程序描述-2"><a href="#三．-程序描述-2" class="headerlink" title="三． 程序描述"></a><strong>三．</strong> <strong>程序描述</strong></h3><p>在 linux 系 统 的 环 境 下 使 用 C++ 完 成 实 验 ， 使 用 了 系 统 调 用fork(),read(),write(),pipe(),lockf(),wait(),exit(),sleep()等。随机创建了三个子进程，并且按照相关语句进行输出以检查进程执行顺序。过程中通过加锁解锁和wait函数对进程进行控制。（事实上是n个紫荆城</p>
+<p>使用系统调用 pipe()建立一条管道，系统调用 fork()分别创建两个子进程，它们分别向管道写一句话，如：Child process1 is sending a message! Child process2 is sending a message!父进程分别从管道读出来自两个子进程的信息，显示在屏幕上</p>
+<h3 id="四．-实验结果（部分截图）-2"><a href="#四．-实验结果（部分截图）-2" class="headerlink" title="四． 实验结果（部分截图）"></a><strong>四．</strong> <strong>实验结果（部分截图）</strong></h3><p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif" alt="img"></p>
+<h3 id="五．-部分核心代码-2"><a href="#五．-部分核心代码-2" class="headerlink" title="五． 部分核心代码"></a><strong>五．</strong> <strong>部分核心代码</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;error.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F_ULOCK 0 <span class="comment">// 解锁</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> F_LOCK 1  <span class="comment">// 互斥锁定区域</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> num, fd[<span class="number">2</span>], result = <span class="number">-1</span>;</span><br><span class="line">    <span class="type">pid_t</span> pid, reid, gtid;</span><br><span class="line">    <span class="type">char</span> outpipe[<span class="number">100</span>], father_str[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建管道, fd[0]读管道，fd[1]写管道</span></span><br><span class="line">    result = <span class="built_in">pipe</span>(fd);</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="number">-1</span>) <span class="comment">// 调用失败</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;fail to create pipe \n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建子进程</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please input the number of processes: &quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n-------------------------分割线----------------------\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (num &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        pid = fork();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;pid: %d\n&quot;</span>, pid);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pid == <span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 创建失败</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;creat subprocess failed!\n&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 创建子进程，从子进程返回ID</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;now I&#x27;m writing in subprocess %d\n&quot;</span>, gtid = <span class="built_in">getpid</span>());</span><br><span class="line">            <span class="built_in">lockf</span>(fd[<span class="number">1</span>], F_LOCK, <span class="number">0</span>); <span class="comment">// 加锁</span></span><br><span class="line">            <span class="built_in">sprintf</span>(outpipe, <span class="string">&quot;child process %d is sending message!\n&quot;</span>, gtid);</span><br><span class="line">            <span class="built_in">write</span>(fd[<span class="number">1</span>], outpipe, <span class="built_in">sizeof</span>(outpipe));</span><br><span class="line">            <span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line">            <span class="built_in">lockf</span>(fd[<span class="number">1</span>], F_ULOCK, <span class="number">0</span>); <span class="comment">// 解锁</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;send message successfully and exit subprocess %d\n&quot;</span>, gtid);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (pid &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 创建子进程，从父进程返回子进程的ID</span></span><br><span class="line">            reid = <span class="built_in">wait</span>(<span class="literal">NULL</span>); <span class="comment">// 等待一个子线程结束？？？</span></span><br><span class="line">            <span class="keyword">if</span> (reid == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;father process calls subprocess failed!\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">read</span>(fd[<span class="number">0</span>], father_str, <span class="built_in">sizeof</span>(father_str));</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;\nfather process reads from subprocess %d:\n&quot;</span>, reid);</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, father_str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n-------------------------分割线----------------------\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        num--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="实验四"><a href="#实验四" class="headerlink" title="实验四"></a><strong>实验四</strong></h2><h3 id="一．-实验内容-3"><a href="#一．-实验内容-3" class="headerlink" title="一． 实验内容"></a><strong>一．</strong> <strong>实验内容</strong></h3><p>  这是一个综合型实验，要求在掌握父子进程并发执行机制和内存页面置换算法的基础上，能综合运用这两方面的知识，自行编制程序。</p>
+<p>程序涉及一个父进程和两个子进程。父进程使用rand()函数随机产生若干随机数，经过处理后，存于一数组Acess_Series[]中，作为内存页面访问的序列。两个子进程根据这个访问序列，分别采用FIFO和LRU两种不同的页面置换算法对内存页面进行调度。要求：</p>
+<p>1） 每个子进程应能反映出页面置换的过程，并统计页面置换算法的命中或缺页情况。</p>
+<p>设缺页的次数为diseffect。总的页面访问次数为total_instruction。</p>
+<p>缺页率 &#x3D; disaffect&#x2F;total_instruction</p>
+<p>命中率 &#x3D; 1- disaffect&#x2F;total_instruction</p>
+<p>2）将为进程分配的内存页面数mframe作为程序的参数，通过多次运行程序，说明FIFO算法存在的Belady现象。</p>
+<h3 id="二．-程序流程图-3"><a href="#二．-程序流程图-3" class="headerlink" title="二． 程序流程图"></a><strong>二．</strong> <strong>程序流程图</strong></h3><p>见我的GitHub仓库</p>
+<h3 id="三．-程序描述-3"><a href="#三．-程序描述-3" class="headerlink" title="三． 程序描述"></a><strong>三．</strong> <strong>程序描述</strong></h3><p>对生产的随机页面数据，开展了FIFO与LRU的页面置换算法，并对置换效果和命中率等信息进行展示。并对FIFO中的Belady现象进行了检验。</p>
+<p>完成了基础点： 程序用父进程创建两个子进程， 父进程产生随机序列并完成初始化，两个子进程分别实现 FIFO 算法和 LRU 算法，并分别输出每个状态的内存中页帧状态，最终输出缺页率。</p>
+<p>完成了扩展点一： 可以使用父进程创建了两个子进程,两个子进程分别使用不同大小的驻留集，都是用 FIFO 的置换算法，最终可以观察到驻留集更大的子进程反而缺页率更高。</p>
+<p>程序涉及一个父进程和两个子进程。父进程使用 rand()函数随机产生若干随机数，经过处理后，存于一数组 Acess_Series[]中，作为内存页面访问的序列。两个子进程根据这个访问序列，分别采用 FIFO 和 LRU 两种不同的页面置换算法对内存页面进行调度。同时统计不同的页面调度算法的缺页率。在 linux 系 统 的 环 境 下 使 用 C++ 并 用 g++ 进 行 编 译 完 成 实 验 ， 使 用 了 系 统 调 用fork(),wait(),exit(),sleep(),rand()等。可以随意修改程序序列的长度。</p>
+<h3 id="四．-实验结果（部分截图）-3"><a href="#四．-实验结果（部分截图）-3" class="headerlink" title="四． 实验结果（部分截图）"></a><strong>四．</strong> <strong>实验结果（部分截图）</strong></h3><p>对于随机生产的页面序号分别进行FIFO、LRU进行页面置换，对FIFO进行再一次执行以检验是否有Belady现象发生。</p>
+<p>若选择要看Belady异常</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image002.gif" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image004.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image006.jpg" alt="img"></p>
+<p>若选择不要看Belady异常</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image008.jpg" alt="img"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/neu_os_experiments/clip_image010.jpg" alt="img"></p>
+<h3 id="五．-部分核心代码-3"><a href="#五．-部分核心代码-3" class="headerlink" title="五． 部分核心代码"></a><strong>五．</strong> <strong>部分核心代码</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现FIFO算法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FIFO</span><span class="params">(<span class="type">int</span> memory_blocks_number, <span class="type">int</span> choice = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,choice);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\nFIFO的内存块数： %d 块\n&quot;</span>, memory_blocks_number);</span><br><span class="line">    <span class="comment">// 这里没有随机化数组元素，之后再加</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    total_instructions为总的页面访问次数</span></span><br><span class="line"><span class="comment">    diseffect为缺页数</span></span><br><span class="line"><span class="comment">    pageid为想访问的页面的序号</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="type">int</span> total_instructions = <span class="number">12</span>;</span><br><span class="line">    <span class="built_in">srand</span>((<span class="type">unsigned</span>)<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> Acess_Series[total_instructions] = &#123;<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="keyword">if</span> (choice == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; total_instructions; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            Acess_Series[i] = <span class="built_in">rand</span>() % <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// srand((unsigned)time(NULL));</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3</span></span><br><span class="line">    <span class="function">Page_Frame <span class="title">page_Frame</span><span class="params">(memory_blocks_number)</span></span>;</span><br><span class="line">    std::deque&lt;<span class="type">int</span>&gt; fifo_queue; <span class="comment">// 双段队列</span></span><br><span class="line">    <span class="type">int</span> diseffect = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; total_instructions; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> pageid = Acess_Series[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;访问页面序号：%d &quot;</span>, pageid);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        对Acess_Series数组里面的数字，判断以下三种情况</span></span><br><span class="line"><span class="comment">        1 内存块中存在此页面,什么都不用做</span></span><br><span class="line"><span class="comment">        2 内存块中无此页面，且内存块未满，直接加入</span></span><br><span class="line"><span class="comment">        3 内存块中无此页面，且内存块已满，取出队列首个元素（FIFO算法）</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="comment">// find返回的是指针，指向找序列里面第一个出现的地方</span></span><br><span class="line">        <span class="comment">// 存在此页面</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">find</span>(page_Frame.pageframe_array.<span class="built_in">begin</span>(), page_Frame.pageframe_array.<span class="built_in">end</span>(), pageid) != page_Frame.pageframe_array.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 无此页面，缺页数先加一</span></span><br><span class="line">            diseffect++;</span><br><span class="line">            fifo_queue.<span class="built_in">push_back</span>(pageid);</span><br><span class="line">            <span class="comment">// 同时内存快未满</span></span><br><span class="line">            <span class="keyword">if</span> (page_Frame.occupied_size &lt; page_Frame.pageframe_size)</span><br><span class="line">            <span class="comment">// if (page_Frame.pageframe_array.size() &lt; page_Frame.pageframe_size)</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 直接加入</span></span><br><span class="line">                page_Frame.occupied_size++;</span><br><span class="line">                page_Frame.pageframe_array.<span class="built_in">push_back</span>(pageid);</span><br><span class="line">                page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 同时内存块已满</span></span><br><span class="line">                <span class="type">int</span> be_replaced_pageid = fifo_queue.<span class="built_in">front</span>();</span><br><span class="line">                fifo_queue.<span class="built_in">pop_front</span>();</span><br><span class="line">                <span class="keyword">auto</span> be_replaced_pageid_iter = <span class="built_in">find</span>(page_Frame.pageframe_array.<span class="built_in">begin</span>(), page_Frame.pageframe_array.<span class="built_in">end</span>(), be_replaced_pageid);</span><br><span class="line">                *be_replaced_pageid_iter = pageid;</span><br><span class="line">                page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;缺页数：%d  缺页率：%f  命中率：%f\n&quot;</span>, diseffect, (<span class="type">float</span>)diseffect / total_instructions, (<span class="number">1</span> - (<span class="type">float</span>)diseffect / total_instructions));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n--------------------------------分割线-------------------------------\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">LRU</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> total_instructions = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> Acess_Series[total_instructions] = &#123;<span class="number">1</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; total_instructions; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Acess_Series[i] = <span class="built_in">rand</span>() % <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Page_Frame <span class="title">page_Frame</span><span class="params">(<span class="number">4</span>)</span></span>; <span class="comment">// 是一个数组</span></span><br><span class="line">    <span class="type">int</span> diseffect = <span class="number">0</span>;        <span class="comment">// 缺页数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; total_instructions; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> pageid = Acess_Series[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;访问页面序号：%d &quot;</span>, pageid);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">       对Acess_Series数组里面的数字，判断以下三种情况</span></span><br><span class="line"><span class="comment">       1 内存块中存在此页面,则把其次数置为0即可</span></span><br><span class="line"><span class="comment">       2 内存块中无此页面，且内存块未满，直接加入</span></span><br><span class="line"><span class="comment">       3 内存块中无此页面，且内存块已满，找到最近最久未使用的页面</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">        std::vector&lt;<span class="type">int</span>&gt;::iterator iter;</span><br><span class="line">        <span class="keyword">if</span> ((iter = <span class="built_in">find</span>(page_Frame.pageframe_array.<span class="built_in">begin</span>(), page_Frame.pageframe_array.<span class="built_in">end</span>(), pageid)) != page_Frame.pageframe_array.<span class="built_in">end</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            page_Frame.<span class="built_in">add_pageframe_array_time</span>();</span><br><span class="line">            <span class="type">int</span> position = std::<span class="built_in">distance</span>(page_Frame.pageframe_array.<span class="built_in">begin</span>(), iter);</span><br><span class="line">            page_Frame.pageframe_array_time.<span class="built_in">at</span>(position) = <span class="number">0</span>; <span class="comment">// 新出现一次，就置成0,越大代表越久没有访问，0代表刚刚访问</span></span><br><span class="line">            page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 内存中无此页面,缺页数加一</span></span><br><span class="line">            diseffect++;</span><br><span class="line">            <span class="comment">// 且内存块未满，直接加入</span></span><br><span class="line">            <span class="keyword">if</span> (page_Frame.occupied_size &lt; page_Frame.pageframe_size)</span><br><span class="line">            &#123;</span><br><span class="line">                page_Frame.<span class="built_in">add_pageframe_array_time</span>();</span><br><span class="line">                page_Frame.occupied_size++;</span><br><span class="line">                page_Frame.pageframe_array.<span class="built_in">push_back</span>(pageid);</span><br><span class="line">                page_Frame.pageframe_array_time.<span class="built_in">push_back</span>(<span class="number">0</span>); <span class="comment">// 0代表刚刚访问</span></span><br><span class="line">                page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// 且内存块已满，找到最近最久未使用的页面,也就之找到times次数最大的数组下标</span></span><br><span class="line">                page_Frame.<span class="built_in">add_pageframe_array_time</span>();</span><br><span class="line">                <span class="keyword">auto</span> max_iter = std::<span class="built_in">max_element</span>(page_Frame.pageframe_array_time.<span class="built_in">begin</span>(), page_Frame.pageframe_array_time.<span class="built_in">end</span>());</span><br><span class="line">                <span class="type">int</span> max_position = std::<span class="built_in">distance</span>(page_Frame.pageframe_array_time.<span class="built_in">begin</span>(), max_iter);</span><br><span class="line">                page_Frame.pageframe_array.<span class="built_in">at</span>(max_position) = pageid;</span><br><span class="line">                page_Frame.pageframe_array_time.<span class="built_in">at</span>(max_position) = <span class="number">0</span>;</span><br><span class="line">                page_Frame.<span class="built_in">print_info</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;缺页数：%d  缺页率：%f  命中率：%f\n&quot;</span>, diseffect, (<span class="type">float</span>)diseffect / total_instructions, (<span class="number">1</span> - (<span class="type">float</span>)diseffect / total_instructions));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n--------------------------------分割线-------------------------------\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="源码和其余参考资料见我的github仓库"><a href="#源码和其余参考资料见我的github仓库" class="headerlink" title="源码和其余参考资料见我的github仓库"></a>源码和其余参考资料见我的github仓库</h1><p><a target="_blank" rel="noopener" href="https://github.com/BradTorres/neu-os-experiments">https://github.com/BradTorres/neu-os-experiments</a></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\05\22\Git\" rel="bookmark">40分钟学会Git</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\29\NEU计算机体系结构速通\" rel="bookmark">NEU计算机体系结构速通</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2023/05/22/neu-os-experiments/" title="neu-os-experiments">https://bradtorres.github.io/2023/05/22/neu-os-experiments/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" rel="tag"> <i class="fa fa-tag"></i> 课内学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/22/%E6%83%B3%E4%B9%B0%E4%B8%80%E4%B8%AA%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%8E%A8%E8%8D%90%EF%BC%9F/" rel="prev" title="想买一个移动硬盘，有哪些推荐？">
+      <i class="fa fa-chevron-left"></i> 想买一个移动硬盘，有哪些推荐？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/22/Git/" rel="next" title="40分钟学会Git">
+      40分钟学会Git <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#neu-os-experiments"><span class="nav-text">neu-os-experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E6%B3%A8%E6%84%8F%E4%B8%80%E5%AE%9A%E8%A6%81%E7%9C%8B%EF%BC%81%EF%BC%81%EF%BC%81"><span class="nav-text">注意注意一定要看！！！</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%80"><span class="nav-text">实验一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="nav-text">一． 实验内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">二． 程序流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%8F%8F%E8%BF%B0"><span class="nav-text">三． 程序描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%88%E9%83%A8%E5%88%86%E6%88%AA%E5%9B%BE%EF%BC%89"><span class="nav-text">四． 实验结果（部分截图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%EF%BC%8E-%E9%83%A8%E5%88%86%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-text">五． 部分核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9A%E4%B9%89"><span class="nav-text">结构体定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E5%87%BD%E6%95%B0%E8%A7%81%E6%88%91%E7%9A%84GitHub%E4%BB%93%E5%BA%93"><span class="nav-text">具体函数见我的GitHub仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="nav-text">主函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%BA%8C"><span class="nav-text">实验二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-1"><span class="nav-text">一． 实验内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE-1"><span class="nav-text">二． 程序流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">三． 程序描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%88%E9%83%A8%E5%88%86%E6%88%AA%E5%9B%BE%EF%BC%89-1"><span class="nav-text">四． 实验结果（部分截图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%EF%BC%8E-%E9%83%A8%E5%88%86%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81-1"><span class="nav-text">五． 部分核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E4%B8%89"><span class="nav-text">实验三</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-2"><span class="nav-text">一． 实验内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE-2"><span class="nav-text">二． 程序流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%8F%8F%E8%BF%B0-2"><span class="nav-text">三． 程序描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%88%E9%83%A8%E5%88%86%E6%88%AA%E5%9B%BE%EF%BC%89-2"><span class="nav-text">四． 实验结果（部分截图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%EF%BC%8E-%E9%83%A8%E5%88%86%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81-2"><span class="nav-text">五． 部分核心代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%9B%9B"><span class="nav-text">实验四</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9-3"><span class="nav-text">一． 实验内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E5%9B%BE-3"><span class="nav-text">二． 程序流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%EF%BC%8E-%E7%A8%8B%E5%BA%8F%E6%8F%8F%E8%BF%B0-3"><span class="nav-text">三． 程序描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8E-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%EF%BC%88%E9%83%A8%E5%88%86%E6%88%AA%E5%9B%BE%EF%BC%89-3"><span class="nav-text">四． 实验结果（部分截图）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%EF%BC%8E-%E9%83%A8%E5%88%86%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81-3"><span class="nav-text">五． 部分核心代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E5%92%8C%E5%85%B6%E4%BD%99%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E8%A7%81%E6%88%91%E7%9A%84github%E4%BB%93%E5%BA%93"><span class="nav-text">源码和其余参考资料见我的github仓库</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

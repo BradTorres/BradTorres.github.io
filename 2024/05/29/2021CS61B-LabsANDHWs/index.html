@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘要 Git教程 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HM411377j?p&#x3D;1&amp;vd_source&#x3D;d84f08a0531e04d6d41c38180cce9fb5 我的博客，希望自己能够不要那么那么笨了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021CS61B-LabsANDHWs">
+<meta property="og:url" content="https://bradtorres.github.io/2024/05/29/2021CS61B-LabsANDHWs/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="摘要 Git教程 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HM411377j?p&#x3D;1&amp;vd_source&#x3D;d84f08a0531e04d6d41c38180cce9fb5 我的博客，希望自己能够不要那么那么笨了。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529230134500.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529230217348.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529232044779.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529233931878.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529234714485.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235312981.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235612781.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235815313.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530001235893.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530094937378.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530111111533.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530111731459.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531172306320.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531172454123.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531201052203.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601223621803.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601225351001.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601230852419.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602075351166.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602075532255.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602080539030.png">
+<meta property="article:published_time" content="2024-05-29T14:40:25.000Z">
+<meta property="article:modified_time" content="2024-06-08T16:08:35.363Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="CS61B">
+<meta property="article:tag" content="CSDIY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529230134500.png">
+
+<link rel="canonical" href="https://bradtorres.github.io/2024/05/29/2021CS61B-LabsANDHWs/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>2021CS61B-LabsANDHWs | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2024/05/29/2021CS61B-LabsANDHWs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021CS61B-LabsANDHWs
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-05-29 22:40:25" itemprop="dateCreated datePublished" datetime="2024-05-29T22:40:25+08:00">2024-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-09 00:08:35" itemprop="dateModified" datetime="2024-06-09T00:08:35+08:00">2024-06-09</time>
+              </span>
+
+          
+            <span id="/2024/05/29/2021CS61B-LabsANDHWs/" class="post-meta-item leancloud_visitors" data-flag-title="2021CS61B-LabsANDHWs" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/05/29/2021CS61B-LabsANDHWs/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/05/29/2021CS61B-LabsANDHWs/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>摘要</p>
+<p>Git教程</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1HM411377j?p=1&vd_source=d84f08a0531e04d6d41c38180cce9fb5">https://www.bilibili.com/video/BV1HM411377j?p=1&amp;vd_source=d84f08a0531e04d6d41c38180cce9fb5</a></p>
+<p><strong>我的博客，希望自己能够不要那么那么笨了。</strong></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529230134500.png" alt="image-20240529230134500"></p>
+<p>我记得，好像是vscode吧，，给你看个截图</p>
+<p>是很久以前配置的，懒得改了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529230217348.png" alt="image-20240529230217348"></p>
+<p>有点没绷住，git clone 的时候不能开代理，不然就会出错</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529232044779.png" alt="image-20240529232044779"></p>
+<p>太棒了，，过去的点滴积累没有白费，，太好了！！</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529233931878.png" alt="image-20240529233931878"></p>
+<p>我换过桌面，D盘里面的桌面是DesktopNew。真正的Desktop在C盘。里面放着cs61b</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529234714485.png" alt="image-20240529234714485"></p>
+<p>太棒了，本来是蒙的，没想到youyouyou蒙对了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235312981.png" alt="image-20240529235312981"></p>
+<p>yes，离成功又近了一步</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235612781.png" alt="image-20240529235612781"></p>
+<p>太棒了，，成功辣，，把他们的代码骨架skeleton都搞下来了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529235815313.png" alt="image-20240529235815313"></p>
+<p>哈哈到这里出错了，，但是无所谓了。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530001235893.png" alt="image-20240530001235893"></p>
+<p>oracleopenjdk不行就换，但这也是之后的事情了，我已经进步太多了。</p>
+<p>哈哈哈，绷不住了，，到最后我还是用的java8跑的，无所谓了，，后面再改吧。反正前面简单从内容用不到新语言的特性</p>
+<p>修复测试乘成功了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530094937378.png" alt="image-20240530094937378"></p>
+<p>git提交应该是没出错的，但是他的自动评分系统报错，个人感觉是因jdk版本的原因。这个之后再改吧，已经是几乎成功了。</p>
+<p>我突然其实是感觉课程不配套导致的，我的作业写的是24年的。</p>
+<p>但是评测gradescope测评的是2021年从春季的课程</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530111111533.png" alt="image-20240530111111533"></p>
+<p>靠了，，放出没看懂他们的话，，现在看懂了。</p>
+<p>既然只有21spring开放的测评机，那一切都从21Spring 的版本为准吧。版本不重要，重要的是坚持做完。</p>
+<p>搜了搜有没有CS61B的2024Spring的入学代码，完全找不到。网上都是2021Spring的博客和笔记，个人猜测是2021Spring的Gradescope开放的，所以大家都用这个学期的版本。那我也学这个学期的版本，与大部分人同步得了。</p>
+<p>重新换任务我也等到6.1号之后了。</p>
+<p>真别急，谁说最后还用不用的着你的程序代码呢，慢点开始。看了看电脑设置多个jdk麻烦死了。不想动了，不管这些了。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240530111731459.png" alt="image-20240530111731459"></p>
+<h1 id="上面都是2024SpringCS61B的Lab01的过程，我现在改成2021SpringCS61B了。"><a href="#上面都是2024SpringCS61B的Lab01的过程，我现在改成2021SpringCS61B了。" class="headerlink" title="上面都是2024SpringCS61B的Lab01的过程，我现在改成2021SpringCS61B了。"></a>上面都是2024SpringCS61B的Lab01的过程，我现在改成2021SpringCS61B了。</h1><h1 id="Week1✔"><a href="#Week1✔" class="headerlink" title="Week1✔"></a>Week1✔</h1><h2 id="Lab-1-Setup-Setting-Up-Your-Computer✔"><a href="#Lab-1-Setup-Setting-Up-Your-Computer✔" class="headerlink" title="Lab 1 Setup: Setting Up Your Computer✔"></a>Lab 1 Setup: Setting Up Your Computer✔</h2><p>hhhhhhhhhhhhh为什么我这里java HelloWorld成功了，但是之前不成功，难道真是的用户变量里面的CLASSPATH的alg4.jar导致的吗。</p>
+<p>感觉用Windows Terminal也一样行，我试试</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531172306320.png" alt="image-20240531172306320"></p>
+<p>果然是是的用户变量里面的CLASSPATH的alg4.jar导致的。奶奶的</p>
+<p>那我的普林斯顿的那个之后放到后面做了。因为alg4的配置比我先做的更麻烦，我先歇一会。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531172454123.png" alt="image-20240531172454123"></p>
+<h2 id="Lab-1-IntelliJ-Java-git✔"><a href="#Lab-1-IntelliJ-Java-git✔" class="headerlink" title="Lab 1: IntelliJ, Java, git✔"></a>Lab 1: IntelliJ, Java, git✔</h2><p>太棒了，这个也做完了。</p>
+<p>而且自动评分器得了满分。太好了</p>
+<p>有个小小的报错</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot resolve symbol &#x27;String&#x27; 和 &#x27;System’</span><br></pre></td></tr></table></figure>
+
+<p>解决方法<a target="_blank" rel="noopener" href="https://blog.csdn.net/wy_hhxx/article/details/121239112">https://blog.csdn.net/wy_hhxx/article/details/121239112</a></p>
+<p>个人感觉原因是，把别人的setting导入进来的时候，别人的jdk路径和自己的jdk路径不一样，所以会有这个报错。</p>
+<p>果然好了，不报错了</p>
+<p>这也解决了我的选择困难症，再也不用纠结用哪个color scheme,用加州大学伯克利分校的教授同款怎么样都是好。好好哈后</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240531201052203.png" alt="image-20240531201052203"></p>
+<h2 id="HW-0-A-Java-Crash-Course✔"><a href="#HW-0-A-Java-Crash-Course✔" class="headerlink" title="HW 0: A Java Crash Course✔"></a>HW 0: A Java Crash Course✔</h2><p>讲的很细，和C++49讲的一样</p>
+<p><strong>中断并继续</strong></p>
+<p>有时，您可能会发现使用<code>break</code>或<code>continue</code>关键字很有用。该<code>continue</code>语句跳过循环当前迭代的其余部分，<strong>有效地直接跳转到增量条件。</strong></p>
+<p><strong>增强的 For 循环</strong></p>
+<p>这一点和acwing讲的一样</p>
+<p>Java 还支持使用“增强的 for 循环”对数组进行迭代。基本思想是，在很多情况下我们实际上根本不关心索引。在这种情况下，我们避免使用涉及冒号的特殊语法来创建索引变量。</p>
+<p>例如，在下面的代码中，我们执行的操作与<code>BreakDemo</code>上面的完全相同。但是，在这种情况下，我们不创建索引<code>i</code>。相反，从开始到，只接受<code>String</code> <code>s</code>每个的标识一次。您可以通过<a target="_blank" rel="noopener" href="https://goo.gl/wmhVPM">此链接</a>试用此代码。<code>String``a``a[0]``a[a.length - 1]</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EnhancedForBreakDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        String[] a = &#123;<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;dog&quot;</span>, <span class="string">&quot;laser horse&quot;</span>, <span class="string">&quot;ketchup&quot;</span>, <span class="string">&quot;horse&quot;</span>, <span class="string">&quot;horbse&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (String s : a) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">3</span>; j += <span class="number">1</span>) &#123;</span><br><span class="line">                System.out.println(s);</span><br><span class="line">                <span class="keyword">if</span> (s.contains(<span class="string">&quot;horse&quot;</span>)) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Project-0-2048✔"><a href="#Project-0-2048✔" class="headerlink" title="Project 0: 2048✔"></a>Project 0: 2048✔</h2><p>好难，要做吗</p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><a target="_blank" rel="noopener" href="https://youtu.be/Xzihuj_JZBI">您可以在https://youtu.be/Xzihuj_JZBI</a>找到该项目的高级概述。</p>
+<p>但您的任务仅存在于四种方法中<code>Model.java</code>，并且仅限于四种方法。(感觉没那么难)，其他的部分他都给我封装好 了。</p>
+<h3 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h3><p>在这个项目中，您将构建此游戏的核心逻辑。也就是说，我们已经整合了所有 GUI 代码、处理按键以及大量其他框架。<strong>您的工作是完成最重要和最有趣的部分。</strong></p>
+<p>具体来说，您将在文件中填写 4 种方法<code>Model.java</code>，这些方法控制用户按下某些键后发生的情况。</p>
+<p>在第一次移动之前，应用程序会将包含 2 或 4 的方块添加到最初为空的棋盘上的随机方格中。2 或 4 的选择是随机的，选择 2 的概率为 75%，选择 4 的概率为 25%</p>
+<p>以下是发生合并时的完整规则，如上图所示。</p>
+<ol>
+<li>两块相同数值的牌<em>合并</em>为一块牌，其数字是初始数字的两倍。</li>
+<li>合并后的图块不会在该倾斜度上再次合并。例如，如果我们有 [X, 2, 2, 4]，其中 X 代表空白区域，我们将图块向左移动，最终结果应该是 [4, 4, X, X]，而不是 [8, X, X, X]。这是因为最左边的 <strong>4 已经是合并的一部分，因此不应再次合并。</strong></li>
+<li>当运动方向上的三个相邻图块具有相同的编号时，运动方向上的<strong>前两个</strong>图块将合并，而后面的图块则不会合并。例如，如果我们有 [X, 2, 2, 2] 并将图块向左移动，则最终结果应该是 [4, 2, X, X]，而不是 [2, 4, X, X]。</li>
+</ol>
+<p>根据这些规则，如果在运动方向上有四个相邻的图块具有相同的编号，它们将形成两个合并的图块。例如，如果我们有 [4, 4, 4, 4]，那么如果我们向左移动，我们最终会得到 [8, 8, X, X]。这是因为前两个图块将根据规则 3 合并，然后后面的两个图块将合并，但是由于规则 2，这些合并的图块（在我们的示例中为 8）不会在该倾斜方向上自行合并。您会在上面的动画 GIF 中找到上面列出的 3 条规则中的每一个的应用，因此请仔细观看几次以很好地理解这些规则。</p>
+<p>注意：您的代码不会添加任何新图块！我们已经为您完成了这一部分。</p>
+<p>您的代码需要更新分数</p>
+<p>当当前玩家没有可用的移动（没有倾斜可以改变棋盘）或移动形成包含 2048 的方格时，游戏结束。您的代码将负责检测游戏何时结束。</p>
+<h3 id="作业理念与课程设计"><a href="#作业理念与课程设计" class="headerlink" title="作业理念与课程设计"></a>作业理念与课程设计</h3><p>当您进行该项目的第四个最终任务（编写方法<code>tilt</code>）时，其中一个挑战是找出这些方法和实例变量中的哪些是有用的。</p>
+<h4 id="Board"><a href="#Board" class="headerlink" title="Board"></a>Board</h4><p>此类代表棋盘本身。它有三种方法供您使用：<code>setViewingPerspective</code>、<code>tile</code>、<code>move</code>。您也可以选择使用 进行实验<code>getRandomNonNullTile</code>。</p>
+<p><strong>您只能编辑<code>Model.java</code>此作业中的文件。Gradescope</strong>只会采用您的<code>Model.java</code>文件并使用其他文件的框架版本，因此如果您对文件进行编辑<code>Tile.java</code>，Gradescope 将无法识别该文件。</p>
+<h3 id="你的任务"><a href="#你的任务" class="headerlink" title="你的任务"></a>你的任务</h3><p>您在这个项目中要做的工作是修改和完成<code>Model</code>类，特别是<code>emptySpaceExists</code>、<code>maxTileExists</code>和<code>atLeastOneMoveExists</code>方法 <code>tilt</code>。其他一切都已为您实现。我们建议按此顺序完成它们。前两个相对简单。第三个（<code>atLeastOneMoveExists</code>）更难，最后一种方法<code>tilt</code>可能相当困难。我们预计<code>tilt</code>您需要 3 到 10 个小时才能完成。前三种方法将处理游戏结束条件，最后一种方法<code>tilt</code>将在用户按下按键后修改棋盘。您可以阅读该方法的简短主体，<code>checkGameOver</code>以了解如何使用您的方法来检查游戏是否结束。</p>
+<p>前面的视频和SLids和指南和现场问答都看完了。就差pro 0 了</p>
+<p>纪念一下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601223621803.png" alt="image-20240601223621803"></p>
+<p>理解了，悟了。Tile t为null表示空格子，没有数字。所以为了引用空指针要先判断t !&#x3D; null，当然这也算一个小小的短路原则。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601225351001.png" alt="image-20240601225351001"></p>
+<p>一次性写对了，很开心</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601230852419.png" alt="image-20240601230852419"></p>
+<p>贴上我的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">atLeastOneMoveExists</span><span class="params">(Board b)</span> &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> Fill in this function.</span></span><br><span class="line">    <span class="keyword">if</span> (emptySpaceExists(b)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="type">int</span>[] dj = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">int</span>[] di = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> b.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">            <span class="type">Tile</span> <span class="variable">t</span> <span class="operator">=</span> b.tile(j, i);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>; k &lt; <span class="number">4</span>; k++) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">jNew</span> <span class="operator">=</span> j + dj[k];</span><br><span class="line">                <span class="type">int</span> <span class="variable">iNew</span> <span class="operator">=</span> i + di[k];</span><br><span class="line">                <span class="keyword">if</span> (iNew &gt;= <span class="number">0</span> &amp;&amp; iNew &lt; len &amp;&amp; jNew &gt;= <span class="number">0</span> &amp;&amp; jNew &lt; len) &#123;</span><br><span class="line">                    <span class="type">Tile</span> <span class="variable">tNew</span> <span class="operator">=</span> b.tile(iNew,  jNew);</span><br><span class="line">                    <span class="keyword">if</span>(t.value() == tNew.value())&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第四个函数</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602075351166.png" alt="image-20240602075351166"></p>
+<p>贴上我的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">tilt</span><span class="params">(Side side)</span> &#123;</span><br><span class="line">        <span class="type">boolean</span> changed;</span><br><span class="line">        changed = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> Modify this.board (and perhaps this.score) to account</span></span><br><span class="line">        <span class="comment">// for the tilt to the Side SIDE. If the board changed, set the</span></span><br><span class="line">        <span class="comment">// changed local variable to true.</span></span><br><span class="line">        board.setViewingPerspective(side);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">0</span>; c &lt; board.size(); c++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">r</span> <span class="operator">=</span> board.size() - <span class="number">1</span>; r &gt;= <span class="number">0</span>; r--) &#123;</span><br><span class="line">                <span class="type">Tile</span> <span class="variable">t1</span> <span class="operator">=</span> board.tile(c, r);</span><br><span class="line">                <span class="keyword">if</span> (t1 != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">r2</span> <span class="operator">=</span> r - <span class="number">1</span>; r2 &gt;= <span class="number">0</span>; r2--) &#123;</span><br><span class="line">                        <span class="type">Tile</span> <span class="variable">t2</span> <span class="operator">=</span> board.tile(c, r2);</span><br><span class="line">                        <span class="keyword">if</span> (t2 != <span class="literal">null</span>) &#123;</span><br><span class="line">                            <span class="keyword">if</span> (t2.value() == t1.value()) &#123;</span><br><span class="line">                                board.move(c, r, t2);</span><br><span class="line">                                changed = <span class="literal">true</span>;</span><br><span class="line">                                score += <span class="number">2</span> * t1.value();</span><br><span class="line">                                r = r2;</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">break</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">0</span>; c &lt; board.size(); c++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">r</span> <span class="operator">=</span> board.size() - <span class="number">1</span>; r &gt;= <span class="number">0</span>; r--) &#123;</span><br><span class="line">                <span class="type">Tile</span> <span class="variable">t1</span> <span class="operator">=</span> board.tile(c, r);</span><br><span class="line">                <span class="keyword">if</span> (t1 == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">r2</span> <span class="operator">=</span> r - <span class="number">1</span>; r2 &gt;= <span class="number">0</span>; r2--) &#123;</span><br><span class="line">                        <span class="type">Tile</span> <span class="variable">t2</span> <span class="operator">=</span> board.tile(c, r2);</span><br><span class="line">                        <span class="keyword">if</span> (t2 != <span class="literal">null</span>) &#123;</span><br><span class="line">                            board.move(c, r, t2);</span><br><span class="line">                            changed = <span class="literal">true</span>;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">continue</span>;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        board.setViewingPerspective(Side.NORTH);</span><br><span class="line">        checkGameOver();</span><br><span class="line">        <span class="keyword">if</span> (changed) &#123;</span><br><span class="line">            setChanged();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> changed;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>testModel.java</code>也成功了。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602075532255.png" alt="image-20240602075532255"></p>
+<p>开心，终于完成任务 了</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602080539030.png" alt="image-20240602080539030"></p>
+<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">DONE</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://sp21.datastructur.es/materials/lab/lab2/lab2">Debugging (due 01&#x2F;29)</a></td>
+<td align="center"></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">[<a target="_blank" rel="noopener" href="https://sp21.datastructur.es/materials/proj/proj0/proj0">Project 0 due 1&#x2F;29]</a></td>
+<td align="center">DONE</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>现在把可能用到的网页放在这里</p>
+<p>最主要的两个链接。</p>
+<p><a target="_blank" rel="noopener" href="https://www.gradescope.com/courses/137626">https://www.gradescope.com/courses/137626</a></p>
+<p><a target="_blank" rel="noopener" href="https://sp21.datastructur.es/">https://sp21.datastructur.es/</a></p>
+<p>参考作业</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/KANIKIG/cs61b-sp21/blob/main/proj0/game2048/Model.java">https://github.com/KANIKIG/cs61b-sp21/blob/main/proj0/game2048/Model.java</a></p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\2021CS61BWeek3and4\" rel="bookmark">2021CS61BWeek3and4</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\29\2021CS61BWeek1and2\" rel="bookmark">2021CS61BWeek1and2</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CS61A-Structure-and-Interpretation-of-Computer-Programs\" rel="bookmark">CS61A-Structure-and-Interpretation-of-Computer-Programs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CS50\" rel="bookmark">CS50</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CMU-CS15213-CSAPP\" rel="bookmark">CMU CS15213: CSAPP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\31\MIT-Missing-Semester\" rel="bookmark">MIT-Missing-Semester</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\31\Coursera-Algorithms-I-II\" rel="bookmark">Coursera: Algorithms I & II</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2024/05/29/2021CS61B-LabsANDHWs/" title="2021CS61B-LabsANDHWs">https://bradtorres.github.io/2024/05/29/2021CS61B-LabsANDHWs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CS61B/" rel="tag"> <i class="fa fa-tag"></i> CS61B</a>
+              <a href="/tags/CSDIY/" rel="tag"> <i class="fa fa-tag"></i> CSDIY</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/29/2021CS61BWeek1and2/" rel="prev" title="2021CS61BWeek1and2">
+      <i class="fa fa-chevron-left"></i> 2021CS61BWeek1and2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/30/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5day24-%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-77/" rel="next" title="代码随想录算法训练营day24-理论基础-77">
+      代码随想录算法训练营day24-理论基础-77 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E9%9D%A2%E9%83%BD%E6%98%AF2024SpringCS61B%E7%9A%84Lab01%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%8C%E6%88%91%E7%8E%B0%E5%9C%A8%E6%94%B9%E6%88%902021SpringCS61B%E4%BA%86%E3%80%82"><span class="nav-text">上面都是2024SpringCS61B的Lab01的过程，我现在改成2021SpringCS61B了。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week1%E2%9C%94"><span class="nav-text">Week1✔</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lab-1-Setup-Setting-Up-Your-Computer%E2%9C%94"><span class="nav-text">Lab 1 Setup: Setting Up Your Computer✔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lab-1-IntelliJ-Java-git%E2%9C%94"><span class="nav-text">Lab 1: IntelliJ, Java, git✔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HW-0-A-Java-Crash-Course%E2%9C%94"><span class="nav-text">HW 0: A Java Crash Course✔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-0-2048%E2%9C%94"><span class="nav-text">Project 0: 2048✔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F"><span class="nav-text">游戏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E7%90%86%E5%BF%B5%E4%B8%8E%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1"><span class="nav-text">作业理念与课程设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Board"><span class="nav-text">Board</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="nav-text">你的任务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week2"><span class="nav-text">Week2</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

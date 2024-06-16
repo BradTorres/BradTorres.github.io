@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="文件流在 C 语言中，流 (stream) 表示任意输入的源或任意输出的目的地。流是一个抽象的概念，它即可以表示存储硬盘上的文件，也可以表示网络端口或者打印设备。流这个概念可以很好地屏蔽硬件设备之间的差异，使得 C 语言可以像读写文件一样读写任意的设备    Linux哲学：一切皆文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="词法分析器C++49">
+<meta property="og:url" content="https://bradtorres.github.io/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="文件流在 C 语言中，流 (stream) 表示任意输入的源或任意输出的目的地。流是一个抽象的概念，它即可以表示存储硬盘上的文件，也可以表示网络端口或者打印设备。流这个概念可以很好地屏蔽硬件设备之间的差异，使得 C 语言可以像读写文件一样读写任意的设备    Linux哲学：一切皆文件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-10T09:30:11.000Z">
+<meta property="article:modified_time" content="2024-05-10T12:30:35.761Z">
+<meta property="article:author" content="BradTorres">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bradtorres.github.io/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>词法分析器C++49 | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          词法分析器C++49
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-05-10 17:30:11 / 修改时间：20:30:35" itemprop="dateCreated datePublished" datetime="2024-05-10T17:30:11+08:00">2024-05-10</time>
+            </span>
+
+          
+            <span id="/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/" class="post-meta-item leancloud_visitors" data-flag-title="词法分析器C++49" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><p>在 C 语言中，<strong>流 (stream)</strong> 表示任意输入的源或任意输出的目的地。流是一个抽象的概念，它即可以表示存储硬盘上的文件，也可以表示网络端口或者打印设备。流这个概念可以很好地屏蔽硬件设备之间的差异，<strong>使得 C 语言可以像读写文件一样读写任意的设备</strong>  </p>
+<blockquote>
+<p>Linux哲学：一切皆文件  </p>
+</blockquote>
+<h3 id="文件缓冲"><a href="#文件缓冲" class="headerlink" title="文件缓冲"></a>文件缓冲</h3><p>仅仅了解抽象的概念是不够的，有时候我们还需要了解事物运行的机理。由于内存和硬件设备之间存在读写性能上的”鸿沟”，所以操作系统会在内存上为流设置缓冲区  </p>
+<p>缓冲区是以<strong>先进先出</strong>的方式管理数据的。缓冲区分为三种类型：</p>
+<p>满缓冲。当缓冲区空时，从输入流中读取数据；当缓冲区满时，向输出流中写入数据。</p>
+<p>行缓冲。每次从输入流中读取一行数据；每次向输出流中写入一行数据。</p>
+<p>无缓冲。顾名思义，就是没有缓冲区</p>
+<blockquote>
+<p>stdin标准输入流</p>
+<p>stdout标准输出流</p>
+</blockquote>
+<blockquote>
+<p>stderr标准错误流</p>
+</blockquote>
+<h3 id="标准流"><a href="#标准流" class="headerlink" title="标准流"></a>标准流</h3><p>C 语言对流的访问是通过<strong>文件指针</strong>实现的，它的类型为 FILE* 。并且在 &lt;stdio.h&gt; 头文件中提供了 3 个标准流。这 3 个标准流可以直接使用——我们不需要对其进行声明，也不用打开或者关闭它们。  </p>
+<table>
+<thead>
+<tr>
+<th>文件指针</th>
+<th>流</th>
+<th>默认含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stdin</td>
+<td>标准输入</td>
+<td>键盘</td>
+</tr>
+<tr>
+<td>stdout</td>
+<td>标准输出</td>
+<td>屏幕</td>
+</tr>
+<tr>
+<td>stderr</td>
+<td>标准错误</td>
+<td>屏幕</td>
+</tr>
+</tbody></table>
+<h3 id="文本文件和二进制文件"><a href="#文本文件和二进制文件" class="headerlink" title="文本文件和二进制文件"></a>文本文件和二进制文件</h3><p>C 语言支持两种类型的文件：文本文件和二进制文件。文本文件中存储的是字符数据，人类是可以看懂的；二进制文件中的数据，人类是看不懂的。</p>
+<p>文本文件具有两个独特的性质：</p>
+<p><strong>文本文件有行的概念</strong>。文本文件被划分为若干行，并且每一行的结尾都以特殊字符进行标记。在 Windows 系统中，是以回车符和换行符 (\r\n) 进行标记的；在 Unix和 Macintosh 系统中是以换行符 (\n) 标记的。</p>
+<blockquote>
+<p>早期的 Macintosh 是以回车符 (\r) 标记每一行的结尾的。</p>
+</blockquote>
+<p><strong>文本文件可能包含一个特殊的 “文件末尾” 标记。</strong>一些操作系统允许在文本文件的末尾使用一个特殊的字节作为标记。在 Windows 系统中，这个标记为 ‘\x1a’ (Ctrl+Z)。Ctrl+Z不是必需的，但如果存在，它就标志着文件的结束，其后的所有字节都会被忽略。大多数其他操作系统 (包括 UNIX) 是没有文件末尾字符。</p>
+<blockquote>
+<p>使用 Ctrl+Z 的这一习惯继承自 DOS，而 DOS 中的这一习惯又是从 CP&#x2F;M (早期用于个人电脑的一种操作系统) 来的。</p>
+</blockquote>
+<p>在写入数据时，我们需要考虑是以文本形式存储还是以二进制的形式存储。比如，存储整数 32767，一种选择是写入字符 ‘3’, ‘2’, ‘7’, ‘6’, ‘7’，需要 5 个字节。  </p>
+<p>另一个选择是以二进制形式存储这个数，这种方法只需要两个字节。  </p>
+<blockquote>
+<p>文本形式可以方便人类阅读和编辑；二进制形式可以节省空间，并且转换效率高。  </p>
+</blockquote>
+<h2 id="打开-x2F-关闭文件"><a href="#打开-x2F-关闭文件" class="headerlink" title="打开&#x2F;关闭文件"></a>打开&#x2F;关闭文件</h2><h3 id="f-o-p-e-n"><a href="#f-o-p-e-n" class="headerlink" title="f o p e n"></a>f o p e n</h3><p>读写文件之前，我们需要使用 <code>fopen</code> 函数打开文件。  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE* <span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* filename, <span class="type">const</span> <span class="type">char</span>* mode)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>第一个参数是文件的路径，用来定位文件的；第二个参数表示是以何种模式打开文件的。如果无法打开文件， <code>fopen</code> 返回空指针  </p>
+<h4 id="文件路径"><a href="#文件路径" class="headerlink" title="文件路径"></a>文件路径</h4><p>文件路径分为两种，一种是绝对路径：从根目录 (或者盘符) 开始，一直到文件所在的位置，比如：”c:&#x2F;project&#x2F;test.dat”。另一种是相对路径：从当前工作目录开始，一直到文件所在的位置，比如：”in.dat”。</p>
+<p>在实际工作中，我们一般使用相对路径 (Why?)。</p>
+<p>便于移植</p>
+<h4 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h4><p>模式的选择不仅依赖于后续对文件的操作，还依赖于文件是文本形式还是二进制形式。打开一个文本文件，可以使用下面一些模式：  </p>
+<p>自己看pdf</p>
+<blockquote>
+<p>写模式和追加模式是不一样的。如果文件存在，写模式会清空原有的数据，而追加模式会在原有数据的后面写入新的内容。  </p>
+</blockquote>
+<h3 id="f-c-l-o-s-e"><a href="#f-c-l-o-s-e" class="headerlink" title="f c l o s e"></a>f c l o s e</h3><p>看pdf</p>
+<h2 id="读-x2F-写文件"><a href="#读-x2F-写文件" class="headerlink" title="读&#x2F;写文件"></a>读&#x2F;写文件</h2><p>前面介绍了如何打开和关闭文件，接下来我们来学习下如何读写文件。其中<code>fgetc/fputc</code> , <code>fgets/fputs</code> 和 <code>fscanf/fprintf</code>是用来读写文本文件的； <code>fread/fwrite</code> 是用来读写二进制文件的。  </p>
+<h3 id="f-g-e-t-c-amp-f-p-u-t-c"><a href="#f-g-e-t-c-amp-f-p-u-t-c" class="headerlink" title="f g e t c &amp; f p u t c"></a>f g e t c &amp; f p u t c</h3><p>看pdf</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2024/05/10/%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8C-49/" title="词法分析器C++49">https://bradtorres.github.io/2024/05/10/词法分析器C-49/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/10/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E4%B8%89%E5%A4%A9-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0-707-%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8-206-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/" rel="prev" title="代码随想录算法训练营第三天 |203.移除链表元素,  707.设计链表, 206.反转链表">
+      <i class="fa fa-chevron-left"></i> 代码随想录算法训练营第三天 |203.移除链表元素,  707.设计链表, 206.反转链表
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/11/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%9B%9B%E5%A4%A9-24-19-%E9%9D%A2%E8%AF%95%E9%A2%98-02-07-%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4-142/" rel="next" title="代码随想录算法训练营第四天 |24, 19, 面试题 02.07. 链表相交, 142">
+      代码随想录算法训练营第四天 |24, 19, 面试题 02.07. 链表相交, 142 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6"><span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81"><span class="nav-text">流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2"><span class="nav-text">文件缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%B5%81"><span class="nav-text">标准流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="nav-text">文本文件和二进制文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%BC%80-x2F-%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6"><span class="nav-text">打开&#x2F;关闭文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f-o-p-e-n"><span class="nav-text">f o p e n</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="nav-text">文件路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F"><span class="nav-text">模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f-c-l-o-s-e"><span class="nav-text">f c l o s e</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB-x2F-%E5%86%99%E6%96%87%E4%BB%B6"><span class="nav-text">读&#x2F;写文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#f-g-e-t-c-amp-f-p-u-t-c"><span class="nav-text">f g e t c &amp; f p u t c</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="图数据结构-图的基本操作(邻接矩阵存储)来自这个 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1pA411G7xX&#x2F;?spm_id_from&#x3D;333.788&amp;vd_source&#x3D;d84f08a0531e04d6d41c38180cce9fb5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图">
+<meta property="og:url" content="https://bradtorres.github.io/2024/05/20/%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="图数据结构-图的基本操作(邻接矩阵存储)来自这个 https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1pA411G7xX&#x2F;?spm_id_from&#x3D;333.788&amp;vd_source&#x3D;d84f08a0531e04d6d41c38180cce9fb5">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-20T11:38:40.000Z">
+<meta property="article:modified_time" content="2024-05-27T02:59:42.445Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="DataStructure">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://bradtorres.github.io/2024/05/20/%E5%9B%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>图 | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2024/05/20/%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-05-20 19:38:40" itemprop="dateCreated datePublished" datetime="2024-05-20T19:38:40+08:00">2024-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-27 10:59:42" itemprop="dateModified" datetime="2024-05-27T10:59:42+08:00">2024-05-27</time>
+              </span>
+
+          
+            <span id="/2024/05/20/%E5%9B%BE/" class="post-meta-item leancloud_visitors" data-flag-title="图" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/05/20/%E5%9B%BE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/05/20/%E5%9B%BE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h2 id="数据结构-图的基本操作-邻接矩阵存储"><a href="#数据结构-图的基本操作-邻接矩阵存储" class="headerlink" title="数据结构-图的基本操作(邻接矩阵存储)"></a>数据结构-图的基本操作(邻接矩阵存储)</h2><p>来自这个</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pA411G7xX/?spm_id_from=333.788&vd_source=d84f08a0531e04d6d41c38180cce9fb5">https://www.bilibili.com/video/BV1pA411G7xX/?spm_id_from=333.788&amp;vd_source=d84f08a0531e04d6d41c38180cce9fb5</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXVEX 20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 99</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//面向对象的方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MGraph</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//初始化</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXVEX; i++) &#123;</span><br><span class="line">            Visited[i] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; MAXVEX; j++) &#123;</span><br><span class="line">                arc[i][j] = INF;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//Visited数组初始化</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">InitVisited</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; MAXVEX; i++)</span><br><span class="line">            Visited[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//创建邻接矩阵</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i, j, k, w;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Please enter the number of vertices and edges:&quot;</span> &lt;&lt; endl;</span><br><span class="line">        cin &gt;&gt; vexnum &gt;&gt; edgenum;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Please enter vertex information:&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">            Vertex[i] = i;    <span class="comment">//存储序号</span></span><br><span class="line">            cin &gt;&gt; Vername[i];<span class="comment">//输入顶点名字</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; edgenum; k++) &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;Please enter the subscripts i, j and weight w of the edge (vi, vj):&quot;</span>;</span><br><span class="line">            cin &gt;&gt; i &gt;&gt; j &gt;&gt; w;</span><br><span class="line">            arc[i][j] = arc[j][i] = w;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//输出邻接矩阵</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Adjacency matrix:&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; vexnum; j++)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%4d&quot;</span>, arc[i][j]);</span><br><span class="line">            cout &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回顶点在图的位置</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">LocateVex</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Vername[i] == ch)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i == vexnum) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//增加某个顶点</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">InsertVex</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        Vername[vexnum] = ch;</span><br><span class="line">        Vertex[vexnum] = vexnum;</span><br><span class="line">        vexnum++;<span class="comment">//别忘了顶点数自增</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除某个顶点</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">DeleteVex</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i, j, k;</span><br><span class="line">        <span class="comment">//遍历寻找节点位置</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Vername[i] == ch) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//Vername数组循环左移</span></span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; vexnum; j++) &#123;</span><br><span class="line">            Vername[j - <span class="number">1</span>] = Vername[j];<span class="comment">//覆盖</span></span><br><span class="line">            Vertex[j - <span class="number">1</span>] = Vertex[j];  <span class="comment">//覆盖</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//arc数组循环左移和上移</span></span><br><span class="line">        <span class="comment">//上移</span></span><br><span class="line">        <span class="keyword">for</span> (j = i + <span class="number">1</span>; j &lt; vexnum; j++)</span><br><span class="line">            <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; vexnum; k++) &#123;</span><br><span class="line">                arc[j - <span class="number">1</span>][k] = arc[j][k];<span class="comment">//覆盖</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="comment">//左移</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; vexnum - <span class="number">1</span>; j++)</span><br><span class="line">            <span class="keyword">for</span> (k = i + <span class="number">1</span>; k &lt; vexnum; k++) &#123;</span><br><span class="line">                arc[j][k - <span class="number">1</span>] = arc[j][k];<span class="comment">//覆盖</span></span><br><span class="line">            &#125;</span><br><span class="line">        vexnum--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//增加某条边</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">InsertEdge</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> w)</span> </span>&#123;</span><br><span class="line">        arc[i][j] = arc[j][i] = w;</span><br><span class="line">        edgenum++;<span class="comment">//别忘了</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//删除某条边</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RemoveEdge</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line">        arc[i][j] = arc[j][i] = INF;</span><br><span class="line">        edgenum--;<span class="comment">//别忘了</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回第一个邻接顶点</span></span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">FirstNeighbor</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++)</span><br><span class="line">            <span class="keyword">if</span> (Vername[i] == ch) <span class="keyword">break</span>;</span><br><span class="line">        <span class="type">int</span> j;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; vexnum; j++)</span><br><span class="line">            <span class="keyword">if</span> (arc[i][j] != INF) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (j == vexnum) <span class="keyword">return</span> <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> Vername[j];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//自己照着书上写的</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">Adjacent</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> arc[i][j] != INF;</span><br><span class="line">    &#125;<span class="comment">//O(1)</span></span><br><span class="line">    <span class="comment">//自己照着书上写的,下面是错的，不管了</span></span><br><span class="line">    <span class="comment">//    int *Neighbors(int i) &#123;</span></span><br><span class="line">    <span class="comment">//        int arr[MAXVEX] = &#123;0&#125;;</span></span><br><span class="line">    <span class="comment">//        for (int j = 0; j &lt; vexnum; j++)</span></span><br><span class="line">    <span class="comment">//            if (arc[i][j] != INF)</span></span><br><span class="line">    <span class="comment">//                arr[j] = 1;</span></span><br><span class="line">    <span class="comment">//        return arr;</span></span><br><span class="line">    <span class="comment">//    &#125;//</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//深度优先遍历</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">DFS</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//InitVisited();//这是递归写的，进入下一层的时候又会InitVisited(),导致循环。所以不能写InitVisited()</span></span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">LocateVex</span>(ch);</span><br><span class="line">        <span class="comment">//        cout &lt;&lt; &quot;The current vertex position is: &quot; &lt;&lt; l &lt;&lt; endl;</span></span><br><span class="line">        cout &lt;&lt; Vername[l] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">//输出当前顶点</span></span><br><span class="line">        Visited[l] = <span class="number">1</span>;           <span class="comment">//表示访问过该顶点</span></span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Visited[i] == <span class="number">0</span> &amp;&amp; arc[l][i] != INF)</span><br><span class="line">                <span class="built_in">DFS</span>(Vername[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">DFSTraverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">InitVisited</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vexnum; i++)</span><br><span class="line">            <span class="keyword">if</span> (!Visited[i])</span><br><span class="line">                <span class="built_in">DFSmyself</span>(Vername[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">DFSmyself</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">LocateVex</span>(ch);</span><br><span class="line">        <span class="built_in">visit</span>(l);</span><br><span class="line">        Visited[l] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;  i &lt; vexnum; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!Visited[i] &amp;&amp; arc[l][i] != INF)</span><br><span class="line">                <span class="built_in">DFSmyself</span>(Vername[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//广度优先遍历</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">BFS</span><span class="params">(<span class="type">char</span> ch)</span> </span>&#123;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; q;<span class="comment">//定义队列</span></span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">LocateVex</span>(ch);</span><br><span class="line">        cout &lt;&lt; Vername[l] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">//输出当前顶点， 访问初始顶点</span></span><br><span class="line">        <span class="built_in">InitVisited</span>();</span><br><span class="line">        Visited[l] = <span class="number">1</span>;<span class="comment">//表示访问过该顶点</span></span><br><span class="line">        q.<span class="built_in">push</span>(l);</span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            l = q.<span class="built_in">front</span>();<span class="comment">//获取对头 信息</span></span><br><span class="line">            q.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Visited[i] == <span class="number">0</span> &amp;&amp; arc[l][i] != INF) &#123;</span><br><span class="line">                    cout &lt;&lt; Vername[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">//输出当前顶点， 访问初始顶点</span></span><br><span class="line">                    Visited[i] = <span class="number">1</span>;           <span class="comment">//表示访问过该顶点</span></span><br><span class="line">                    q.<span class="built_in">push</span>(i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//自己写一遍广度优先遍历，而且是完全版ben，便利所有连通分量</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">BFSTraverse</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="built_in">InitVisited</span>();</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vexnum; i++)</span><br><span class="line">            <span class="keyword">if</span> (!Visited[i])</span><br><span class="line">                <span class="built_in">BFSmyself</span>(Vername[i], q);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">BFSmyself</span><span class="params">(<span class="type">char</span> ch, queue&lt;<span class="type">int</span>&gt; &amp;q)</span> </span>&#123;</span><br><span class="line">        <span class="comment">/*InitVisited();*/</span></span><br><span class="line">        <span class="comment">//queue&lt;int&gt; q;//队列放的是顶点数组的下标</span></span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">LocateVex</span>(ch);<span class="comment">//ch是我们输入的，要便利的第一个节点，也就是出发的节点</span></span><br><span class="line">        <span class="built_in">visit</span>(l);</span><br><span class="line">        Visited[l] = <span class="number">1</span>;</span><br><span class="line">        q.<span class="built_in">push</span>(l);<span class="comment">//这三部经典操作</span></span><br><span class="line">        <span class="keyword">while</span> (!q.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">           <span class="comment">/* DeQueue(q, l);*/</span></span><br><span class="line">            l = q.<span class="built_in">front</span>();</span><br><span class="line">            q.<span class="built_in">pop</span>();<span class="comment">//stl里面pop是void的类型，不返回出队元素，考研里面Dequeue返回出队元素。</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vexnum; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!Visited[i] &amp;&amp; arc[l][i] != INF) &#123;</span><br><span class="line">                    <span class="built_in">visit</span>(i);</span><br><span class="line">                    Visited[i] = <span class="number">1</span>;</span><br><span class="line">                    q.<span class="built_in">push</span>(i);<span class="comment">//这三部经典操作</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visit</span><span class="params">(<span class="type">int</span> l )</span> </span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c  &quot;</span>, Vername[l]);<span class="comment">//不是%d</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> Vertex[MAXVEX];     <span class="comment">//存储结点的序号</span></span><br><span class="line">    <span class="type">char</span> Vername[MAXVEX];   <span class="comment">//存储结点的名字</span></span><br><span class="line">    <span class="type">int</span> arc[MAXVEX][MAXVEX];<span class="comment">//邻接矩阵</span></span><br><span class="line">    <span class="type">int</span> vexnum;             <span class="comment">//顶点数</span></span><br><span class="line">    <span class="type">int</span> edgenum;            <span class="comment">//边数</span></span><br><span class="line">    <span class="type">int</span> Visited[MAXVEX];    <span class="comment">//是否访问过</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    MGraph MyGraph;</span><br><span class="line">    MyGraph.<span class="built_in">Init</span>();</span><br><span class="line">    MyGraph.<span class="built_in">Create</span>();</span><br><span class="line">    MyGraph.<span class="built_in">Print</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    //增加顶点</span></span><br><span class="line">    <span class="comment">//    char ch;</span></span><br><span class="line">    <span class="comment">//    cout &lt;&lt; &quot;Please enter the vertex information to be added:&quot;;</span></span><br><span class="line">    <span class="comment">//    cin &gt;&gt; ch;</span></span><br><span class="line">    <span class="comment">//    MyGraph.InsertVex(ch);</span></span><br><span class="line">    <span class="comment">//    MyGraph.Print();</span></span><br><span class="line">    <span class="comment">//    //删除顶点</span></span><br><span class="line">    <span class="comment">//    cout &lt;&lt; &quot;Please enter the vertex information to be deleted:&quot;;</span></span><br><span class="line">    <span class="comment">//    cin &gt;&gt; ch;</span></span><br><span class="line">    <span class="comment">//    MyGraph.DeleteVex(ch);</span></span><br><span class="line">    <span class="comment">//    MyGraph.Print();</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//    //返回第一个邻接顶点</span></span><br><span class="line">    <span class="comment">//    cout &lt;&lt; &quot;Please enter the vertex you are looking for:&quot;;</span></span><br><span class="line">    <span class="comment">//    cin &gt;&gt; ch;</span></span><br><span class="line">    <span class="comment">//    ch = MyGraph.FirstNeighbor(ch);</span></span><br><span class="line">    <span class="comment">//    if (ch == &#x27;\0&#x27;) cout &lt;&lt; &quot;is not exist FirstNeighbor&quot; &lt;&lt; endl;</span></span><br><span class="line">    <span class="comment">//    else</span></span><br><span class="line">    <span class="comment">//        cout &lt;&lt; &quot;FirstNeighbor is: &quot; &lt;&lt; ch &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//深度优先遍历R</span></span><br><span class="line">    <span class="comment">/*cout &lt;&lt; &quot;Please enter the information of the starting point:&quot;;</span></span><br><span class="line"><span class="comment">    char ch;</span></span><br><span class="line"><span class="comment">    cin &gt;&gt; ch;*/</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;depth first traversal:&quot;</span> &lt;&lt; endl;</span><br><span class="line">    MyGraph.<span class="built_in">DFSTraverse</span>();</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//广度优先遍历</span></span><br><span class="line">    <span class="comment">//cout &lt;&lt; &quot;Please enter the information of the starting point:&quot;;</span></span><br><span class="line">    <span class="comment">//    char ch;</span></span><br><span class="line">    <span class="comment">//cin &gt;&gt; ch;</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;B first traversal:&quot;</span> &lt;&lt; endl;</span><br><span class="line">    MyGraph.<span class="built_in">BFSTraverse</span>();</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">11 13</span><br><span class="line">a b c d e f g h i j k</span><br><span class="line">0 1 1</span><br><span class="line">0 4 1</span><br><span class="line">1 5 1</span><br><span class="line">2 5 1</span><br><span class="line">2 6 1</span><br><span class="line">2 3 1</span><br><span class="line">3 6 1</span><br><span class="line">3 7 1</span><br><span class="line">5 6 1</span><br><span class="line">6 7 1</span><br><span class="line">8 9 1</span><br><span class="line">8 10 1</span><br><span class="line">9 10 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p>用Clion不能把测试全部复制进去，要一行一行复制</p>
+<p>用Visual Studio 2022就可以全部复制</p>
+<p>后续会更新的</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\27\青空の霞光数据结构与算法\" rel="bookmark">qingkongDS</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\07\07\DS408+C408lg\" rel="bookmark">DS408+C408lg</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2024/05/20/%E5%9B%BE/" title="图">https://bradtorres.github.io/2024/05/20/图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DataStructure/" rel="tag"> <i class="fa fa-tag"></i> DataStructure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/18/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9-20-1047-150/" rel="prev" title="代码随想录算法训练营第十一天-20,1047,150">
+      <i class="fa fa-chevron-left"></i> 代码随想录算法训练营第十一天-20,1047,150
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/20/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E7%AE%97%E6%B3%95%E8%AE%AD%E7%BB%83%E8%90%A5%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9-239-347-%E6%80%BB%E7%BB%93/" rel="next" title="代码随想录算法训练营第十三天-239,347,总结">
+      代码随想录算法训练营第十三天-239,347,总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%BE"><span class="nav-text">图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%9B%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C-%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5%E5%AD%98%E5%82%A8"><span class="nav-text">数据结构-图的基本操作(邻接矩阵存储)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8"><span class="nav-text">注</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

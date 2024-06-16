@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="2021CS61BWeek1and2希望能坚持下去，下面这个链接给我坚持的兴趣。 怎样学习数据结构？ 伯克利神课CS61B 总结感悟，学习指南和避坑建议 http:&#x2F;&#x2F;t.csdnimg.cn&#x2F;6egG4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021CS61BWeek1and2">
+<meta property="og:url" content="https://bradtorres.github.io/2024/05/29/2021CS61BWeek1and2/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="2021CS61BWeek1and2希望能坚持下去，下面这个链接给我坚持的兴趣。 怎样学习数据结构？ 伯克利神课CS61B 总结感悟，学习指南和避坑建议 http:&#x2F;&#x2F;t.csdnimg.cn&#x2F;6egG4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529164851171.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529164914940.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529165429175.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529165457136.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170007680.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170344972.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170441393.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170643257.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171107791.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171141488.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171413511.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171353545.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171655899.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601104101857.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601105150021.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601110854061.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601111140111.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601111448403.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601115005446.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601115241087.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601213427964.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602090858898.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602113015253.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602124146826.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602130830923.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602150159126.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602150705759.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602154320505.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602154812068.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602161250228.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602162114028.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602163651355.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602163846623.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602165524953.png">
+<meta property="article:published_time" content="2024-05-29T02:59:04.000Z">
+<meta property="article:modified_time" content="2024-06-02T13:52:54.143Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="CS61B">
+<meta property="article:tag" content="CSDIY">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529164851171.png">
+
+<link rel="canonical" href="https://bradtorres.github.io/2024/05/29/2021CS61BWeek1and2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>2021CS61BWeek1and2 | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2024/05/29/2021CS61BWeek1and2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021CS61BWeek1and2
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-05-29 10:59:04" itemprop="dateCreated datePublished" datetime="2024-05-29T10:59:04+08:00">2024-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-02 21:52:54" itemprop="dateModified" datetime="2024-06-02T21:52:54+08:00">2024-06-02</time>
+              </span>
+
+          
+            <span id="/2024/05/29/2021CS61BWeek1and2/" class="post-meta-item leancloud_visitors" data-flag-title="2021CS61BWeek1and2" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/05/29/2021CS61BWeek1and2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/05/29/2021CS61BWeek1and2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2021CS61BWeek1and2"><a href="#2021CS61BWeek1and2" class="headerlink" title="2021CS61BWeek1and2"></a>2021CS61BWeek1and2</h1><p>希望能坚持下去，下面这个链接给我坚持的兴趣。</p>
+<p>怎样学习数据结构？ 伯克利神课CS61B 总结感悟，学习指南和避坑建议</p>
+<p><a target="_blank" rel="noopener" href="http://t.csdnimg.cn/6egG4">http://t.csdnimg.cn/6egG4</a></p>
+<p>目前策略是这样</p>
+<p>优先看完<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ri421o7dS/?spm_id_from=333.999.0.0&vd_source=d84f08a0531e04d6d41c38180cce9fb5">https://www.bilibili.com/video/BV1Ri421o7dS/?spm_id_from=333.999.0.0&amp;vd_source=d84f08a0531e04d6d41c38180cce9fb5</a></p>
+<p>如果有不清楚的在看英文原版</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QP4y1u7jv/?spm_id_from=333.337.search-card.all.click&vd_source=d84f08a0531e04d6d41c38180cce9fb5">https://www.bilibili.com/video/BV1QP4y1u7jv/?spm_id_from=333.337.search-card.all.click&amp;vd_source=d84f08a0531e04d6d41c38180cce9fb5</a></p>
+<p>怎么实验室lab和家庭作业homework还不一样呢</p>
+<p>目前进度windows安装git搞完了</p>
+<p>这两个视频都是一样的，都是UCB CS 61B: Data Structures, Spring 2024</p>
+<h1 id="L1-Introduction"><a href="#L1-Introduction" class="headerlink" title="L1-Introduction"></a>L1-Introduction</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Car</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> String model;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> wheels;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Car</span><span class="params">(String m)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.model = m;</span><br><span class="line">            <span class="built_in">this</span>.wheels = <span class="number">4</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drive</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">this</span>.wheels &lt; <span class="number">4</span>) &#123;</span><br><span class="line">                System.out.println(<span class="built_in">this</span>.model + <span class="string">&quot;no go vroom&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="built_in">this</span>.model + <span class="string">&quot;go vroom&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getWheels</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.wheels;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">driveIntoDitch</span><span class="params">(<span class="type">int</span> wheelsLost)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.wheels -= wheelsLost;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Car</span> <span class="variable">c1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&quot;baoshijie&quot;</span>);</span><br><span class="line">        <span class="type">Car</span> <span class="variable">c2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Car</span>(<span class="string">&quot;falali&quot;</span>);</span><br><span class="line">        c1.drive();</span><br><span class="line">        c1.driveIntoDitch(<span class="number">1</span>);</span><br><span class="line">        c1.drive();</span><br><span class="line">        System.out.println(c2.getWheels());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="L2-Defining-and-Using-Classes"><a href="#L2-Defining-and-Using-Classes" class="headerlink" title="L2 - Defining and Using Classes"></a>L2 - Defining and Using Classes</h1><h2 id="Classes-in-Java"><a href="#Classes-in-Java" class="headerlink" title="Classes in Java"></a>Classes in Java</h2><p><code>Dog.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">makeNoise</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Bark!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>DogLauncher.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        Dog.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>static是静态修饰符，什么叫静态修饰符呢？大家都知道，在程序中任何变量或者代码都是在编译时由系统自动分配内存来存储的，而所谓静态就是指在编译后所分配的内存会一直存在，直到程序退出内存才会释放这个空间，也就是只要程序在运行，那么这块内存就会一直存在。这样做有什么意义呢？在Java程序里面，所有的东西都是对象，而对象的抽象就是类，<strong>对于一个类而言，如果要使用他的成员，那么普通情况下必须先实例化对象后，通过对象的引用才能够访问这些成员，但是用static修饰的成员可以通过类名加“.”进行直接访问。也就是你不用实例化对象，对这整个类都是通用的，CS61B原话：用static修饰，对所有的Dog都是通用的。直接通过类名加“.”进行直接访问。</strong>	</p>
+<p><code>Dog.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> weightInPounds;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Dog</span><span class="params">(<span class="type">int</span> w)</span>&#123;</span><br><span class="line">        weightInPounds = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">void</span> <span class="title function_">makeNoise</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (weightInPounds &lt; <span class="number">10</span>)</span><br><span class="line">            System.out.println(<span class="string">&quot;yipyipyip!&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (weightInPounds &lt; <span class="number">30</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Bark!&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;arooooooo!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>DogLauncher.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">d1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">100</span>);</span><br><span class="line">        d1.makeNoise();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>哇，一开始觉得他们讲Dog的例子很难理解，但是听到后面豁然开朗，这个例子贯彻讲解始终，生动的比喻脱离了干涩难懂的术语，好记好懂好理解</p>
+</blockquote>
+<p>这两种语法上都是对的，但是用那个取决于你。</p>
+<p><strong>你是喜欢有一个公正的观察者，还是喜欢特定的狗做把戏并将自己与其他狗进行比较</strong></p>
+<p>&#x2F;&#x2F;所有的狗都有相同的通用的学名，那就用static关键字<br>&#x2F;&#x2F; 这是所有狗的学名，是整个类通用的东西，而不是一个变量。对于我创建的每一只狗，他都是常数<br>&#x2F;&#x2F; 不是某一特定狗的学名.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">binomen</span> <span class="operator">=</span> <span class="string">&quot;Canis familiaris&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>Dog.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> weightInPounds;</span><br><span class="line">    <span class="comment">//所有的狗都有相同的通用的学名，那就用static关键字</span></span><br><span class="line">    <span class="comment">// 这是所有狗的学名，是整个类通用的东西，而不是一个变量。对于我创建的每一只狗，他都是常数</span></span><br><span class="line">    <span class="comment">// 不是某一特定狗的学名.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">binomen</span> <span class="operator">=</span> <span class="string">&quot;Canis familiaris&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Dog</span><span class="params">(<span class="type">int</span> w)</span> &#123;</span><br><span class="line">        weightInPounds = w;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">makeNoise</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (weightInPounds &lt; <span class="number">10</span>)</span><br><span class="line">            System.out.println(<span class="string">&quot;yipyipyip!&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (weightInPounds &lt; <span class="number">30</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Bark!&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;arooooooo!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title function_">maxDog</span><span class="params">(Dog d1, Dog d2)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (d1.weightInPounds &gt; d2.weightInPounds)</span><br><span class="line">            <span class="keyword">return</span> d1;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> d2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Dog <span class="title function_">maxDog</span><span class="params">(Dog d2)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.weightInPounds &gt; d2.weightInPounds)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> d2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>DogLauncher.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DogLauncher</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">chester</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">100</span>);</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">yusuf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">17</span>);</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">larger</span> <span class="operator">=</span> Dog.maxDog(yusuf, chester);</span><br><span class="line">        larger.makeNoise();</span><br><span class="line"></span><br><span class="line">        <span class="type">Dog</span> <span class="variable">huya</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">10</span>);</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">jaja</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>(<span class="number">170</span>);</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">larger2</span> <span class="operator">=</span> huya.maxDog(jaja);</span><br><span class="line">        larger2.makeNoise();</span><br><span class="line"></span><br><span class="line">        System.out.println(Dog.binomen);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Interactive-Debugging"><a href="#Interactive-Debugging" class="headerlink" title="Interactive Debugging"></a>Interactive Debugging</h2><p> 讲得很好，代码细节不重要，重要的是与调试器交互。就不贴代码了</p>
+<h1 id="L3-Lists-I-References-Recursion-and-Lists"><a href="#L3-Lists-I-References-Recursion-and-Lists" class="headerlink" title="L3 - Lists I:References Recursion and Lists"></a>L3 - Lists I:References Recursion and Lists</h1><p>引用递归和列表，，是不是少了一章递归的视频</p>
+<h2 id="Primitive-Types-Reference-Types-Parameter-Passing"><a href="#Primitive-Types-Reference-Types-Parameter-Passing" class="headerlink" title="Primitive Types ,Reference Types, Parameter Passing"></a>Primitive Types ,Reference Types, Parameter Passing</h2><p>Java可视化网站<a target="_blank" rel="noopener" href="https://cscircles.cemc.uwaterloo.ca/java_visualize/#mode=display">https://cscircles.cemc.uwaterloo.ca/java_visualize/#mode=display</a></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529164851171.png" alt="image-20240529164851171"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529164914940.png" alt="image-20240529164914940"></p>
+<p><strong>不是八种基本类型之一的任何东西都被称为引用类型</strong>（reference type）</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529165429175.png" alt="image-20240529165429175"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529165457136.png" alt="image-20240529165457136"></p>
+<p>当你实例化一个对象的时候，实际上是创建了对该对象的引用</p>
+<p><code>new Walrus(1000, 8.3)</code>返回内存中为海象结构体分配的空间的首地址。你可以把<code>new</code>关键字想象成返回一个数字，这个数字是在内存中的编号位，也就是地址</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170007680.png" alt="image-20240529170007680"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Walrus someWalrus;</span><br><span class="line">someWalrus = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>someWalrus</code> 是一个指针类型的变量，存放了地址，我们根据这个地址找到海象的在的位置。</p>
+<p>这里赋值为<code>NULL</code>就类似于C语言里面 <code>int *p = NULL;</code>一样</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170344972.png" alt="image-20240529170344972"></p>
+<p><code>someWalrus</code>并没有存放海象，相反，这个空间实际上存放着我的海象在内存中的位置</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170441393.png" alt="image-20240529170441393"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529170643257.png" alt="image-20240529170643257"></p>
+<p>盒子和指针表示法</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171107791.png" alt="image-20240529171107791"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171141488.png" alt="image-20240529171141488"></p>
+<p>八种类型直接放内存盒子里面，因为他们是原始类型</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171413511.png" alt="image-20240529171413511"></p>
+<p>其余类型都是引用类型</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171353545.png" alt="image-20240529171353545"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240529171655899.png" alt="image-20240529171655899"></p>
+<h2 id="Instantiation-of-Arrays"><a href="#Instantiation-of-Arrays" class="headerlink" title="Instantiation of Arrays"></a>Instantiation of Arrays</h2><blockquote>
+<p><strong>数据不是八种原始类型之一</strong></p>
+</blockquote>
+<p>停下来，，往前找作业左了</p>
+<h1 id="下面是2021Spring的课程笔记"><a href="#下面是2021Spring的课程笔记" class="headerlink" title="下面是2021Spring的课程笔记"></a>下面是2021Spring的课程笔记</h1><h1 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h1><p>24OUT表示以后24的视频非特殊情况，例如21讲的自己不懂，除非特殊情况都不看24的讲课视频</p>
+<table>
+<thead>
+<tr>
+<th align="center">VideoName</th>
+<th align="center">Done</th>
+<th align="center">warning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sp24 1.intro</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1.intro</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Discussion</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Lab1</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Project 0.intro</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">sp24 2.Defin</td>
+<td align="center">Done</td>
+<td align="center">24OUT</td>
+</tr>
+<tr>
+<td align="center">2.Defining</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2.live Q&amp;A</td>
+<td align="center">Done</td>
+<td align="center">快速扫过</td>
+</tr>
+<tr>
+<td align="center">Week1Over</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="理清课程资料的使用思路"><a href="#理清课程资料的使用思路" class="headerlink" title="理清课程资料的使用思路"></a>理清课程资料的使用思路</h2><p>懂了，如下面的图。有特地标出来的就是24年的课，没有特地标出来就是21年的课。链接是这个</p>
+<p>【2024 双语字幕🎉 | UCB CS 61B: Data Structures, Spring 2024】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1QP4y1u7jv/?p=5&share_source=copy_web&vd_source=82180e49f17daecf14bb6f246fc29cd0">https://www.bilibili.com/video/BV1QP4y1u7jv/?p=5&amp;share_source=copy_web&amp;vd_source=82180e49f17daecf14bb6f246fc29cd0</a></p>
+<p>但是呢，他很多21的课没做双语字幕，自动翻译的中文字幕差太多了。所以看21的课还是用这个视频</p>
+<p>【【双语字幕】CS 61B 数据结构 | 整合版 | UCB Data Structure Spring 2021 | 转码必看 Java 算法 Leetcode】 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1q3411V7rS/?p=2&share_source=copy_web&vd_source=82180e49f17daecf14bb6f246fc29cd0">https://www.bilibili.com/video/BV1q3411V7rS/?p=2&amp;share_source=copy_web&amp;vd_source=82180e49f17daecf14bb6f246fc29cd0</a></p>
+<p>但是目录和检查各个作业等等还是用第一个视频的标题把。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601104101857.png" alt="image-20240601104101857"></p>
+<h2 id="Project-0-intro"><a href="#Project-0-intro" class="headerlink" title="Project 0.intro"></a>Project 0.intro</h2><p>有人带着看Proj 0的文档帮你在旁边讲解还是好很多，边看文档边听他讲吧。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601105150021.png" alt="image-20240601105150021"></p>
+<p>看完了，每一个都尝试五分钟，如果不会就去看别人的讲解。</p>
+<h2 id="2-Defining"><a href="#2-Defining" class="headerlink" title="2.Defining"></a>2.Defining</h2><p>非静态变量记忆成实例变量</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601110854061.png" alt="image-20240601110854061"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601111140111.png" alt="image-20240601111140111"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601111448403.png" alt="image-20240601111448403"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601115005446.png" alt="image-20240601115005446"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601115241087.png" alt="image-20240601115241087"></p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240601213427964.png" alt="image-20240601213427964"></p>
+<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><p>24OUT表示以后24的视频非特殊情况，例如21讲的自己不懂，除非特殊情况都不看24的讲课视频。翻译成中文的视频的标题为我下面的VideoName，也尝试过写成官方网站上英文的样子，但是对学习的效率有较大的影响，所以还是写成中文。</p>
+<table>
+<thead>
+<tr>
+<th align="center">VideoName</th>
+<th align="center">Done</th>
+<th align="center">warning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sp24 6.测试</td>
+<td align="center">24OUT</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3.测试</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3.现场问答</td>
+<td align="center">扫过</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">sp24 3.列表1</td>
+<td align="center">24OUT</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4.列表1</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4.现场问答</td>
+<td align="center">扫过</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">sp24 4.列表2</td>
+<td align="center">24OUT</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5.列表2</td>
+<td align="center">Done</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5.现场问答</td>
+<td align="center">扫过</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">sp24</td>
+<td align="center">24OUT</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6.清单3</td>
+<td align="center">ing</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6.现场问答</td>
+<td align="center">扫过</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>还是尽量模拟他们的表格，来一个一个完成任务吧</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>Reading</strong></th>
+<th align="center"><strong>Lecture</strong></th>
+<th align="center"><strong>Discussion</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://joshhug.gitbooks.io/hug61b/content/chap3/chap31.html">3.1</a>正在看，  Optional不看</td>
+<td align="center">\3. Testing<br/>[<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=j12X417J85g&list=PL8FaHk7qbOD7RM4xH3tTQgYhNsDt2Gt7o&index=1">video</a>]不看 ‌[<a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1Aop1woPUquEkAamUj3CitvX4UsPZArBUsjhZnId4C-U/edit?usp=sharing">slides</a>]看了 ‌[<a target="_blank" rel="noopener" href="https://sp21.datastructur.es/materials/lectures/lec7/lec7">guide</a>] ‌[<a target="_blank" rel="noopener" href="https://youtu.be/51YjFL6nBFo">live Q&amp;A</a>] ‌ ‌</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://joshhug.gitbooks.io/hug61b/content/chap2/chap21.html">2.1</a></td>
+<td align="center">\4. References, Recursion, and Lists<br/>[<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD7lprwG_xdIMLrwibZDi-Ll">video</a>] ‌[<a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1HQqHSA-h1vRHeResuxmDBGNQACkmxpUBHF3m4-oKU_Q/edit?usp=sharing">slides</a>] ‌[<a target="_blank" rel="noopener" href="https://sp21.datastructur.es/materials/lectures/lec3/lec3.html">guide</a>] ‌[<a target="_blank" rel="noopener" href="https://youtu.be/20ZhW106838">live Q&amp;A</a>] ‌</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://joshhug.gitbooks.io/hug61b/content/chap2/chap22.html">2.2</a></td>
+<td align="center">\5. SLLists, Nested Classes, Sentinel Nodes<br/>[<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD4cp06tWA8i9m20pQLvcgE7">video</a>] ‌[<a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/1q6p0spGPmj8rFrQnWKp_QZJRFHg-IkHE1L9BfZc0f0Q/edit?usp=sharing">slides</a>] ‌[<a target="_blank" rel="noopener" href="https://sp21.datastructur.es/materials/lectures/lec4/lec4">guide</a>] ‌[<a target="_blank" rel="noopener" href="https://youtu.be/46DJBZC5Yvc">live Q&amp;A</a>] ‌</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><strong>Discussion</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602090858898.png" alt="image-20240602090858898"></p>
+<h2 id="3-Testing"><a href="#3-Testing" class="headerlink" title="3_Testing"></a>3_Testing</h2><blockquote>
+<p><strong>Important note:</strong> You may be asking “Why are you looping through the entire array? Why don’t you just check if the arrays are equal using <code>==</code>? “. The reason is, when we test for equality of two objects, we cannot simply use the <code>==</code> operator. The <code>==</code> operator compares the literal bits in the memory boxes, e.g. <code>input == expected</code> would test whether or not the addresses of <code>input</code> and <code>expected</code> are the same, not whether the values in the arrays are the same. Instead, we used a loop in <code>testSort</code>, and print out the first mismatch. You could also use the built-in method <code>java.util.Arrays.equals</code> instead of a loop.</p>
+</blockquote>
+<p>TestSort.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestSort</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testSort</span><span class="params">()</span> &#123;</span><br><span class="line">        String[] input = &#123;<span class="string">&quot;i&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line">        String[] expected = &#123;<span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;i&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        Sort.sort(input);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; input.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!input[i].equals(expected[i])) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Mismatch in position &quot;</span> + i + <span class="string">&quot;, expected: &quot;</span> + expected[i] + <span class="string">&quot;, but got :&quot;</span> + input[i]);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        testSort();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Intellij IDEA junit 使用之org.junit爆红</p>
+<p>参考这篇博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_31424825/article/details/84873575">https://blog.csdn.net/qq_31424825/article/details/84873575</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestSort</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">testSort</span><span class="params">()</span> &#123;</span><br><span class="line">        String[] input = &#123;<span class="string">&quot;i&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line">        String[] expected = &#123;<span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;i&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        Sort.sort(input);</span><br><span class="line"></span><br><span class="line">        org.junit.Assert.assertArrayEquals(expected, input);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        testSort();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一个伟大的事情，他这个再查看递归里面的堆栈的可视化，，真是一个伟大的插件</p>
+<p>每一层的start和smallestIndex都显示出来。这样子递归就清楚多了。</p>
+<p>虽然IDEA有调试的图形化插件Visualizer但是Clion好像没有</p>
+<p>在windows下有vistual studio，针对<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=opencv&spm=1001.2101.3001.7020">opencv</a>有image watch，在ubuntu下用Clion插件Image Watch要收费，遂研究OpenImageDebugger与CLion问题及在Clion中调试方法</p>
+<p>搜了一搜，，感觉Clion是真没有，不过无所谓了。及时止损。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602113015253.png" alt="image-20240602113015253"></p>
+<p>用</p>
+<p><code>import org.junit.Test;</code></p>
+<p><code>import static org.junit.Assert.*;</code></p>
+<p>来简化代码</p>
+<p>事实上，这种方法帮助你省略了，<code>main</code>函数，你不必自己在main函数里面依次调用每一个testXXX测试方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestSort</span> &#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSort</span><span class="params">()</span> &#123;</span><br><span class="line">        String[] input = &#123;<span class="string">&quot;i&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line">        String[] expected = &#123;<span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;i&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        Sort.sort(input);</span><br><span class="line"></span><br><span class="line">        assertArrayEquals(expected, input);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Test the Sort.findSmallest method.*/</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testfindSmallest</span><span class="params">()</span> &#123;</span><br><span class="line">        String[] input = &#123;<span class="string">&quot;i&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line">        <span class="type">int</span> <span class="variable">expected</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">actual</span> <span class="operator">=</span> Sort.findSmallest(input, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        assertEquals(expected, actual);</span><br><span class="line">        String[] input2 = &#123;<span class="string">&quot;there&quot;</span>, <span class="string">&quot;are&quot;</span>, <span class="string">&quot;many&quot;</span>, <span class="string">&quot;pigs&quot;</span>&#125;;</span><br><span class="line">        <span class="type">int</span> <span class="variable">expected2</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">actual2</span> <span class="operator">=</span> Sort.findSmallest(input2, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        assertEquals(expected2, actual2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    Test the Sort.swap method.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSwap</span><span class="params">()</span> &#123;</span><br><span class="line">        String[] input = &#123;<span class="string">&quot;i&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;an&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line">        String[] expected = &#123;<span class="string">&quot;an&quot;</span>, <span class="string">&quot;have&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;egg&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">        Sort.swap(input, a, b);</span><br><span class="line"></span><br><span class="line">        assertArrayEquals(expected, input);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-References-Recursion-and-Lists"><a href="#4-References-Recursion-and-Lists" class="headerlink" title="4_References, Recursion, and Lists"></a>4_References, Recursion, and Lists</h2><h3 id="Primitive-Types"><a href="#Primitive-Types" class="headerlink" title="Primitive Types"></a>Primitive Types</h3><p>前半部分看过，就在上面24年的笔记上面</p>
+<p>想起来一件事情， 如果自己还觉得无法理解，或者觉得字幕翻译的不够好的话，，可以在看对应章节的24的中文ai配音视频。它的字幕是精心翻译校对过的，同时有中文声音让人也更加专注</p>
+<h3 id="Parameter-Passing"><a href="#Parameter-Passing" class="headerlink" title="Parameter Passing"></a>Parameter Passing</h3><p><a target="_blank" rel="noopener" href="https://cscircles.cemc.uwaterloo.ca/java_visualize/#mode=display">Java Visualizer (uwaterloo.ca)</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PollQuestions</span> &#123;</span><br><span class="line"><span class="number">2</span>	   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"><span class="number">3</span>	      <span class="type">Walrus</span> <span class="variable">walrus</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Walrus</span>(<span class="number">3500</span>, <span class="number">10.5</span>);</span><br><span class="line"><span class="number">4</span>	      <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">9</span>;</span><br><span class="line"><span class="number">5</span>	      </span><br><span class="line"><span class="number">6</span>	      doStuff(walrus, x);</span><br><span class="line"><span class="number">7</span>	      System.out.println(walrus);</span><br><span class="line"><span class="number">8</span>	      System.out.println(x);</span><br><span class="line"><span class="number">9</span>	   &#125;</span><br><span class="line"><span class="number">10</span>	   </span><br><span class="line"><span class="number">11</span>	   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">doStuff</span><span class="params">(Walrus W, <span class="type">int</span> x)</span> &#123;</span><br><span class="line"><span class="number">12</span>	      W.weight = W.weight - <span class="number">100</span>;</span><br><span class="line"><span class="number">13</span>	      x = x - <span class="number">5</span>;</span><br><span class="line"><span class="number">14</span>	   &#125;</span><br><span class="line"><span class="number">15</span>	   </span><br><span class="line"><span class="number">16</span>	   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Walrus</span> &#123;</span><br><span class="line"><span class="number">17</span>	      <span class="keyword">public</span> <span class="type">int</span> weight;</span><br><span class="line"><span class="number">18</span>	      <span class="keyword">public</span> <span class="type">double</span> tuskSize;</span><br><span class="line"><span class="number">19</span>	      </span><br><span class="line"><span class="number">20</span>	      <span class="keyword">public</span> <span class="title function_">Walrus</span><span class="params">(<span class="type">int</span> w, <span class="type">double</span> ts)</span> &#123;</span><br><span class="line"><span class="number">21</span>	         weight = w;</span><br><span class="line"><span class="number">22</span>	         tuskSize = ts;</span><br><span class="line"><span class="number">23</span>	      &#125;</span><br><span class="line"><span class="number">24</span>	</span><br><span class="line"><span class="number">25</span>	      <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="number">26</span>	         <span class="keyword">return</span> String.format(<span class="string">&quot;weight: %d, tusk size: %.2f&quot;</span>, weight, tuskSize);</span><br><span class="line"><span class="number">27</span>	      &#125;</span><br><span class="line"><span class="number">28</span>	   &#125;</span><br><span class="line"><span class="number">29</span>	&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Instantiation-of-Arrays-1"><a href="#Instantiation-of-Arrays-1" class="headerlink" title="Instantiation of Arrays"></a>Instantiation of Arrays</h3><p>数组也属于非八种原始变量，因此数组名里面放着第一个数组元素的地址。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602124146826.png" alt="image-20240602124146826"></p>
+<h3 id="IniList-and-Linked-Data-Structures-See-webcast-or-code-directory"><a href="#IniList-and-Linked-Data-Structures-See-webcast-or-code-directory" class="headerlink" title="IniList and Linked Data Structures(See webcast or code directory)"></a>IniList and Linked Data Structures(See webcast or code directory)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntList</span><span class="params">(<span class="type">int</span> f, IntList r)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.first = f;</span><br><span class="line">        <span class="built_in">this</span>.rest = r;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//这好像相当于链表的头插法</span></span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">15</span>, <span class="literal">null</span>);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">10</span>, L);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">5</span>, L);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602130830923.png" alt="image-20240602130830923"></p>
+<p>t这课堂作业要不要做，是课上直接在自己的电脑上面做呢，，还是git clone他的课程代码呢？？</p>
+<p>课上做得了。自己又不是不会，之前写过好多类似的代码，这个不用太严肃 的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> IntList <span class="title function_">incrList</span><span class="params">(IntList L, <span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="comment">//用dummyNode处理尾插法可以避免分类讨论</span></span><br><span class="line">        <span class="comment">//Q用尾插法，事实上Q就是dummyNode.rest,L从前往后遍历</span></span><br><span class="line">        <span class="type">IntList</span> <span class="variable">dummyNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(-<span class="number">1</span>, <span class="literal">null</span>);</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">tailQ</span> <span class="operator">=</span> dummyNode;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">cur</span> <span class="operator">=</span> L;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="type">IntList</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(cur.first + x, <span class="literal">null</span>);</span><br><span class="line">            tailQ.rest = newNode;</span><br><span class="line">            tailQ = newNode;</span><br><span class="line">            cur = cur.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummyNode.rest;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602150159126.png" alt="image-20240602150159126"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> IntList <span class="title function_">dincrList</span><span class="params">(IntList L, <span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">cur</span> <span class="operator">=</span> L;</span><br><span class="line">        <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">            cur.first += x;</span><br><span class="line">            cur = cur.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>  L;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602150705759.png" alt="image-20240602150705759"></p>
+<h2 id="5-SLLists-Nested-Classes-Sentinel-Notes"><a href="#5-SLLists-Nested-Classes-Sentinel-Notes" class="headerlink" title="5_SLLists, Nested Classes, Sentinel Notes"></a>5_SLLists, Nested Classes, Sentinel Notes</h2><p>nest，嵌套的意思</p>
+<h3 id="SLList-A-Singly-Linked-List-单链表"><a href="#SLList-A-Singly-Linked-List-单链表" class="headerlink" title="SLList: A Singly-Linked List.单链表"></a><em>SLList</em>: A Singly-Linked List.单链表</h3><p><code>IntNode.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">    <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.item = i;</span><br><span class="line">        <span class="built_in">this</span>.next = n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>SLList.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InsufficientResourcesException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="comment">//理解成L链表只存放着第一个结点的地址，也就是L链表里面的元素就是一个指针变量，放着第一个结点的地址</span></span><br><span class="line">    <span class="comment">// 这就是C++49那个花生老师的写法，一模一样，，运气太好了。自己越是学习，感觉运气就越好</span></span><br><span class="line">    <span class="keyword">public</span> IntNode first;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Adds x to the front of the list*/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line"><span class="comment">//        IntNode newNode = new IntNode(x, null);</span></span><br><span class="line"><span class="comment">//        newNode.next = first;</span></span><br><span class="line"><span class="comment">//        first = newNode;</span></span><br><span class="line">        <span class="comment">//上面三行在Java里面可以写成一行代码，真的难绷</span></span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, first);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getFirst</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.first.item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">15</span>);</span><br><span class="line">        L.addFirst(<span class="number">10</span>);</span><br><span class="line">        L.addFirst(<span class="number">5</span>);</span><br><span class="line">        System.out.println(L.getFirst());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602154320505.png" alt="image-20240602154320505"></p>
+<h3 id="Naked-Linked-Lists-IntList-VS-SLLists"><a href="#Naked-Linked-Lists-IntList-VS-SLLists" class="headerlink" title="Naked Linked Lists (IntList) VS SLLists"></a>Naked Linked Lists (IntList) VS SLLists</h3><p>肯定是下面的 好，，大家都约定俗成了、</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602154812068.png" alt="image-20240602154812068"></p>
+<p>吓死我了，，还以为自己写错 了。。原来只是同一事物的另一种可视化 </p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602161250228.png" alt="image-20240602161250228"></p>
+<p>原来私有静态结构是这样用的 。private static</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602162114028.png" alt="image-20240602162114028"></p>
+<p>为了递归的求他的大小，不得不采用这种新的编程。创建private static类型，它使用神的语言（就是说采用裸露的数据结构，naked Linked Lists)</p>
+<p>贴上我的代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InsufficientResourcesException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.item = i;</span><br><span class="line">            <span class="built_in">this</span>.next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//理解成L链表只存放着第一个结点的地址，也就是L链表里面的元素就是一个指针变量，放着第一个结点的地址</span></span><br><span class="line">    <span class="comment">// 这就是C++49那个花生老师的写法，一模一样，，运气太好了。自己越是学习，感觉运气就越好</span></span><br><span class="line">    <span class="keyword">private</span> IntNode first;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Adds x to the front of the list*/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line"><span class="comment">//        IntNode newNode = new IntNode(x, null);</span></span><br><span class="line"><span class="comment">//        newNode.next = first;</span></span><br><span class="line"><span class="comment">//        first = newNode;</span></span><br><span class="line">        <span class="comment">//上面三行在Java里面可以写成一行代码，真的难绷</span></span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, first);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.first.item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.first == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//空表</span></span><br><span class="line">            <span class="built_in">this</span>.addFirst(x);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">IntNode</span> <span class="variable">tail</span> <span class="operator">=</span> <span class="built_in">this</span>.first;</span><br><span class="line">            <span class="keyword">while</span> (tail.next != <span class="literal">null</span>) &#123;</span><br><span class="line">                tail = tail.next;</span><br><span class="line">            &#125;</span><br><span class="line">            tail.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line"><span class="comment">//tail = tail.next;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Returns the size of the list that starts at IntNode p.*/</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">(IntNode p)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (p.next == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(p.next);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> size(<span class="built_in">this</span>.first);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sizeNoRecursion</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">cnt</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> <span class="built_in">this</span>.first;</span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cnt;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">15</span>);</span><br><span class="line">        L.addFirst(<span class="number">10</span>);</span><br><span class="line">        L.addFirst(<span class="number">5</span>);</span><br><span class="line">        L.addLast(<span class="number">20</span>);</span><br><span class="line">        System.out.println(L.getFirst());</span><br><span class="line">        System.out.println(L.size());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>加一个size变量，求size的时候，时间复杂度最低。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602163651355.png" alt="image-20240602163651355"></p>
+<p>这个教授说SSList的优势是能够实例化一个空列表，是吗？？</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602163846623.png" alt="image-20240602163846623"></p>
+<p>他最终还是将了，，他又要写创建空表，，又要写尾插法还不带判断空表的情况，果然他还是讲了这部分的内容。</p>
+<p>代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.first == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">//空表</span></span><br><span class="line">            <span class="comment">//不能再调用addFirst()函数，因为size在这儿函数里面也会++，，最终会导致size＋2</span></span><br><span class="line"><span class="comment">//            this.addFirst(x);</span></span><br><span class="line">            <span class="built_in">this</span>.first =  <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="type">IntNode</span> <span class="variable">tail</span> <span class="operator">=</span> <span class="built_in">this</span>.first;</span><br><span class="line">            <span class="keyword">while</span> (tail.next != <span class="literal">null</span>) &#123;</span><br><span class="line">                tail = tail.next;</span><br><span class="line">            &#125;</span><br><span class="line">            tail.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line"><span class="comment">//tail = tail.next;</span></span><br><span class="line">        &#125;</span><br><span class="line">        size++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后开始讲dummyNode，他这里了叫sentinel Nodes，哨兵结点</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/code/PKUFlyingPig/image-20240602165524953.png" alt="image-20240602165524953"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.naming.InsufficientResourcesException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.item = i;</span><br><span class="line">            <span class="built_in">this</span>.next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//理解成L链表只存放着第一个结点的地址，也就是L链表里面的元素就是一个指针变量，放着第一个结点的地址</span></span><br><span class="line">    <span class="comment">// 这就是C++49那个花生老师的写法，一模一样，，运气太好了。自己越是学习，感觉运气就越好</span></span><br><span class="line"><span class="comment">//    private IntNode first;</span></span><br><span class="line">    <span class="keyword">private</span> IntNode sentinel;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Create an empty SLList</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">63</span>, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">63</span>, <span class="literal">null</span>);</span><br><span class="line">        sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Adds x to the front of the list*/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line"><span class="comment">//        IntNode newNode = new IntNode(x, null);</span></span><br><span class="line"><span class="comment">//        newNode.next = first;</span></span><br><span class="line"><span class="comment">//        first = newNode;</span></span><br><span class="line">        <span class="comment">//上面三行在Java里面可以写成一行代码，真的难绷</span></span><br><span class="line">        sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, sentinel.next);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getFirst</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.sentinel.next.item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> sentinel;</span><br><span class="line">        <span class="keyword">while</span> (p.next != <span class="literal">null</span>) &#123;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        p.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Returns the size of the list that starts at IntNode p.*/</span></span><br><span class="line"><span class="comment">//    private static int size(IntNode p) &#123;</span></span><br><span class="line"><span class="comment">//        if (p.next == null) return 1;</span></span><br><span class="line"><span class="comment">//        return 1 + size(p.next);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.size;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    public int sizeNoRecursion() &#123;</span></span><br><span class="line"><span class="comment">//        int cnt = 0;</span></span><br><span class="line"><span class="comment">//        IntNode p = this.first;</span></span><br><span class="line"><span class="comment">//        while (p != null) &#123;</span></span><br><span class="line"><span class="comment">//            cnt++;</span></span><br><span class="line"><span class="comment">//            p = p.next;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//        return cnt;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>();</span><br><span class="line"><span class="comment">//        L.addFirst(10);</span></span><br><span class="line"><span class="comment">//        L.addFirst(5);</span></span><br><span class="line">        L.addLast(<span class="number">20</span>);</span><br><span class="line"><span class="comment">//        System.out.println(L.getFirst());</span></span><br><span class="line">        System.out.println(L.size());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>不变量的好处。例如sentinel就是一种不变量，保证永远不为空</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\29\2021CS61B-LabsANDHWs\" rel="bookmark">2021CS61B-LabsANDHWs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\2021CS61BWeek3and4\" rel="bookmark">2021CS61BWeek3and4</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CS61A-Structure-and-Interpretation-of-Computer-Programs\" rel="bookmark">CS61A-Structure-and-Interpretation-of-Computer-Programs</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CS50\" rel="bookmark">CS50</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\06\02\CMU-CS15213-CSAPP\" rel="bookmark">CMU CS15213: CSAPP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\31\MIT-Missing-Semester\" rel="bookmark">MIT-Missing-Semester</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2024\05\31\Coursera-Algorithms-I-II\" rel="bookmark">Coursera: Algorithms I & II</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2024/05/29/2021CS61BWeek1and2/" title="2021CS61BWeek1and2">https://bradtorres.github.io/2024/05/29/2021CS61BWeek1and2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CS61B/" rel="tag"> <i class="fa fa-tag"></i> CS61B</a>
+              <a href="/tags/CSDIY/" rel="tag"> <i class="fa fa-tag"></i> CSDIY</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/05/28/MIT6-006-1-Algorithmic-Thinking-Peak-Finding-%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%EF%BC%8C%E5%B3%B0%E5%80%BC%E5%AF%BB%E6%89%BE/" rel="prev" title="MIT6.006 1. Algorithmic Thinking, Peak Finding 算法思维，峰值寻找">
+      <i class="fa fa-chevron-left"></i> MIT6.006 1. Algorithmic Thinking, Peak Finding 算法思维，峰值寻找
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/05/29/2021CS61B-LabsANDHWs/" rel="next" title="2021CS61B-LabsANDHWs">
+      2021CS61B-LabsANDHWs <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2021CS61BWeek1and2"><span class="nav-text">2021CS61BWeek1and2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L1-Introduction"><span class="nav-text">L1-Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L2-Defining-and-Using-Classes"><span class="nav-text">L2 - Defining and Using Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Classes-in-Java"><span class="nav-text">Classes in Java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interactive-Debugging"><span class="nav-text">Interactive Debugging</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L3-Lists-I-References-Recursion-and-Lists"><span class="nav-text">L3 - Lists I:References Recursion and Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Primitive-Types-Reference-Types-Parameter-Passing"><span class="nav-text">Primitive Types ,Reference Types, Parameter Passing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation-of-Arrays"><span class="nav-text">Instantiation of Arrays</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF2021Spring%E7%9A%84%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0"><span class="nav-text">下面是2021Spring的课程笔记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week1"><span class="nav-text">Week1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E6%B8%85%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99%E7%9A%84%E4%BD%BF%E7%94%A8%E6%80%9D%E8%B7%AF"><span class="nav-text">理清课程资料的使用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-0-intro"><span class="nav-text">Project 0.intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Defining"><span class="nav-text">2.Defining</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Week2"><span class="nav-text">Week2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Testing"><span class="nav-text">3_Testing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-References-Recursion-and-Lists"><span class="nav-text">4_References, Recursion, and Lists</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Primitive-Types"><span class="nav-text">Primitive Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameter-Passing"><span class="nav-text">Parameter Passing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Instantiation-of-Arrays-1"><span class="nav-text">Instantiation of Arrays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IniList-and-Linked-Data-Structures-See-webcast-or-code-directory"><span class="nav-text">IniList and Linked Data Structures(See webcast or code directory)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-SLLists-Nested-Classes-Sentinel-Notes"><span class="nav-text">5_SLLists, Nested Classes, Sentinel Notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SLList-A-Singly-Linked-List-%E5%8D%95%E9%93%BE%E8%A1%A8"><span class="nav-text">SLList: A Singly-Linked List.单链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Naked-Linked-Lists-IntList-VS-SLLists"><span class="nav-text">Naked Linked Lists (IntList) VS SLLists</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>

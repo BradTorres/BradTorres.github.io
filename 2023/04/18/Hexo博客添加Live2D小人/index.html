@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+  
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ukelele.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/ukelele.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=EB Garamond:300,300italic,400,400italic,700,700italic|Cinzel Decorative:300,300italic,400,400italic,700,700italic|JetBrains Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<link href="https://fonts.loli.net/css?family=Noto+Serif+SC|Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"bradtorres.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="摘要通过hexo-helper-live2d插件给自己的博客添加一个小人。 小白入门：hexo 的官方是支持看板娘的，已经封装好了插件，但只是模型，不能说话、不能换装、功能较少。 大神水平：功能齐全。能说话、能换装、能玩游戏、能拍照、还能自定义。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo博客添加Live2D小人">
+<meta property="og:url" content="https://bradtorres.github.io/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/index.html">
+<meta property="og:site_name" content="Serendipity">
+<meta property="og:description" content="摘要通过hexo-helper-live2d插件给自己的博客添加一个小人。 小白入门：hexo 的官方是支持看板娘的，已经封装好了插件，但只是模型，不能说话、不能换装、功能较少。 大神水平：功能齐全。能说话、能换装、能玩游戏、能拍照、还能自定义。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image002.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image004.png">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image005.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image006.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image007.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image008.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image009.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image010.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image011.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image012.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image013.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image014.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image015.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image016.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image017.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image018.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image019.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image020.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image021.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image022.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image023.gif">
+<meta property="og:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image024.png">
+<meta property="article:published_time" content="2023-04-18T10:58:41.000Z">
+<meta property="article:modified_time" content="2023-04-29T07:46:13.878Z">
+<meta property="article:author" content="BradTorres">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image002.png">
+
+<link rel="canonical" href="https://bradtorres.github.io/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style><style>
+#needsharebutton-float {
+  bottom: 88px;
+  cursor: pointer;
+  left: -8px;
+  position: fixed;
+  z-index: 9999;
+}
+#needsharebutton-float .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 4px;
+  padding: 0 10px 0 14px;
+}
+</style>
+
+  <title>Hexo博客添加Live2D小人 | Serendipity</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Serendipity" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Serendipity</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/links/" rel="section"><i class="fa fa-calendar fa-fw"></i>友链</a>
+
+  </li>
+        <li class="menu-item menu-item-hexoblog">
+
+    <a href="/HexoBlog/" rel="section"><i class="fa fa-calendar fa-fw"></i>博客美化专题</a>
+
+  </li>
+        <li class="menu-item menu-item-technology">
+
+    <a href="/technology/" rel="section"><i class="fa fa-desktop fa-fw"></i>技术</a>
+
+  </li>
+        <li class="menu-item menu-item-neu-related">
+
+    <a href="/neu-related/" rel="section"><i class="fa fa-graduation-cap fa-fw"></i>neu相关</a>
+
+  </li>
+        <li class="menu-item menu-item-jottings-in-sickbed">
+
+    <a href="/Jottings-in-Sickbed/" rel="section"><i class="fa fa-bed fa-fw"></i>病隙碎笔</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/BradTorres" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://bradtorres.github.io/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="BradTorres">
+      <meta itemprop="description" content="乾坤已定，你我皆是JOKER">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Serendipity">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo博客添加Live2D小人
+        </h1>
+
+        <div class="post-meta">
+
+  
+  
+  
+
+  
+  
+  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-18 18:58:41" itemprop="dateCreated datePublished" datetime="2023-04-18T18:58:41+08:00">2023-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-29 15:46:13" itemprop="dateModified" datetime="2023-04-29T15:46:13+08:00">2023-04-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo博客添加Live2D小人" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>通过<code>hexo-helper-live2d</code>插件给自己的博客添加一个小人。</p>
+<p>小白入门：hexo 的官方是支持看板娘的，已经封装好了插件，但只是模型，不能说话、不能换装、功能较少。</p>
+<p>大神水平：功能齐全。能说话、能换装、能玩游戏、能拍照、还能自定义。</p>
+<span id="more"></span>
+
+<h1 id="Hexo博客添加Live2D小人"><a href="#Hexo博客添加Live2D小人" class="headerlink" title="Hexo博客添加Live2D小人"></a>Hexo博客添加Live2D小人</h1><p>通过<code>hexo-helper-live2d</code>插件给自己的博客添加一个小人，最后的成果图如下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image002.png"></p>
+<h2 id="小白入门"><a href="#小白入门" class="headerlink" title="小白入门"></a>小白入门</h2><h3 id="首先安装插件"><a href="#首先安装插件" class="headerlink" title="首先安装插件"></a>首先安装插件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+<p>如果你的npm出现依赖问题 vulnerabilities 错误，那么可以通过降低npm版本，但是如果你不想降低又无法解决依赖问题，那么建议你关闭audit报错，当个鸵鸟，眼不见心不烦。</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image004.png"></p>
+<p>（本人就选择了鸵鸟对策，把头埋进沙地里面，什么也看不见😂）</p>
+<p>选择你喜欢的模型。这里是<a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models">模型仓库</a>，这里是各个<a target="_blank" rel="noopener" href="https://blog.csdn.net/wang_123_zy/article/details/87181892">模型的展示</a></p>
+<p>我选择的是白猫模型，也就是<code>live2d-widget-model-tororo</code></p>
+<h3 id="可供选择模型"><a href="#可供选择模型" class="headerlink" title="可供选择模型"></a>可供选择模型</h3><p>live2d-widget-model-chitose</p>
+<p>live2d-widget-model-epsilon2_1</p>
+<p>live2d-widget-model-gf</p>
+<p>live2d-widget-model-haru&#x2F;01 (use npm install –save live2d-widget-model-haru)</p>
+<p>live2d-widget-model-haru&#x2F;02 (use npm install –save live2d-widget-model-haru)</p>
+<p>live2d-widget-model-haruto</p>
+<p>live2d-widget-model-hibiki</p>
+<p>live2d-widget-model-hijiki</p>
+<p>live2d-widget-model-izumi</p>
+<p>live2d-widget-model-koharu</p>
+<p>live2d-widget-model-miku</p>
+<p>live2d-widget-model-ni-j</p>
+<p>live2d-widget-model-nico</p>
+<p>live2d-widget-model-nietzsche</p>
+<p>live2d-widget-model-nipsilon</p>
+<p>live2d-widget-model-nito</p>
+<p>live2d-widget-model-shizuku</p>
+<p>live2d-widget-model-tororo</p>
+<p>live2d-widget-model-tsumiki</p>
+<p>live2d-widget-model-unitychan</p>
+<p>live2d-widget-model-wanko</p>
+<p>live2d-widget-model-z16</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-&lt;你喜欢的模型名字&gt;</span><br></pre></td></tr></table></figure>
+
+<p>复制你喜欢的模型名字：</p>
+<p>Epsilon2.1</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image005.gif"></p>
+<p>Gantzert_Felixander</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image006.gif"></p>
+<p>haru</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image007.gif"></p>
+<p>miku</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image008.gif"></p>
+<p>ni-j</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image009.gif"></p>
+<p>nico</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image010.gif"></p>
+<p>nietzche</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image011.gif"></p>
+<p>nipsilon</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image012.gif"></p>
+<p>nito</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image013.gif"></p>
+<p>shizuku</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image014.gif"></p>
+<p>tsumiki</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image015.gif"></p>
+<p>wanko</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image016.gif"></p>
+<p>z16</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image017.gif"></p>
+<p>hibiki</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image018.gif"></p>
+<p>koharu</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image019.gif"></p>
+<p>haruto</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image020.gif"></p>
+<p>Unitychan</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image021.gif"></p>
+<p>tororo</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image022.gif"></p>
+<p>hijiki</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image023.gif"></p>
+<p>安装好模型后，在 hexo 的配置文件<code>_config.yml</code>中添加如下配置，详细配置可以参考<a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md">文档</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">live2d</span>:</span><br><span class="line"> <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line"> <span class="attr">pluginRootPath</span>: live2dw/ # <span class="title class_">Root</span> path <span class="keyword">of</span> plugin to be on the site (<span class="title class_">Relative</span>)</span><br><span class="line"> <span class="attr">pluginJsPath</span>: lib/ # <span class="title class_">JavaScript</span> path related to plugin<span class="string">&#x27;s root (Relative)</span></span><br><span class="line"><span class="string"> pluginModelPath: assets/ # Relative model path related to plugin&#x27;</span>s root (<span class="title class_">Relative</span>)</span><br><span class="line"> <span class="attr">scriptFrom</span>: local # <span class="title class_">Default</span></span><br><span class="line"> <span class="attr">tagMode</span>: <span class="literal">false</span> # <span class="title class_">Whether</span> only to replace live2d tag instead <span class="keyword">of</span> inject to all pages</span><br><span class="line"> <span class="attr">log</span>: <span class="literal">false</span> # <span class="title class_">Whether</span> to show logs <span class="keyword">in</span> <span class="variable language_">console</span></span><br><span class="line"> <span class="attr">model</span>:</span><br><span class="line">  <span class="attr">use</span>: live2d-widget-model-tororo # npm-<span class="variable language_">module</span> package name</span><br><span class="line">  <span class="attr">scale</span>: <span class="number">1</span></span><br><span class="line">  <span class="attr">hHeadPos</span>: <span class="number">0.5</span></span><br><span class="line">  <span class="attr">vHeadPos</span>: <span class="number">0.618</span></span><br><span class="line"> <span class="attr">display</span>:</span><br><span class="line">  <span class="attr">superSample</span>: <span class="number">2</span></span><br><span class="line">  <span class="attr">width</span>: <span class="number">150</span></span><br><span class="line">  <span class="attr">height</span>: <span class="number">300</span></span><br><span class="line">  <span class="attr">position</span>: left</span><br><span class="line">  <span class="attr">hOffset</span>: <span class="number">150</span></span><br><span class="line">  <span class="attr">vOffset</span>: -<span class="number">10</span></span><br><span class="line"> <span class="attr">mobile</span>:</span><br><span class="line">  <span class="attr">show</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">scale</span>: <span class="number">0.05</span></span><br><span class="line"> <span class="attr">react</span>:</span><br><span class="line">  <span class="attr">opacityDefault</span>: <span class="number">0.7</span></span><br><span class="line">  <span class="attr">opacityOnHover</span>: <span class="number">0.2</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后<code>hexo clean &amp; hexo g &amp;hexo s -p 5555</code>然后<code>hexo d</code>就可以在网站上看到你的看板娘了</p>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="position-left-不生效"><a href="#position-left-不生效" class="headerlink" title="position: left 不生效"></a>position: left 不生效</h4><p><a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d/issues/100">https://github.com/EYHN/hexo-helper-live2d/issues/100</a></p>
+<h2 id="大神水平"><a href="#大神水平" class="headerlink" title="大神水平"></a>大神水平</h2><p>大神作品，功能齐全。能说话、能换装、能玩游戏、能拍照、还能自定义。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>下载 <a target="_blank" rel="noopener" href="https://github.com/stevenjoezhang/live2d-widget">张书樵大神的项目</a>，解压到本地博客目录的 <code>themes/next/source</code> 下，修改文件夹名为 <code>live2d-widget</code>，修改项目中的 <code>autoload.js</code> 文件，如下：将</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span>  live2d_path = <span class="string">&quot;https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>注释掉，将下面的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> live2d_path = <span class="string">&quot;/live2d-widget/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>解除注释</p>
+<p> 在<code>/themes/next/layout/_layout.swig</code>中,新增如下内容  </p>
+<p>在文件位置：~&#x2F;theme&#x2F;next&#x2F;layout&#x2F;_layout.swig 的<code>&lt;/body&gt;</code>标签之前</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;/live2d-widget/autoload.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>  在<code>/themes/next/layout/_layout.swig</code>中,在 <code>&lt;head&gt;</code> 之后中加入 </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 主题配置文件 中,新增如下内容：</p>
+<p><code>live2d: enable: true;</code></p>
+<h3 id="自定义"><a href="#自定义" class="headerlink" title="自定义"></a>自定义</h3><p>想修改看板娘大小、位置、格式、文本内容等，可查看并修改 <code>waifu-tips.js</code> 、 <code>waifu-tips.json</code> 和 <code>waifu.css</code></p>
+<p>效果如下</p>
+<p><img src="https://bradtorresblog.oss-cn-beijing.aliyuncs.com/Live2DBlog/clip_image024.png"></p>
+<h2 id="资料汇总"><a href="#资料汇总" class="headerlink" title="资料汇总"></a>资料汇总</h2><ul>
+<li>GitHub：<a target="_blank" rel="noopener" href="https://github.com/EYHN/hexo-helper-live2d">https://github.com/EYHN/hexo-helper-live2d</a></li>
+<li>配置说明：<a target="_blank" rel="noopener" href="https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html">https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html</a></li>
+<li>模型仓库：<a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models">https://github.com/xiazeyu/live2d-widget-models</a></li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>[<a target="_blank" rel="noopener" href="http://blog.itchenliang.club/posts/22350780-f32d-11ea-bb4a-d3e1cbe3d592/#%E9%85%8D%E7%BD%AE">1] Hexo博客添加看板娘</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://qmike.top/posts/6cf9df4b">2] 看板娘位置调整</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://qiaogaojian.github.io/71f6d9657f3765736920778e47beb31bca7b24ee/?highlight=2d">3] live2D与不蒜子冲突解决</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://lantary.cn/Blog_optimization/add_netcat.html">4] 为博客添加看板娘</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://blog.csdn.net/as480133937/article/details/100138838">5] Hexo-Next 主题博客个性化配置超详细，超全面(两万字)</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39610915/article/details/90679768">6] Hexo博客优化：在Next主题中设置进阶版Live2D看板娘————拒绝踩坑！！！！</a></p>
+<p>[<a target="_blank" rel="noopener" href="https://blog.pangao.vip/Hexo%E5%8D%9A%E5%AE%A2NexT%E4%B8%BB%E9%A2%98%E7%BE%8E%E5%8C%96%E4%B9%8B%E6%96%B0%E5%A2%9E%E7%9C%8B%E6%9D%BF%E5%A8%98(%E8%83%BD%E8%AF%B4%E8%AF%9D%E3%80%81%E8%83%BD%E6%8D%A2%E8%A3%85)/">7] Hexo博客NexT主题美化之新增看板娘(能说话、能换装)_</a></p>
+<h1 id="折腾后的碎碎念"><a href="#折腾后的碎碎念" class="headerlink" title="折腾后的碎碎念"></a>折腾后的碎碎念</h1><p> 01 这个大神魔改的插件有一些很奇怪的话，有些太花里胡哨，喧宾夺主了。所以我修改了小人说的话。修改成了名言警句。</p>
+<p>02 使用科学上网的方法能够更快的加载出来左下角的小人</p>
+
+    </div>
+
+    
+    
+    
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+      
+  <div class="popular-posts-header">相关文章推荐</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\14\Hexo博客进阶：为Next主题添加评论系统\" rel="bookmark">Hexo博客进阶：为Next主题添加评论系统</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\12\Hexo个人博客添加APlayer音乐播放器功能\" rel="bookmark">Hexo个人博客添加APlayer音乐播放器功能</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\11\Next主题-Hexo-字体相关配置\" rel="bookmark">Next主题(Hexo)字体相关配置</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2023\04\11\Hexo静态博客设置文章加密访问\" rel="bookmark">Hexo静态博客设置文章加密访问</a></div>
+    </li>
+  </ul>
+<div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+        <div class="reward-container">
+  <div>只想买台MacBook</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/WeChatPay.png" alt="BradTorres 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/Alipay.png" alt="BradTorres 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>BradTorres
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://bradtorres.github.io/2023/04/18/Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA/" title="Hexo博客添加Live2D小人">https://bradtorres.github.io/2023/04/18/Hexo博客添加Live2D小人/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"> <i class="fa fa-tag"></i> Hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/14/Hexo%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%EF%BC%9A%E4%B8%BANext%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" rel="prev" title="Hexo博客进阶：为Next主题添加评论系统">
+      <i class="fa fa-chevron-left"></i> Hexo博客进阶：为Next主题添加评论系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/04/18/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%A7%84%E5%88%922/" rel="next" title="文章发布规划2">
+      文章发布规划2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  
+
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Live2D%E5%B0%8F%E4%BA%BA"><span class="nav-text">Hexo博客添加Live2D小人</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8"><span class="nav-text">小白入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-text">首先安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BE%9B%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8B"><span class="nav-text">可供选择模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#position-left-%E4%B8%8D%E7%94%9F%E6%95%88"><span class="nav-text">position: left 不生效</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E7%A5%9E%E6%B0%B4%E5%B9%B3"><span class="nav-text">大神水平</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="nav-text">自定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB"><span class="nav-text">资料汇总</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">参考链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%98%E8%85%BE%E5%90%8E%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-text">折腾后的碎碎念</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="BradTorres"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">BradTorres</p>
+  <div class="site-description" itemprop="description">乾坤已定，你我皆是JOKER</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BradTorres" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BradTorres" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+<!-- recent posts -->
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BradTorres</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">413k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">6:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i>
+<span id="busuanzi_container_site_uv">
+  本站总访客数:<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;| 
+</span>
+<span id="busuanzi_container_site_pv">
+    &nbsp;本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+</div>
+</div>
+
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("03/12/2019 12:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="90" alpha="0.6" zIndex="-1" src="/js/ribbon/ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+<div id="needsharebutton-float">
+      <span class="btn">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+    </div>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+      flOptions = {};
+        flOptions.iconStyle = "box";
+        flOptions.boxForm = "horizontal";
+        flOptions.position = "middleRight";
+        flOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-float', flOptions);
+  </script>
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'BziM7bSuVnC11FBJfPFvMxaq-MdYXbMMI',
+      appKey     : '7ocFMWFsbdj4sWqZDMI9MXPs',
+      placeholder: "自古评论出人才，句句胜过李太白。倘若唐朝有网友，唐诗岂止三百首！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+    </div>
+
+  <!-- 樱花特效 -->
+  
+      <script async src="/js/src/sakura.js"></script>
+  
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+
+
+<!-- 加入APlayer音乐播放器 -->
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+
+
+<!-- 文件位置：~/themes/next/layout/_layout.swig -->
+
+<script src="/js/activate-power-mode.js"></script>
+<script>
+  POWERMODE.colorful = true;
+  POWERMODE.shake = true; 
+  document.body.addEventListener('input', POWERMODE);
+</script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+
+<script type="text/javascript" src="/js/crash_cheat.js"></script>
+
+<!-- 文件位置：~/theme/next/layout/_layout.swig -->
+<script src="/live2d-widget/autoload.js"></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":150,"vOffset":-10},"mobile":{"show":true,"scale":0.05},"react":{"opacityDefault":0.7,"opacityOnHover":0.2}});</script></body>
+</html>
